@@ -1,5 +1,4 @@
 #include "materialxml.h"
-#include <QXmlStreamReader>
 #include <QFile>
 #include<QDebug>
 
@@ -9,6 +8,37 @@ MaterialXml::MaterialXml(QString fileName)
 
 
 
+}
+
+void MaterialXml::readMaterial(QXmlStreamReader &reader)
+{
+    while(reader.readNextStartElement())
+    {
+        if(reader.name() == "material")
+        {
+            qInfo() << reader.name();
+
+            while(reader.readNextStartElement())
+            {
+                if(reader.name() == "param")
+                {
+                    QString name = "";
+                    if (reader.attributes().hasAttribute(("name")))
+                        name = reader.attributes().value("name").toString();
+
+                    QString values = reader.readElementText();
+
+                    qInfo() << name << " " << values;
+                }
+                else
+                    reader.skipCurrentElement();
+            }
+
+            reader.skipCurrentElement();
+        }
+        else
+            reader.skipCurrentElement();
+    }
 }
 
 void MaterialXml::MaterialDataFromXML(QString fileName)
@@ -28,7 +58,6 @@ void MaterialXml::MaterialDataFromXML(QString fileName)
 
             while(reader.readNextStartElement())
             {
-
                 if(reader.name() == "mesh")
                 {
                     qInfo() << reader.name();
@@ -39,34 +68,13 @@ void MaterialXml::MaterialDataFromXML(QString fileName)
                         {
                             qInfo() << reader.name();
 
-                            while(reader.readNextStartElement())
-                            {
-                                if(reader.name() == "material")
-                                {
-                                    qInfo() << reader.name();
-
-                                    while(reader.readNextStartElement())
-                                    {
-                                        if(reader.name() == "param")
-                                        {
-                                            qInfo() << reader.name();
-
-                                            QString s = reader.readElementText();
-                                            qInfo() << s;
-
-                                        }
-                                        else
-                                            reader.skipCurrentElement();
-                                    }
-
-                                }
-                                else
-                                    reader.skipCurrentElement();
-                            }
+                            readMaterial(reader);
                         }
                         else
                             reader.skipCurrentElement();
                     }
+
+                    reader.skipCurrentElement();
                 }
                 else
                     reader.skipCurrentElement();
