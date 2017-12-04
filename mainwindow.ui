@@ -75,13 +75,13 @@
       <string>dst Factor</string>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>31</x>
        <y>40</y>
        <width>393</width>
-       <height>22</height>
+       <height>24</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -129,13 +129,13 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>31</x>
        <y>90</y>
        <width>234</width>
-       <height>22</height>
+       <height>24</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -180,13 +180,13 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>30</x>
        <y>140</y>
        <width>234</width>
-       <height>22</height>
+       <height>24</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">

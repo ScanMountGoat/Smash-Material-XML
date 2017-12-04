@@ -20,8 +20,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    QString fileName = QFileDialog::getSaveFileName(this,
-                                           tr("Save Xml"), ".",
-                                           tr("Xml files (*.xml)"));
+    QString fileName = QFileDialog::getOpenFileName(this, "Open Xml", ".", "Xml files (*.xml)");
     MaterialXml::MaterialDataFromXML(fileName);
 }
