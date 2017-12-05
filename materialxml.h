@@ -8,10 +8,12 @@
 class MaterialXml
 {
 public:
-    MaterialXml(QString fileName);
-    static void MaterialDataFromXML(QString fileName);
+    MaterialXml();
+    static void materialDataFromXML(QString fileName);
+    static void readMesh(QXmlStreamReader &reader);
+    static void readPolygon(QXmlStreamReader &reader);
     static void readMaterial(QXmlStreamReader &reader);
-
+    static void readParam(QXmlStreamReader &reader);
 };
 
 #endif // MATERIALXML_H
