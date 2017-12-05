@@ -1,6 +1,9 @@
 #ifndef MATERIALXML_H
 #define MATERIALXML_H
 
+#include "materialxml.h"
+#include "material.h"
+
 #include <QString>
 #include <QXmlStreamReader>
 

@@ -1,6 +1,8 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
+
 #include<QString>
+#include<QHash>
 
 
 class Material
@@ -21,7 +23,9 @@ public:
     int expectedTextureCount = 0;
     int srcFactor;
     int dstFactor;
+
     QString fileName;
+    QHash<QString, float> properties;
 
     enum TextureFlags
     {

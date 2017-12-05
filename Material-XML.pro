@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     materialxml.cpp \
-    material.cpp
+    material.cpp \
+    materialcontainer.cpp
 
 HEADERS += \
         mainwindow.h \
     materialxml.h \
-    material.h
+    material.h \
+    materialcontainer.h
 
 FORMS += \
         mainwindow.ui
