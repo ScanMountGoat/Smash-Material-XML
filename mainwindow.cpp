@@ -9,6 +9,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // enable/disable the different search options
+    ui->srcContainer->setEnabled(ui->srcCheckBox->isChecked());
+    ui->dstContainer->setEnabled(ui->dstCheckBox->isChecked());
+    ui->flagsContainer->setEnabled(ui->flagsCheckBox->isChecked());
 }
 
 MainWindow::~MainWindow()
@@ -22,4 +27,22 @@ void MainWindow::on_actionOpen_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Open Xml", ".", "Xml files (*.xml)");
     MaterialXml::materialDataFromXML(fileName);
+}
+
+void MainWindow::on_flagsCheckBox_clicked()
+{
+    bool isChecked = ui->flagsCheckBox->isChecked();
+    ui->flagsContainer->setEnabled(isChecked);
+}
+
+void MainWindow::on_dstCheckBox_clicked()
+{
+    bool isChecked = ui->dstCheckBox->isChecked();
+    ui->dstContainer->setEnabled(isChecked);
+}
+
+void MainWindow::on_srcCheckBox_clicked()
+{
+    bool isChecked = ui->srcCheckBox->isChecked();
+    ui->srcContainer->setEnabled(isChecked);
 }

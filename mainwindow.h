@@ -19,6 +19,12 @@ private slots:
 
     void on_actionOpen_triggered();
 
+    void on_flagsCheckBox_clicked();
+
+    void on_dstCheckBox_clicked();
+
+    void on_srcCheckBox_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
