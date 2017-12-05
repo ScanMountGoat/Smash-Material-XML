@@ -23,7 +23,7 @@ public:
     int dstFactor;
     QString fileName;
 
-    enum textureFlags
+    enum TextureFlags
     {
         Glow = 0x00000080,
         Shadow = 0x00000040,

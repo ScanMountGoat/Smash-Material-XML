@@ -30,7 +30,11 @@ void MaterialXml::readMesh(QXmlStreamReader &reader)
     {
         if(reader.name() == "mesh")
         {
-            qInfo() << reader.name();
+            QString name = "";
+            if (reader.attributes().hasAttribute(("name")))
+                name = reader.attributes().value("name").toString();
+
+            qInfo() << "\t" << name;
 
             readPolygon(reader);
         }
@@ -45,7 +49,7 @@ void MaterialXml::readPolygon(QXmlStreamReader &reader)
     {
         if(reader.name() == "polygon")
         {
-            qInfo() << reader.name();
+            qInfo() << "\t\t" << reader.name();
 
             readMaterial(reader);
         }
@@ -60,10 +64,12 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader)
     {
         if(reader.name() == "material")
         {
-            qInfo() << reader.name();
+            qInfo() << "\t\t\t"<< reader.name();
 
             readParam(reader);
         }
+        else
+            reader.skipCurrentElement();
     }
 }
 
@@ -79,7 +85,7 @@ void MaterialXml::readParam(QXmlStreamReader &reader)
 
             QString values = reader.readElementText();
 
-            qInfo() << name << " " << values;
+            qInfo() << "\t\t\t\t" << name << " " << values;
         }
         else
             reader.skipCurrentElement();
