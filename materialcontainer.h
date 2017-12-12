@@ -4,11 +4,12 @@
 #include "material.h"
 #include <QList>
 
+extern QList<Material> materialList;
+
 class MaterialContainer
 {
 public:
     MaterialContainer();
-    static QList<Material> materialList;
 };
 
 #endif // MATERIALCONTAINER_H

@@ -2,7 +2,9 @@
 #include "materialcontainer.h"
 
 #include <QFile>
-#include<QDebug>
+#include <QDebug>
+
+QList<Material> materialList;
 
 
 void MaterialXml::materialDataFromXML(QString fileName)
@@ -58,8 +60,21 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader)
         if(reader.name() == "material") {
             qInfo() << "\t\t\t"<< reader.name();
             Material material;
+
+            // read and set flags
+            uint flags = 0;
+            if (reader.attributes().hasAttribute(("flags"))) {
+                bool ok;
+                flags = reader.attributes().value("flags").toUInt(&ok, 16);
+            }
+            material.setFlags(flags);
+
+            qInfo() << "\t\t\t"<< reader.attributes().value(("flags"));
+
             readParam(reader, material);
-            //MaterialContainer::materialList.append(material);
+
+            // add the material to the global material list
+            materialList.append(material);
         } else
             reader.skipCurrentElement();
     }
@@ -81,9 +96,9 @@ void MaterialXml::readParam(QXmlStreamReader &reader, Material material)
                 paramValues.append(values.at(i).toFloat());
             }
 
-            //material.properties.insert(name, paramValues);
+            material.properties.insert(name, paramValues);
 
-            qInfo() << "\t\t\t\t" << name << " " << paramValues.at(0) << "," << paramValues.at(1);
+            qInfo() << "\t\t\t\t" << name << " " << paramValues.at(0) << "," << paramValues.at(1) << "," << paramValues.at(2) << "," << paramValues.at(3);
         } else
             reader.skipCurrentElement();
     }
