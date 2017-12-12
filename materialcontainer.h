@@ -8,7 +8,7 @@ class MaterialContainer
 {
 public:
     MaterialContainer();
-    QList<Material> materialList;
+    static QList<Material> materialList;
 };
 
 #endif // MATERIALCONTAINER_H

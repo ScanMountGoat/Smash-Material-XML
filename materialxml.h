@@ -5,6 +5,7 @@
 #include "material.h"
 
 #include <QString>
+#include <QList>
 #include <QXmlStreamReader>
 
 
@@ -16,7 +17,7 @@ public:
     static void readMesh(QXmlStreamReader &reader);
     static void readPolygon(QXmlStreamReader &reader);
     static void readMaterial(QXmlStreamReader &reader);
-    static void readParam(QXmlStreamReader &reader);
+    static void readParam(QXmlStreamReader &reader, Material material);
 };
 
 #endif // MATERIALXML_H

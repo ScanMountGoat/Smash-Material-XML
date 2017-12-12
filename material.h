@@ -25,7 +25,7 @@ public:
     int dstFactor;
 
     QString fileName;
-    QHash<QString, float> properties;
+    QHash<QString, QList<float>> properties;
 
     enum TextureFlags
     {
@@ -39,7 +39,6 @@ public:
         DiffuseMap = 0x00000001
     };
 
-    Material();
     uint getFlags();
     void setFlags(uint newFlags);
     void testFlags();
