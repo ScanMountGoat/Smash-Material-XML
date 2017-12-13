@@ -32,7 +32,7 @@ void MainWindow::on_actionOpen_triggered()
     for (int i = 0; i < materialList.length(); i++) {
         Material material = materialList.at(i);
 
-        qInfo() <<  material.getFlags();
+        qInfo() <<  material.srcFactor;
     }
 
 }
@@ -53,4 +53,16 @@ void MainWindow::on_srcCheckBox_clicked()
 {
     bool isChecked = ui->srcCheckBox->isChecked();
     ui->srcContainer->setEnabled(isChecked);
+}
+
+void MainWindow::on_searchPushButton_clicked()
+{
+
+}
+
+void MainWindow::on_actionOpen_Folder_triggered()
+{
+    QString directory = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home",
+                                                         QFileDialog::ShowDirsOnly
+                                                         | QFileDialog::DontResolveSymlinks);
 }

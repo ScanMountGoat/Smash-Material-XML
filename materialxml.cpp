@@ -19,7 +19,6 @@ void MaterialXml::materialDataFromXML(QString fileName)
 
     if (reader.readNextStartElement()) {
         if (reader.name() == "NUDMATERIAL") {
-            qInfo() << reader.name();
             readMesh(reader);
         } else
             reader.raiseError(QObject::tr("Incorrect file"));
@@ -34,8 +33,6 @@ void MaterialXml::readMesh(QXmlStreamReader &reader)
             if (reader.attributes().hasAttribute(("name")))
                 name = reader.attributes().value("name").toString();
 
-            qInfo() << "\t" << name;
-
             readPolygon(reader);
         } else
             reader.skipCurrentElement();
@@ -46,8 +43,6 @@ void MaterialXml::readPolygon(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()) {
         if(reader.name() == "polygon") {
-            qInfo() << "\t\t" << reader.name();
-
             readMaterial(reader);
         } else
             reader.skipCurrentElement();
@@ -58,7 +53,6 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader)
 {
     while(reader.readNextStartElement()) {
         if(reader.name() == "material") {
-            qInfo() << "\t\t\t"<< reader.name();
             Material material;
 
             // read and set flags
@@ -69,7 +63,21 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader)
             }
             material.setFlags(flags);
 
-            qInfo() << "\t\t\t"<< reader.attributes().value(("flags"));
+            // read and set srcFactor
+            int src = 0;
+            if (reader.attributes().hasAttribute(("srcFactor"))) {
+                bool ok;
+                src = reader.attributes().value("srcFactor").toInt(&ok, 16);
+            }
+            material.srcFactor = src;
+
+            // read and set dstFactor
+            int dst = 0;
+            if (reader.attributes().hasAttribute(("dstFactor"))) {
+                bool ok;
+                dst = reader.attributes().value("dstFactor").toInt(&ok, 16);
+            }
+            material.dstFactor = dst;
 
             readParam(reader, material);
 
@@ -97,8 +105,6 @@ void MaterialXml::readParam(QXmlStreamReader &reader, Material material)
             }
 
             material.properties.insert(name, paramValues);
-
-            qInfo() << "\t\t\t\t" << name << " " << paramValues.at(0) << "," << paramValues.at(1) << "," << paramValues.at(2) << "," << paramValues.at(3);
         } else
             reader.skipCurrentElement();
     }

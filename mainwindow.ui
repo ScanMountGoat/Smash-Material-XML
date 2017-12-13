@@ -20,7 +20,7 @@
       <x>10</x>
       <y>10</y>
       <width>411</width>
-      <height>181</height>
+      <height>231</height>
      </rect>
     </property>
     <property name="title">
@@ -80,7 +80,7 @@
         <x>0</x>
         <y>0</y>
         <width>235</width>
-        <height>22</height>
+        <height>24</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -141,7 +141,7 @@
         <x>0</x>
         <y>0</y>
         <width>234</width>
-        <height>22</height>
+        <height>24</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -202,7 +202,7 @@
         <x>0</x>
         <y>0</y>
         <width>366</width>
-        <height>22</height>
+        <height>24</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="flagsHorizontalLayout">
@@ -251,6 +251,19 @@
       </layout>
      </widget>
     </widget>
+    <widget class="QPushButton" name="searchPushButton">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>200</y>
+       <width>80</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Search</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
@@ -263,16 +276,6 @@
     </property>
     <property name="text">
      <string>Search</string>
-    </property>
-   </widget>
-   <widget class="QListView" name="listView">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>200</y>
-      <width>411</width>
-      <height>481</height>
-     </rect>
     </property>
    </widget>
   </widget>
@@ -290,6 +293,7 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen"/>
+    <addaction name="actionOpen_Folder"/>
    </widget>
    <addaction name="menuMaterial_XML"/>
   </widget>
@@ -297,6 +301,11 @@
   <action name="actionOpen">
    <property name="text">
     <string>Open File</string>
+   </property>
+  </action>
+  <action name="actionOpen_Folder">
+   <property name="text">
+    <string>Open Folder</string>
    </property>
   </action>
  </widget>

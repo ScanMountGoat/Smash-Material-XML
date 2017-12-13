@@ -25,6 +25,10 @@ private slots:
 
     void on_srcCheckBox_clicked();
 
+    void on_searchPushButton_clicked();
+
+    void on_actionOpen_Folder_triggered();
+
 private:
     Ui::MainWindow *ui;
 };
