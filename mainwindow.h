@@ -15,6 +15,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void displayMaterials();
+
 private slots:
 
     void on_actionOpen_triggered();
@@ -28,6 +30,8 @@ private slots:
     void on_searchPushButton_clicked();
 
     void on_actionOpen_Folder_triggered();
+
+    void on_clearPushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

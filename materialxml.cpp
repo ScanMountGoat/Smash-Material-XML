@@ -6,7 +6,6 @@
 
 QList<Material> materialList;
 
-
 void MaterialXml::materialDataFromXML(QString fileName)
 {
     QXmlStreamReader reader;
