@@ -24,17 +24,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    materialxml.cpp \
-    material.cpp \
-    materialcontainer.cpp
+    Sources/main.cpp \
+    Sources/mainwindow.cpp \
+    Sources/materialcontainer.cpp \
+    Sources/material.cpp \
+    Sources/materialxml.cpp
 
 HEADERS += \
-        mainwindow.h \
-    materialxml.h \
-    material.h \
-    materialcontainer.h
+    Headers/mainwindow.h \
+    Headers/material.h \
+    Headers/materialcontainer.h \
+    Headers/materialxml.h
 
 FORMS += \
         mainwindow.ui

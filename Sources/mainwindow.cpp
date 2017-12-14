@@ -1,7 +1,7 @@
-#include "mainwindow.h"
+#include "Headers/mainwindow.h"
 #include "ui_mainwindow.h"
-#include "materialxml.h"
-#include "materialcontainer.h"
+#include "Headers/materialxml.h"
+#include "Headers/materialcontainer.h"
 
 #include <QMessageBox>
 #include <QFileDialog>

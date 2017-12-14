@@ -1,5 +1,5 @@
-#include "materialxml.h"
-#include "materialcontainer.h"
+#include "Headers/materialxml.h"
+#include "Headers/materialcontainer.h"
 
 #include <QFile>
 #include <QDebug>
