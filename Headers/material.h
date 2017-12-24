@@ -27,8 +27,7 @@ public:
     QString fileName;
     QHash<QString, QList<float>> properties;
 
-    enum TextureFlags
-    {
+    enum TextureFlags {
         Glow = 0x00000080,
         Shadow = 0x00000040,
         DummyRamp = 0x00000020,

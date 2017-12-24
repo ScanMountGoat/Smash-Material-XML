@@ -214,7 +214,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="flags1LineEdit"/>
        </item>
        <item>
         <widget class="QComboBox" name="comboBox">
@@ -246,7 +246,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_2"/>
+        <widget class="QLineEdit" name="flags2LineEdit"/>
        </item>
       </layout>
      </widget>

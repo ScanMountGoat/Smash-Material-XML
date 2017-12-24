@@ -28,13 +28,15 @@ SOURCES += \
     Sources/mainwindow.cpp \
     Sources/materialcontainer.cpp \
     Sources/material.cpp \
-    Sources/materialxml.cpp
+    Sources/materialxml.cpp \
+    Sources/searchsettings.cpp
 
 HEADERS += \
     Headers/mainwindow.h \
     Headers/material.h \
     Headers/materialcontainer.h \
-    Headers/materialxml.h
+    Headers/materialxml.h \
+    Headers/searchsettings.h
 
 FORMS += \
         mainwindow.ui

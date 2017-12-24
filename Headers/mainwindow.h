@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "Headers/searchsettings.h"
+
 #include <QMainWindow>
 
 namespace Ui {
@@ -33,8 +35,13 @@ private slots:
 
     void on_clearPushButton_clicked();
 
+    void on_flags1LineEdit_editingFinished();
+
+    void on_flags2LineEdit_editingFinished();
+
 private:
     Ui::MainWindow *ui;
+    SearchSettings *searchSettings = new SearchSettings();
 };
 
 #endif // MAINWINDOW_H

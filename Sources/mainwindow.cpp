@@ -54,6 +54,7 @@ void MainWindow::on_flagsCheckBox_clicked()
 {
     bool isChecked = ui->flagsCheckBox->isChecked();
     ui->flagsContainer->setEnabled(isChecked);
+    searchSettings->filterFlags = ui->flagsCheckBox->isChecked();
 }
 
 void MainWindow::on_dstCheckBox_clicked()
@@ -70,11 +71,18 @@ void MainWindow::on_srcCheckBox_clicked()
 
 void MainWindow::displayMaterials()
 {
+    // clear the text display for each new search
     ui->plainTextEdit->clear();
+
     for (int i = 0; i < materialList.length(); i++) {
         Material material = materialList.at(i);
-        QString flags;
-        ui->plainTextEdit->appendPlainText(flags.setNum(material.getFlags(), 16));
+
+        if (searchSettings->filterFlags) {
+            if ((material.getFlags() & searchSettings->getFlags1()) == searchSettings->getFlags2()) {
+                QString flags;
+                ui->plainTextEdit->appendPlainText(flags.setNum(material.getFlags(), 16));
+            }
+        }
     }
 }
 
@@ -86,4 +94,16 @@ void MainWindow::on_searchPushButton_clicked()
 void MainWindow::on_clearPushButton_clicked()
 {
     ui->plainTextEdit->clear();
+}
+
+void MainWindow::on_flags1LineEdit_editingFinished()
+{
+    QString text = ui->flags1LineEdit->text();
+    searchSettings->setFlags1(text.toUInt());
+}
+
+void MainWindow::on_flags2LineEdit_editingFinished()
+{
+    QString text = ui->flags2LineEdit->text();
+    searchSettings->setFlags2(text.toUInt());
 }
