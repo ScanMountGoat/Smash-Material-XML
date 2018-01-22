@@ -217,7 +217,7 @@
         <widget class="QLineEdit" name="flags1LineEdit"/>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox">
+        <widget class="QComboBox" name="flagsOpComboBox">
          <item>
           <property name="text">
            <string>==</string>

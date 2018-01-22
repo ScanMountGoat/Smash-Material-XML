@@ -77,8 +77,32 @@ void MainWindow::displayMaterials()
     for (int i = 0; i < materialList.length(); i++) {
         Material material = materialList.at(i);
 
+        // Check flags using the selected flags values and comparison operator.
         if (searchSettings->filterFlags) {
-            if ((material.getFlags() & searchSettings->getFlags1()) == searchSettings->getFlags2()) {
+
+            bool valid = (material.getFlags() & searchSettings->getFlags1()) == searchSettings->getFlags2();
+
+            // There's probably a cleaner way to write this. { ==, >, >=, <, <= }
+            int index = ui->flagsOpComboBox->currentIndex();
+            switch (index) {
+                case 0:
+                    valid = (material.getFlags() & searchSettings->getFlags1()) == searchSettings->getFlags2();
+                    break;
+                case 1:
+                    valid = (material.getFlags() & searchSettings->getFlags1()) > searchSettings->getFlags2();
+                    break;
+                case 2:
+                    valid = (material.getFlags() & searchSettings->getFlags1()) >= searchSettings->getFlags2();
+                    break;
+                case 3:
+                    valid = (material.getFlags() & searchSettings->getFlags1()) < searchSettings->getFlags2();
+                    break;
+                case 4:
+                    valid = (material.getFlags() & searchSettings->getFlags1()) <= searchSettings->getFlags2();
+                    break;
+            }
+
+            if (valid) {
                 QString flags;
                 ui->plainTextEdit->appendPlainText(flags.setNum(material.getFlags(), 16));
             }
@@ -98,12 +122,16 @@ void MainWindow::on_clearPushButton_clicked()
 
 void MainWindow::on_flags1LineEdit_editingFinished()
 {
+    // Use hex format. Ex: 9A011063
     QString text = ui->flags1LineEdit->text();
-    searchSettings->setFlags1(text.toUInt());
+    bool ok;
+    searchSettings->setFlags1(text.toUInt(&ok, 16));
 }
 
 void MainWindow::on_flags2LineEdit_editingFinished()
 {
+    // Use hex format. Ex: 9A011063
     QString text = ui->flags2LineEdit->text();
-    searchSettings->setFlags2(text.toUInt());
+    bool ok;
+    searchSettings->setFlags2(text.toUInt(&ok, 16));
 }
