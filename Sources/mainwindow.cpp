@@ -84,7 +84,6 @@ void MainWindow::displayMaterials()
 
         // Check flags using the selected flags values and comparison operator.
         if (searchSettings->searchFlags) {
-            // Hopefully this cast is safe lol.
             int index = ui->flagsOpComboBox->currentIndex();
             SearchSettings::ComparisonOp comparison = (SearchSettings::ComparisonOp) index;
 
@@ -122,6 +121,22 @@ void MainWindow::displayMaterials()
         validMaterial = validFlags && validSrc && validDst;
         if (validMaterial) {
             ui->plainTextEdit->appendPlainText(material.fileName);
+
+            if (validFlags) {
+                QString flags;
+                ui->plainTextEdit->appendPlainText(flags.setNum(material.getFlags(), 16));
+            }
+
+            if (validSrc) {
+                QString src;
+                ui->plainTextEdit->appendPlainText("src: " + src.setNum(material.srcFactor, 16));
+            }
+
+            if (validDst) {
+                QString dst;
+                ui->plainTextEdit->appendPlainText("dst: " + dst.setNum(material.dstFactor, 16));
+            }
+
             ui->plainTextEdit->appendPlainText("\n");
         }
     }
