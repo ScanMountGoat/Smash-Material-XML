@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // enable/disable the different search options
+    // Enable/disable the different search options.
     ui->srcContainer->setEnabled(ui->srcCheckBox->isChecked());
     ui->dstContainer->setEnabled(ui->dstCheckBox->isChecked());
     ui->flagsContainer->setEnabled(ui->flagsCheckBox->isChecked());
@@ -82,22 +82,23 @@ void MainWindow::displayMaterials()
 
             bool valid = (material.getFlags() & searchSettings->getFlags1()) == searchSettings->getFlags2();
 
-            // There's probably a cleaner way to write this. { ==, >, >=, <, <= }
+            // Hopefully this cast is safe lol.
             int index = ui->flagsOpComboBox->currentIndex();
-            switch (index) {
-                case 0:
+            SearchSettings::flagsComparison comparison = (SearchSettings::flagsComparison) index;
+            switch (comparison) {
+                case SearchSettings::flagsComparison::equals:
                     valid = (material.getFlags() & searchSettings->getFlags1()) == searchSettings->getFlags2();
                     break;
-                case 1:
+                case SearchSettings::flagsComparison::greater:
                     valid = (material.getFlags() & searchSettings->getFlags1()) > searchSettings->getFlags2();
                     break;
-                case 2:
+                case SearchSettings::flagsComparison::gEqual:
                     valid = (material.getFlags() & searchSettings->getFlags1()) >= searchSettings->getFlags2();
                     break;
-                case 3:
+                case SearchSettings::flagsComparison::less:
                     valid = (material.getFlags() & searchSettings->getFlags1()) < searchSettings->getFlags2();
                     break;
-                case 4:
+                case SearchSettings::flagsComparison::lEqual:
                     valid = (material.getFlags() & searchSettings->getFlags1()) <= searchSettings->getFlags2();
                     break;
             }
@@ -134,4 +135,16 @@ void MainWindow::on_flags2LineEdit_editingFinished()
     QString text = ui->flags2LineEdit->text();
     bool ok;
     searchSettings->setFlags2(text.toUInt(&ok, 16));
+}
+
+void MainWindow::on_srcLineEdit_editingFinished()
+{
+
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    // Display license information.
+    QString link = "<a href='https://github.com/ScanMountGoat/Smash-Material-XML/blob/master/license.txt'>GPL License</a>";
+    QMessageBox::about(0, "About", link);
 }

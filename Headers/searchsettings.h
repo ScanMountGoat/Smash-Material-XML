@@ -8,7 +8,8 @@ class SearchSettings
 public:
     SearchSettings();
 
-    enum flagsComparison {
+    // Need this to use SearchSettings::flagsComparison::equals.
+    enum class flagsComparison {
         equals = 0,
         greater = 1,
         gEqual = 2,

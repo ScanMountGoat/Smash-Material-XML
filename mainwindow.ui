@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Material XML</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGroupBox" name="groupBox">
@@ -121,7 +121,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_5"/>
+        <widget class="QLineEdit" name="dstLineEdit"/>
        </item>
       </layout>
      </widget>
@@ -182,7 +182,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_4"/>
+        <widget class="QLineEdit" name="srcLineEdit"/>
        </item>
       </layout>
      </widget>
@@ -341,7 +341,14 @@
     <addaction name="actionOpen"/>
     <addaction name="actionOpen_Folder"/>
    </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
    <addaction name="menuMaterial_XML"/>
+   <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen">
@@ -352,6 +359,11 @@
   <action name="actionOpen_Folder">
    <property name="text">
     <string>Open Folder</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>

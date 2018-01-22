@@ -39,6 +39,10 @@ private slots:
 
     void on_flags2LineEdit_editingFinished();
 
+    void on_srcLineEdit_editingFinished();
+
+    void on_actionAbout_triggered();
+
 private:
     Ui::MainWindow *ui;
     SearchSettings *searchSettings = new SearchSettings();
