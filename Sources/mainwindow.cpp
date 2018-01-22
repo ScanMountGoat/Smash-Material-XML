@@ -77,11 +77,10 @@ void MainWindow::displayMaterials()
     for (int i = 0; i < materialList.length(); i++) {
         Material material = materialList.at(i);
 
-        // I should be able to simplify this using helper functions.
-        bool validMaterial = false;
-        bool validFlags = false;
-        bool validSrc = false;
-        bool validDst = false;
+        bool validMaterial = true;
+        bool validFlags = true;
+        bool validSrc = true;
+        bool validDst = true;
 
         // Check flags using the selected flags values and comparison operator.
         if (searchSettings->searchFlags) {
@@ -111,13 +110,19 @@ void MainWindow::displayMaterials()
         if (searchSettings->searchSrc) {
             int index = ui->srcOpComboBox->currentIndex();
             SearchSettings::ComparisonOp comparison = (SearchSettings::ComparisonOp) index;
-            validDst = SearchSettings::matchesSearch(comparison, material.srcFactor, SearchSettings::srcFactor);
+            validSrc = SearchSettings::matchesSearch(comparison, material.srcFactor, searchSettings->srcFactor);
         }
 
         if (searchSettings->searchDst) {
             int index = ui->dstOpComboBox->currentIndex();
             SearchSettings::ComparisonOp comparison = (SearchSettings::ComparisonOp) index;
-            validDst = SearchSettings::matchesSearch(comparison, material.dstFactor, SearchSettings::dstFactor);
+            validDst = SearchSettings::matchesSearch(comparison, material.dstFactor, searchSettings->dstFactor);
+        }
+
+        validMaterial = validFlags && validSrc && validDst;
+        if (validMaterial) {
+            ui->plainTextEdit->appendPlainText(material.fileName);
+            ui->plainTextEdit->appendPlainText("\n");
         }
     }
 }
@@ -153,7 +158,15 @@ void MainWindow::on_srcLineEdit_editingFinished()
     // Use hex format
     QString text = ui->srcLineEdit->text();
     bool ok;
-    searchSettings->srcFactor(text.toInt(&ok, 16));
+    searchSettings->srcFactor = (text.toInt(&ok, 16));
+}
+
+void MainWindow::on_dstLineEdit_editingFinished()
+{
+    // Use hex format
+    QString text = ui->dstLineEdit->text();
+    bool ok;
+    searchSettings->dstFactor = (text.toInt(&ok, 16));
 }
 
 void MainWindow::on_actionAbout_triggered()

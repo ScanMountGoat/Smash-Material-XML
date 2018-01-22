@@ -85,14 +85,14 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="dstLabel">
          <property name="text">
           <string>dstFactor</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_3">
+        <widget class="QComboBox" name="dstOpComboBox">
          <item>
           <property name="text">
            <string>==</string>
@@ -146,14 +146,14 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="srcLabel">
          <property name="text">
           <string>srcFactor</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_2">
+        <widget class="QComboBox" name="srcOpComboBox">
          <item>
           <property name="text">
            <string>==</string>

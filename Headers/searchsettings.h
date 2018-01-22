@@ -30,7 +30,7 @@ public:
     uint getFlags1();
     uint getFlags2();
 
-    bool matchesSearch(ComparisonOp operation, int value, int comparisonValue);
+    static bool matchesSearch(ComparisonOp operation, int value, int comparisonValue);
 
 private:
     // flags

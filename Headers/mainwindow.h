@@ -43,6 +43,8 @@ private slots:
 
     void on_actionAbout_triggered();
 
+    void on_dstLineEdit_editingFinished();
+
 private:
     Ui::MainWindow *ui;
     SearchSettings *searchSettings = new SearchSettings();
