@@ -54,7 +54,7 @@ void MainWindow::on_flagsCheckBox_clicked()
 {
     bool isChecked = ui->flagsCheckBox->isChecked();
     ui->flagsContainer->setEnabled(isChecked);
-    searchSettings->filterFlags = ui->flagsCheckBox->isChecked();
+    searchSettings->searchFlags = ui->flagsCheckBox->isChecked();
 }
 
 void MainWindow::on_dstCheckBox_clicked()
@@ -77,36 +77,47 @@ void MainWindow::displayMaterials()
     for (int i = 0; i < materialList.length(); i++) {
         Material material = materialList.at(i);
 
+        // I should be able to simplify this using helper functions.
+        bool validMaterial = false;
+        bool validFlags = false;
+        bool validSrc = false;
+        bool validDst = false;
+
         // Check flags using the selected flags values and comparison operator.
-        if (searchSettings->filterFlags) {
-
-            bool valid = (material.getFlags() & searchSettings->getFlags1()) == searchSettings->getFlags2();
-
+        if (searchSettings->searchFlags) {
             // Hopefully this cast is safe lol.
             int index = ui->flagsOpComboBox->currentIndex();
-            SearchSettings::flagsComparison comparison = (SearchSettings::flagsComparison) index;
-            switch (comparison) {
-                case SearchSettings::flagsComparison::equals:
-                    valid = (material.getFlags() & searchSettings->getFlags1()) == searchSettings->getFlags2();
-                    break;
-                case SearchSettings::flagsComparison::greater:
-                    valid = (material.getFlags() & searchSettings->getFlags1()) > searchSettings->getFlags2();
-                    break;
-                case SearchSettings::flagsComparison::gEqual:
-                    valid = (material.getFlags() & searchSettings->getFlags1()) >= searchSettings->getFlags2();
-                    break;
-                case SearchSettings::flagsComparison::less:
-                    valid = (material.getFlags() & searchSettings->getFlags1()) < searchSettings->getFlags2();
-                    break;
-                case SearchSettings::flagsComparison::lEqual:
-                    valid = (material.getFlags() & searchSettings->getFlags1()) <= searchSettings->getFlags2();
-                    break;
-            }
+            SearchSettings::ComparisonOp comparison = (SearchSettings::ComparisonOp) index;
 
-            if (valid) {
-                QString flags;
-                ui->plainTextEdit->appendPlainText(flags.setNum(material.getFlags(), 16));
+            switch (comparison) {
+                case SearchSettings::ComparisonOp::equals:
+                    validFlags = (material.getFlags() & searchSettings->getFlags1()) == searchSettings->getFlags2();
+                    break;
+                case SearchSettings::ComparisonOp::greater:
+                    validFlags = (material.getFlags() & searchSettings->getFlags1()) > searchSettings->getFlags2();
+                    break;
+                case SearchSettings::ComparisonOp::gEqual:
+                    validFlags = (material.getFlags() & searchSettings->getFlags1()) >= searchSettings->getFlags2();
+                    break;
+                case SearchSettings::ComparisonOp::less:
+                    validFlags = (material.getFlags() & searchSettings->getFlags1()) < searchSettings->getFlags2();
+                    break;
+                case SearchSettings::ComparisonOp::lEqual:
+                    validFlags = (material.getFlags() & searchSettings->getFlags1()) <= searchSettings->getFlags2();
+                    break;
             }
+        }
+
+        if (searchSettings->searchSrc) {
+            int index = ui->srcOpComboBox->currentIndex();
+            SearchSettings::ComparisonOp comparison = (SearchSettings::ComparisonOp) index;
+            validDst = SearchSettings::matchesSearch(comparison, material.srcFactor, SearchSettings::srcFactor);
+        }
+
+        if (searchSettings->searchDst) {
+            int index = ui->dstOpComboBox->currentIndex();
+            SearchSettings::ComparisonOp comparison = (SearchSettings::ComparisonOp) index;
+            validDst = SearchSettings::matchesSearch(comparison, material.dstFactor, SearchSettings::dstFactor);
         }
     }
 }
@@ -139,7 +150,10 @@ void MainWindow::on_flags2LineEdit_editingFinished()
 
 void MainWindow::on_srcLineEdit_editingFinished()
 {
-
+    // Use hex format
+    QString text = ui->srcLineEdit->text();
+    bool ok;
+    searchSettings->srcFactor(text.toInt(&ok, 16));
 }
 
 void MainWindow::on_actionAbout_triggered()

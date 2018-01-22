@@ -18,13 +18,13 @@ void MaterialXml::materialDataFromXML(QString fileName)
 
     if (reader.readNextStartElement()) {
         if (reader.name() == "NUDMATERIAL") {
-            readMesh(reader);
+            readMesh(reader, fileName);
         } else
             reader.raiseError(QObject::tr("Incorrect file"));
     }
 }
 
-void MaterialXml::readMesh(QXmlStreamReader &reader)
+void MaterialXml::readMesh(QXmlStreamReader &reader, QString fileName)
 {
     while(reader.readNextStartElement()) {
         if(reader.name() == "mesh") {
@@ -32,27 +32,30 @@ void MaterialXml::readMesh(QXmlStreamReader &reader)
             if (reader.attributes().hasAttribute(("name")))
                 name = reader.attributes().value("name").toString();
 
-            readPolygon(reader);
+            readPolygon(reader, fileName);
         } else
             reader.skipCurrentElement();
     }
 }
 
-void MaterialXml::readPolygon(QXmlStreamReader &reader)
+void MaterialXml::readPolygon(QXmlStreamReader &reader, QString fileName)
 {
     while(reader.readNextStartElement()) {
         if(reader.name() == "polygon") {
-            readMaterial(reader);
+            readMaterial(reader, fileName);
         } else
             reader.skipCurrentElement();
     }
 }
 
-void MaterialXml::readMaterial(QXmlStreamReader &reader)
+void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName)
 {
     while(reader.readNextStartElement()) {
         if(reader.name() == "material") {
             Material material;
+
+            // In case we need to display the file path later.
+            material.fileName = fileName;
 
             // read and set flags
             uint flags = 0;

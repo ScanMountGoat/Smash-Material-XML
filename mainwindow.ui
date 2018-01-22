@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>436</width>
-    <height>611</height>
+    <width>427</width>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -301,19 +301,6 @@
      </property>
     </widget>
    </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>400</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Search</string>
-    </property>
-   </widget>
    <widget class="QPlainTextEdit" name="plainTextEdit">
     <property name="geometry">
      <rect>
@@ -330,7 +317,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>436</width>
+     <width>427</width>
      <height>21</height>
     </rect>
    </property>
