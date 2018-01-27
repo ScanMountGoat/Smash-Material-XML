@@ -47,6 +47,8 @@ private slots:
 
     void on_matPropLineEdit_editingFinished();
 
+    void on_matPropCheckBox_clicked();
+
 private:
     Ui::MainWindow *ui;
     SearchSettings *searchSettings = new SearchSettings();

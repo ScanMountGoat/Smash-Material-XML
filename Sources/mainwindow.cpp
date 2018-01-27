@@ -15,9 +15,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // Enable/disable the different search options.
+    // Containers (QWidget) are used to hide/unhide all child widgets.
     ui->srcContainer->setEnabled(ui->srcCheckBox->isChecked());
     ui->dstContainer->setEnabled(ui->dstCheckBox->isChecked());
     ui->flagsContainer->setEnabled(ui->flagsCheckBox->isChecked());
+    ui->matPropContainer->setEnabled(ui->matPropCheckBox->isChecked());
 }
 
 MainWindow::~MainWindow()
@@ -82,6 +84,7 @@ void MainWindow::displayMaterials()
         bool validFlags = true;
         bool validSrc = true;
         bool validDst = true;
+        bool validMatProp = true;
 
         // Check flags using the selected flags values and comparison operator.
         if (searchSettings->searchFlags) {
@@ -119,7 +122,11 @@ void MainWindow::displayMaterials()
             validDst = SearchSettings::matchesSearch(comparison, material.dstFactor, searchSettings->dstFactor);
         }
 
-        validMaterial = validFlags && validSrc && validDst;
+        if (searchSettings->searchMatProp) {
+            validMatProp = material.properties.contains("NU_" + searchSettings->materialProperty);
+        }
+
+        validMaterial = validFlags && validSrc && validDst && validMatProp;
         if (validMaterial) {
             ui->plainTextEdit->appendPlainText(material.fileName);
 
@@ -138,6 +145,23 @@ void MainWindow::displayMaterials()
                 ui->plainTextEdit->appendPlainText("dst: " + dst.setNum(material.dstFactor, 16));
             }
 
+            if (validMatProp) {
+                QString propertyText = "NU_" + searchSettings->materialProperty;
+                for (int i = 0; i < material.properties.keys().length(); i++) {
+                    qInfo() << material.properties.keys().at(i);
+                }
+
+                qInfo() << material.properties.count();
+
+                // Add all the param values separated by spaces
+                QList<float> values = material.properties["NU_" + searchSettings->materialProperty];
+                for (int i = 0; i < values.size(); i++) {
+                    //propertyText += " " + QString::number(values.at(i)) + " ";
+                }
+                ui->plainTextEdit->appendPlainText(propertyText);
+            }
+
+            // Put a line between each material.
             ui->plainTextEdit->appendPlainText("\n");
         }
     }
@@ -194,11 +218,13 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_matPropLineEdit_editingFinished()
 {
-
+    QString text = ui->matPropLineEdit->text();
+    searchSettings->materialProperty = text;
 }
 
 void MainWindow::on_matPropCheckBox_clicked()
 {
-    bool isChecked = ui->srcCheckBox->isChecked();
-    ui->matPropContainer->setEnabled(isCheked);
+    bool isChecked = ui->matPropCheckBox->isChecked();
+    ui->matPropContainer->setEnabled(isChecked);
+    searchSettings->searchMatProp = isChecked;
 }

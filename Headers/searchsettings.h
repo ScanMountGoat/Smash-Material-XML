@@ -2,7 +2,6 @@
 #define SEARCHSETTINGS_H
 
 #include <QString>
-#include <QList>
 
 class SearchSettings
 {
@@ -21,9 +20,11 @@ public:
     bool searchFlags = false;
     bool searchSrc = false;
     bool searchDst = false;
+    bool searchMatProp = false;
 
     int dstFactor = 0;
     int srcFactor = 0;
+    QString materialProperty = "";
 
     void setFlagsOperation(ComparisonOp comparison);
     void setFlags1(uint flags1);
