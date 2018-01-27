@@ -26,7 +26,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Sources/main.cpp \
     Sources/mainwindow.cpp \
-    Sources/materialcontainer.cpp \
     Sources/material.cpp \
     Sources/materialxml.cpp \
     Sources/searchsettings.cpp
@@ -34,7 +33,6 @@ SOURCES += \
 HEADERS += \
     Headers/mainwindow.h \
     Headers/material.h \
-    Headers/materialcontainer.h \
     Headers/materialxml.h \
     Headers/searchsettings.h
 

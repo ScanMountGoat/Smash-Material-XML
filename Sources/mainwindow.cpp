@@ -147,16 +147,11 @@ void MainWindow::displayMaterials()
 
             if (validMatProp) {
                 QString propertyText = "NU_" + searchSettings->materialProperty;
-                for (int i = 0; i < material.properties.keys().length(); i++) {
-                    qInfo() << material.properties.keys().at(i);
-                }
 
-                qInfo() << material.properties.count();
-
-                // Add all the param values separated by spaces
+                // Add the space separated values to a new line.
                 QList<float> values = material.properties["NU_" + searchSettings->materialProperty];
                 for (int i = 0; i < values.size(); i++) {
-                    //propertyText += " " + QString::number(values.at(i)) + " ";
+                    propertyText += "\n" + QString::number(values.at(i)) + " ";
                 }
                 ui->plainTextEdit->appendPlainText(propertyText);
             }

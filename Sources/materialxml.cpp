@@ -90,7 +90,7 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName)
     }
 }
 
-void MaterialXml::readParam(QXmlStreamReader &reader, Material material)
+void MaterialXml::readParam(QXmlStreamReader &reader, Material &material)
 {
     while(reader.readNextStartElement()) {
         if(reader.name() == "param") {

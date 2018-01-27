@@ -17,7 +17,7 @@ public:
     static void readMesh(QXmlStreamReader &reader, QString fileName);
     static void readPolygon(QXmlStreamReader &reader, QString fileName);
     static void readMaterial(QXmlStreamReader &reader, QString fileName);
-    static void readParam(QXmlStreamReader &reader, Material material);
+    static void readParam(QXmlStreamReader &reader, Material &material);
 };
 
 #endif // MATERIALXML_H
