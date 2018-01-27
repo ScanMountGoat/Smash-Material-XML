@@ -13,7 +13,7 @@ class MaterialXml
 {
 public:
     MaterialXml();
-    static void materialDataFromXML(QString fileName);
+    static void addMaterialsFromXML(QString fileName);
     static void readMesh(QXmlStreamReader &reader, QString fileName);
     static void readPolygon(QXmlStreamReader &reader, QString fileName);
     static void readMaterial(QXmlStreamReader &reader, QString fileName);

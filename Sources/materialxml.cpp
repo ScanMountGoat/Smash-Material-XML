@@ -6,7 +6,7 @@
 
 QList<Material> materialList;
 
-void MaterialXml::materialDataFromXML(QString fileName)
+void MaterialXml::addMaterialsFromXML(QString fileName)
 {
     QXmlStreamReader reader;
 

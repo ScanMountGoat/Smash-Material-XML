@@ -2,6 +2,7 @@
 #define SEARCHSETTINGS_H
 
 #include <QString>
+#include <QList>
 
 class SearchSettings
 {

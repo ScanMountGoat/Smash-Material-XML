@@ -45,6 +45,8 @@ private slots:
 
     void on_dstLineEdit_editingFinished();
 
+    void on_matPropLineEdit_editingFinished();
+
 private:
     Ui::MainWindow *ui;
     SearchSettings *searchSettings = new SearchSettings();

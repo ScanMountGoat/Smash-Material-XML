@@ -28,7 +28,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionOpen_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Open Xml", ".", "Xml files (*.xml)");
-    MaterialXml::materialDataFromXML(fileName);
+    MaterialXml::addMaterialsFromXML(fileName);
 
     displayMaterials();
 }
@@ -42,8 +42,7 @@ void MainWindow::on_actionOpen_Folder_triggered()
     while (it.hasNext()) {
         if (it.next().endsWith(".xml")) {
             QString fileName = it.next();
-            qInfo() << fileName;
-            MaterialXml::materialDataFromXML(fileName);
+            MaterialXml::addMaterialsFromXML(fileName);
         }
     }
 
@@ -54,19 +53,21 @@ void MainWindow::on_flagsCheckBox_clicked()
 {
     bool isChecked = ui->flagsCheckBox->isChecked();
     ui->flagsContainer->setEnabled(isChecked);
-    searchSettings->searchFlags = ui->flagsCheckBox->isChecked();
+    searchSettings->searchFlags = isChecked;
 }
 
 void MainWindow::on_dstCheckBox_clicked()
 {
     bool isChecked = ui->dstCheckBox->isChecked();
     ui->dstContainer->setEnabled(isChecked);
+    searchSettings->searchDst = isChecked;
 }
 
 void MainWindow::on_srcCheckBox_clicked()
 {
     bool isChecked = ui->srcCheckBox->isChecked();
     ui->srcContainer->setEnabled(isChecked);
+    searchSettings->searchSrc = isChecked;
 }
 
 void MainWindow::displayMaterials()
@@ -189,4 +190,15 @@ void MainWindow::on_actionAbout_triggered()
     // Display license information.
     QString link = "<a href='https://github.com/ScanMountGoat/Smash-Material-XML/blob/master/license.txt'>GPL License</a>";
     QMessageBox::about(0, "About", link);
+}
+
+void MainWindow::on_matPropLineEdit_editingFinished()
+{
+
+}
+
+void MainWindow::on_matPropCheckBox_clicked()
+{
+    bool isChecked = ui->srcCheckBox->isChecked();
+    ui->matPropContainer->setEnabled(isCheked);
 }
