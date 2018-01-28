@@ -1,14 +1,18 @@
 #ifndef SEARCHSETTINGS_H
 #define SEARCHSETTINGS_H
 
+#include "Headers/material.h"
+
 #include <QString>
+#include <QList>
 
 class SearchSettings
 {
 public:
     SearchSettings();
 
-    // Need this to use SearchSettings::flagsComparison::equals.
+    QList<Material> materialList;
+
     enum class ComparisonOp {
         equals = 0,
         greater = 1,

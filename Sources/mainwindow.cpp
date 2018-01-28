@@ -1,7 +1,7 @@
 #include "Headers/mainwindow.h"
+
 #include "ui_mainwindow.h"
 #include "Headers/materialxml.h"
-#include "Headers/materialcontainer.h"
 
 #include <QMessageBox>
 #include <QFileDialog>
@@ -30,7 +30,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionOpen_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Open Xml", ".", "Xml files (*.xml)");
-    MaterialXml::addMaterialsFromXML(fileName);
+    MaterialXml::addMaterialsFromXML(fileName, searchSettings);
 
     displayMaterials();
 }
@@ -44,7 +44,7 @@ void MainWindow::on_actionOpen_Folder_triggered()
     while (it.hasNext()) {
         if (it.next().endsWith(".xml")) {
             QString fileName = it.next();
-            MaterialXml::addMaterialsFromXML(fileName);
+            MaterialXml::addMaterialsFromXML(fileName, searchSettings);
         }
     }
 
@@ -55,21 +55,28 @@ void MainWindow::on_flagsCheckBox_clicked()
 {
     bool isChecked = ui->flagsCheckBox->isChecked();
     ui->flagsContainer->setEnabled(isChecked);
-    searchSettings->searchFlags = isChecked;
+    searchSettings.searchFlags = isChecked;
 }
 
 void MainWindow::on_dstCheckBox_clicked()
 {
     bool isChecked = ui->dstCheckBox->isChecked();
     ui->dstContainer->setEnabled(isChecked);
-    searchSettings->searchDst = isChecked;
+    searchSettings.searchDst = isChecked;
 }
 
 void MainWindow::on_srcCheckBox_clicked()
 {
     bool isChecked = ui->srcCheckBox->isChecked();
     ui->srcContainer->setEnabled(isChecked);
-    searchSettings->searchSrc = isChecked;
+    searchSettings.searchSrc = isChecked;
+}
+
+bool MainWindow::hasValidSrc(Material material)
+{
+    int index = ui->srcOpComboBox->currentIndex();
+    SearchSettings::ComparisonOp comparison = (SearchSettings::ComparisonOp) index;
+    return SearchSettings::matchesSearch(comparison, material.srcFactor, searchSettings.srcFactor);
 }
 
 void MainWindow::displayMaterials()
@@ -77,8 +84,8 @@ void MainWindow::displayMaterials()
     // clear the text display for each new search
     ui->plainTextEdit->clear();
 
-    for (int i = 0; i < materialList.length(); i++) {
-        Material material = materialList.at(i);
+    for (int i = 0; i < searchSettings.materialList.length(); i++) {
+        Material material = searchSettings.materialList.at(i);
 
         bool validMaterial = true;
         bool validFlags = true;
@@ -87,43 +94,41 @@ void MainWindow::displayMaterials()
         bool validMatProp = true;
 
         // Check flags using the selected flags values and comparison operator.
-        if (searchSettings->searchFlags) {
+        if (searchSettings.searchFlags) {
             int index = ui->flagsOpComboBox->currentIndex();
             SearchSettings::ComparisonOp comparison = (SearchSettings::ComparisonOp) index;
 
             switch (comparison) {
                 case SearchSettings::ComparisonOp::equals:
-                    validFlags = (material.getFlags() & searchSettings->getFlags1()) == searchSettings->getFlags2();
+                    validFlags = (material.getFlags() & searchSettings.getFlags1()) == searchSettings.getFlags2();
                     break;
                 case SearchSettings::ComparisonOp::greater:
-                    validFlags = (material.getFlags() & searchSettings->getFlags1()) > searchSettings->getFlags2();
+                    validFlags = (material.getFlags() & searchSettings.getFlags1()) > searchSettings.getFlags2();
                     break;
                 case SearchSettings::ComparisonOp::gEqual:
-                    validFlags = (material.getFlags() & searchSettings->getFlags1()) >= searchSettings->getFlags2();
+                    validFlags = (material.getFlags() & searchSettings.getFlags1()) >= searchSettings.getFlags2();
                     break;
                 case SearchSettings::ComparisonOp::less:
-                    validFlags = (material.getFlags() & searchSettings->getFlags1()) < searchSettings->getFlags2();
+                    validFlags = (material.getFlags() & searchSettings.getFlags1()) < searchSettings.getFlags2();
                     break;
                 case SearchSettings::ComparisonOp::lEqual:
-                    validFlags = (material.getFlags() & searchSettings->getFlags1()) <= searchSettings->getFlags2();
+                    validFlags = (material.getFlags() & searchSettings.getFlags1()) <= searchSettings.getFlags2();
                     break;
             }
         }
 
-        if (searchSettings->searchSrc) {
-            int index = ui->srcOpComboBox->currentIndex();
-            SearchSettings::ComparisonOp comparison = (SearchSettings::ComparisonOp) index;
-            validSrc = SearchSettings::matchesSearch(comparison, material.srcFactor, searchSettings->srcFactor);
+        if (searchSettings.searchSrc) {
+            validSrc = hasValidSrc(material);
         }
 
-        if (searchSettings->searchDst) {
+        if (searchSettings.searchDst) {
             int index = ui->dstOpComboBox->currentIndex();
             SearchSettings::ComparisonOp comparison = (SearchSettings::ComparisonOp) index;
-            validDst = SearchSettings::matchesSearch(comparison, material.dstFactor, searchSettings->dstFactor);
+            validDst = SearchSettings::matchesSearch(comparison, material.dstFactor, searchSettings.dstFactor);
         }
 
-        if (searchSettings->searchMatProp) {
-            validMatProp = material.properties.contains("NU_" + searchSettings->materialProperty);
+        if (searchSettings.searchMatProp) {
+            validMatProp = material.properties.contains("NU_" + searchSettings.materialProperty);
         }
 
         validMaterial = validFlags && validSrc && validDst && validMatProp;
@@ -146,12 +151,12 @@ void MainWindow::displayMaterials()
             }
 
             if (validMatProp) {
-                QString propertyText = "NU_" + searchSettings->materialProperty;
+                QString propertyText = "NU_" + searchSettings.materialProperty + "\n";
 
                 // Add the space separated values to a new line.
-                QList<float> values = material.properties["NU_" + searchSettings->materialProperty];
+                QList<float> values = material.properties["NU_" + searchSettings.materialProperty];
                 for (int i = 0; i < values.size(); i++) {
-                    propertyText += "\n" + QString::number(values.at(i)) + " ";
+                    propertyText += QString::number(values.at(i)) + " ";
                 }
                 ui->plainTextEdit->appendPlainText(propertyText);
             }
@@ -177,7 +182,7 @@ void MainWindow::on_flags1LineEdit_editingFinished()
     // Use hex format. Ex: 9A011063
     QString text = ui->flags1LineEdit->text();
     bool ok;
-    searchSettings->setFlags1(text.toUInt(&ok, 16));
+    searchSettings.setFlags1(text.toUInt(&ok, 16));
 }
 
 void MainWindow::on_flags2LineEdit_editingFinished()
@@ -185,7 +190,7 @@ void MainWindow::on_flags2LineEdit_editingFinished()
     // Use hex format. Ex: 9A011063
     QString text = ui->flags2LineEdit->text();
     bool ok;
-    searchSettings->setFlags2(text.toUInt(&ok, 16));
+    searchSettings.setFlags2(text.toUInt(&ok, 16));
 }
 
 void MainWindow::on_srcLineEdit_editingFinished()
@@ -193,7 +198,7 @@ void MainWindow::on_srcLineEdit_editingFinished()
     // Use hex format
     QString text = ui->srcLineEdit->text();
     bool ok;
-    searchSettings->srcFactor = (text.toInt(&ok, 16));
+    searchSettings.srcFactor = (text.toInt(&ok, 16));
 }
 
 void MainWindow::on_dstLineEdit_editingFinished()
@@ -201,7 +206,7 @@ void MainWindow::on_dstLineEdit_editingFinished()
     // Use hex format
     QString text = ui->dstLineEdit->text();
     bool ok;
-    searchSettings->dstFactor = (text.toInt(&ok, 16));
+    searchSettings.dstFactor = (text.toInt(&ok, 16));
 }
 
 void MainWindow::on_actionAbout_triggered()
@@ -214,12 +219,12 @@ void MainWindow::on_actionAbout_triggered()
 void MainWindow::on_matPropLineEdit_editingFinished()
 {
     QString text = ui->matPropLineEdit->text();
-    searchSettings->materialProperty = text;
+    searchSettings.materialProperty = text;
 }
 
 void MainWindow::on_matPropCheckBox_clicked()
 {
     bool isChecked = ui->matPropCheckBox->isChecked();
     ui->matPropContainer->setEnabled(isChecked);
-    searchSettings->searchMatProp = isChecked;
+    searchSettings.searchMatProp = isChecked;
 }

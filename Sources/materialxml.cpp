@@ -1,12 +1,11 @@
 #include "Headers/materialxml.h"
-#include "Headers/materialcontainer.h"
 
 #include <QFile>
 #include <QDebug>
 
-QList<Material> materialList;
+//QList<Material> materialList;
 
-void MaterialXml::addMaterialsFromXML(QString fileName)
+void MaterialXml::addMaterialsFromXML(QString fileName, SearchSettings &settings)
 {
     QXmlStreamReader reader;
 
@@ -18,13 +17,13 @@ void MaterialXml::addMaterialsFromXML(QString fileName)
 
     if (reader.readNextStartElement()) {
         if (reader.name() == "NUDMATERIAL") {
-            readMesh(reader, fileName);
+            readMesh(reader, fileName, settings);
         } else
             reader.raiseError(QObject::tr("Incorrect file"));
     }
 }
 
-void MaterialXml::readMesh(QXmlStreamReader &reader, QString fileName)
+void MaterialXml::readMesh(QXmlStreamReader &reader, QString fileName, SearchSettings &settings)
 {
     while(reader.readNextStartElement()) {
         if(reader.name() == "mesh") {
@@ -32,23 +31,23 @@ void MaterialXml::readMesh(QXmlStreamReader &reader, QString fileName)
             if (reader.attributes().hasAttribute(("name")))
                 name = reader.attributes().value("name").toString();
 
-            readPolygon(reader, fileName);
+            readPolygon(reader, fileName, settings);
         } else
             reader.skipCurrentElement();
     }
 }
 
-void MaterialXml::readPolygon(QXmlStreamReader &reader, QString fileName)
+void MaterialXml::readPolygon(QXmlStreamReader &reader, QString fileName, SearchSettings &settings)
 {
     while(reader.readNextStartElement()) {
         if(reader.name() == "polygon") {
-            readMaterial(reader, fileName);
+            readMaterial(reader, fileName, settings);
         } else
             reader.skipCurrentElement();
     }
 }
 
-void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName)
+void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName, SearchSettings &settings)
 {
     while(reader.readNextStartElement()) {
         if(reader.name() == "material") {
@@ -84,7 +83,7 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName)
             readParam(reader, material);
 
             // add the material to the global material list
-            materialList.append(material);
+            settings.materialList.append(material);
         } else
             reader.skipCurrentElement();
     }

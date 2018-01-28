@@ -1,8 +1,8 @@
 #ifndef MATERIALXML_H
 #define MATERIALXML_H
 
-#include "materialxml.h"
-#include "material.h"
+#include "Headers/material.h"
+#include "Headers/searchsettings.h"
 
 #include <QString>
 #include <QList>
@@ -13,10 +13,10 @@ class MaterialXml
 {
 public:
     MaterialXml();
-    static void addMaterialsFromXML(QString fileName);
-    static void readMesh(QXmlStreamReader &reader, QString fileName);
-    static void readPolygon(QXmlStreamReader &reader, QString fileName);
-    static void readMaterial(QXmlStreamReader &reader, QString fileName);
+    static void addMaterialsFromXML(QString fileName, SearchSettings &settings);
+    static void readMesh(QXmlStreamReader &reader, QString fileName, SearchSettings &settings);
+    static void readPolygon(QXmlStreamReader &reader, QString fileName, SearchSettings &settings);
+    static void readMaterial(QXmlStreamReader &reader, QString fileName, SearchSettings &settings);
     static void readParam(QXmlStreamReader &reader, Material &material);
 };
 

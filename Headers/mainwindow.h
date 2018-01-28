@@ -4,6 +4,9 @@
 #include "Headers/searchsettings.h"
 
 #include <QMainWindow>
+#include <QList>
+
+#include "Headers/material.h"
 
 namespace Ui {
 class MainWindow;
@@ -51,7 +54,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    SearchSettings *searchSettings = new SearchSettings();
+    SearchSettings searchSettings;
+
+    bool hasValidSrc(Material material);
 };
 
 #endif // MAINWINDOW_H

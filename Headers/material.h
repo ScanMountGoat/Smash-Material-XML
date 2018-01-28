@@ -4,7 +4,6 @@
 #include<QString>
 #include<QHash>
 
-
 class Material
 {
 public:
