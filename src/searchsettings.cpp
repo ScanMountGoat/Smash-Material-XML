@@ -1,4 +1,4 @@
-#include "Headers/searchsettings.h"
+#include "searchsettings.h"
 
 SearchSettings::SearchSettings()
 {

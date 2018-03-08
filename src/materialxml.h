@@ -1,8 +1,8 @@
 #ifndef MATERIALXML_H
 #define MATERIALXML_H
 
-#include "Headers/material.h"
-#include "Headers/searchsettings.h"
+#include "material.h"
+#include "searchsettings.h"
 
 #include <QString>
 #include <QList>

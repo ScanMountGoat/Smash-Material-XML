@@ -1,7 +1,7 @@
 #ifndef SEARCHSETTINGS_H
 #define SEARCHSETTINGS_H
 
-#include "Headers/material.h"
+#include "material.h"
 
 #include <QString>
 #include <QList>

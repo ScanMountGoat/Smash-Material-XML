@@ -1,12 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "Headers/searchsettings.h"
+#include "src/searchsettings.h"
 
 #include <QMainWindow>
 #include <QList>
 
-#include "Headers/material.h"
+#include "src/material.h"
 
 namespace Ui {
 class MainWindow;

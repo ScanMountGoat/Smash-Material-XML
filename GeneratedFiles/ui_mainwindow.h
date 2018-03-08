@@ -65,7 +65,7 @@ public:
     QPushButton *clearPushButton;
     QCheckBox *matPropCheckBox;
     QWidget *matPropContainer;
-    QWidget *widget;
+    QWidget *layoutWidget3;
     QHBoxLayout *horizontalLayout;
     QLabel *nuLabel;
     QLineEdit *matPropLineEdit;
@@ -79,7 +79,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(427, 607);
+        MainWindow->resize(459, 635);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
         actionOpen_Folder = new QAction(MainWindow);
@@ -107,7 +107,7 @@ public:
         dstContainer->setGeometry(QRect(30, 140, 241, 31));
         layoutWidget = new QWidget(dstContainer);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(0, 0, 235, 24));
+        layoutWidget->setGeometry(QRect(0, 0, 279, 33));
         horizontalLayout_3 = new QHBoxLayout(layoutWidget);
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -133,7 +133,7 @@ public:
         srcContainer->setGeometry(QRect(30, 90, 241, 31));
         layoutWidget1 = new QWidget(srcContainer);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(0, 0, 234, 24));
+        layoutWidget1->setGeometry(QRect(0, 0, 278, 33));
         horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -159,7 +159,7 @@ public:
         flagsContainer->setGeometry(QRect(30, 40, 371, 31));
         layoutWidget2 = new QWidget(flagsContainer);
         layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(0, 0, 366, 24));
+        layoutWidget2->setGeometry(QRect(0, 0, 376, 33));
         flagsHorizontalLayout = new QHBoxLayout(layoutWidget2);
         flagsHorizontalLayout->setSpacing(6);
         flagsHorizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -197,20 +197,20 @@ public:
         matPropContainer = new QWidget(groupBox);
         matPropContainer->setObjectName(QStringLiteral("matPropContainer"));
         matPropContainer->setGeometry(QRect(20, 190, 251, 31));
-        widget = new QWidget(matPropContainer);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(10, 0, 231, 24));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget3 = new QWidget(matPropContainer);
+        layoutWidget3->setObjectName(QStringLiteral("layoutWidget3"));
+        layoutWidget3->setGeometry(QRect(10, 0, 231, 33));
+        horizontalLayout = new QHBoxLayout(layoutWidget3);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        nuLabel = new QLabel(widget);
+        nuLabel = new QLabel(layoutWidget3);
         nuLabel->setObjectName(QStringLiteral("nuLabel"));
 
         horizontalLayout->addWidget(nuLabel);
 
-        matPropLineEdit = new QLineEdit(widget);
+        matPropLineEdit = new QLineEdit(layoutWidget3);
         matPropLineEdit->setObjectName(QStringLiteral("matPropLineEdit"));
 
         horizontalLayout->addWidget(matPropLineEdit);
@@ -221,7 +221,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 427, 21));
+        menuBar->setGeometry(QRect(0, 0, 459, 38));
         menuMaterial_XML = new QMenu(menuBar);
         menuMaterial_XML->setObjectName(QStringLiteral("menuMaterial_XML"));
         menuAbout = new QMenu(menuBar);
