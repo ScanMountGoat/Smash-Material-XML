@@ -5,42 +5,17 @@ SearchSettings::SearchSettings()
 
 }
 
-void SearchSettings::setFlagsOperation(ComparisonOp comparison)
+bool SearchSettings::matchesSearch(ComparisonOperation operation, int value, int comparisonValue)
 {
-    this->flagsOperation = comparison;
-}
-
-void SearchSettings::setFlags1(uint flags1)
-{
-    this->flags1 = flags1;
-}
-
-void SearchSettings::setFlags2(uint flags2)
-{
-    this->flags2 = flags2;
-}
-
-uint SearchSettings::getFlags1()
-{
-    return flags1;
-}
-
-uint SearchSettings::getFlags2()
-{
-    return flags2;
-}
-
-bool SearchSettings::matchesSearch(ComparisonOp operation, int value, int comparisonValue)
-{
-    if (operation == SearchSettings::ComparisonOp::equals)
+    if (operation == SearchSettings::ComparisonOperation::equals)
         return value == comparisonValue;
-    else if (operation == SearchSettings::ComparisonOp::greater)
+    else if (operation == SearchSettings::ComparisonOperation::greater)
         return value > comparisonValue;
-    else if (operation == SearchSettings::ComparisonOp::gEqual)
+    else if (operation == SearchSettings::ComparisonOperation::gEqual)
         return value >= comparisonValue;
-    else if (operation == SearchSettings::ComparisonOp::less)
+    else if (operation == SearchSettings::ComparisonOperation::less)
         return value < comparisonValue;
-    else if (operation == SearchSettings::ComparisonOp::lEqual)
+    else if (operation == SearchSettings::ComparisonOperation::lEqual)
         return value <= comparisonValue;
 
     return false;

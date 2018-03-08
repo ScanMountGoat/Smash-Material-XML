@@ -1,17 +1,5 @@
 #include "material.h"
 
-
-uint Material::getFlags()
-{
-    return flags;
-}
-
-
-void Material::setFlags(uint newFlags)
-{
-    flags = newFlags;
-}
-
 void Material::testFlags()
 {
     shadow = (flags & (int)TextureFlags::Shadow) > 0;

@@ -3,8 +3,6 @@
 #include <QFile>
 #include <QDebug>
 
-//QList<Material> materialList;
-
 void MaterialXml::addMaterialsFromXML(QString fileName, SearchSettings &settings)
 {
     QXmlStreamReader reader;
@@ -62,7 +60,7 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName, Searc
                 bool ok;
                 flags = reader.attributes().value("flags").toUInt(&ok, 16);
             }
-            material.setFlags(flags);
+            material.flags = flags;
 
             // read and set srcFactor
             int src = 0;

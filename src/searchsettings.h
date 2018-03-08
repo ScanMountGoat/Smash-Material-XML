@@ -13,7 +13,7 @@ public:
 
     QList<Material> materialList;
 
-    enum class ComparisonOp {
+    enum class ComparisonOperation {
         equals = 0,
         greater = 1,
         gEqual = 2,
@@ -21,6 +21,9 @@ public:
         lEqual = 4
     };
 
+	uint flags1 = 0xFFFFFFFF;
+	uint flags2 = 0xFFFFFFFF;
+	ComparisonOperation flagsOperation;
     bool searchFlags = false;
     bool searchSrc = false;
     bool searchDst = false;
@@ -30,19 +33,7 @@ public:
     int srcFactor = 0;
     QString materialProperty = "";
 
-    void setFlagsOperation(ComparisonOp comparison);
-    void setFlags1(uint flags1);
-    void setFlags2(uint flags2);
-    uint getFlags1();
-    uint getFlags2();
-
-    static bool matchesSearch(ComparisonOp operation, int value, int comparisonValue);
-
-private:
-    // flags
-    uint flags1 = 0xFFFFFFFF;
-    uint flags2 = 0xFFFFFFFF;
-    ComparisonOp flagsOperation;
+    static bool matchesSearch(ComparisonOperation operation, int value, int comparisonValue);
 };
 
 #endif // SEARCHSETTINGS_H

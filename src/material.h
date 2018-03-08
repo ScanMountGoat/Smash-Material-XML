@@ -18,13 +18,16 @@ public:
     bool shadow;
     bool dummyramp;
     bool normalmap;
+
     int textureCount = 0;
     int expectedTextureCount = 0;
+
     int srcFactor;
     int dstFactor;
 
     QString fileName;
     QHash<QString, QList<float>> properties;
+	uint flags;
 
     enum TextureFlags {
         Glow = 0x00000080,
@@ -37,16 +40,9 @@ public:
         DiffuseMap = 0x00000001
     };
 
-    uint getFlags();
-    void setFlags(uint newFlags);
     void testFlags();
+
     void calculateTextureCount();
-
-
-private:
-    uint flags;
-
-
 };
 
 #endif // MATERIAL_H
