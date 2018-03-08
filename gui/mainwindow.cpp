@@ -55,21 +55,21 @@ void MainWindow::on_flagsCheckBox_clicked()
 {
 	bool isChecked = ui->flagsCheckBox->isChecked();
 	ui->flagsContainer->setEnabled(isChecked);
-	searchSettings.searchFlags = isChecked;
+	searchSettings.filterFlags = isChecked;
 }
 
 void MainWindow::on_dstCheckBox_clicked()
 {
 	bool isChecked = ui->dstCheckBox->isChecked();
 	ui->dstContainer->setEnabled(isChecked);
-	searchSettings.searchDst = isChecked;
+	searchSettings.filterDst = isChecked;
 }
 
 void MainWindow::on_srcCheckBox_clicked()
 {
 	bool isChecked = ui->srcCheckBox->isChecked();
 	ui->srcContainer->setEnabled(isChecked);
-	searchSettings.searchSrc = isChecked;
+	searchSettings.filterSrc = isChecked;
 }
 
 bool MainWindow::hasValidSrc(Material material)
@@ -87,14 +87,13 @@ void MainWindow::displayMaterials()
 	for (int i = 0; i < searchSettings.materialList.length(); i++) {
 		Material material = searchSettings.materialList.at(i);
 
-		bool validMaterial = true;
 		bool validFlags = true;
 		bool validSrc = true;
 		bool validDst = true;
 		bool validMatProp = true;
 
 		// Check flags using the selected flags values and comparison operator.
-		if (searchSettings.searchFlags) {
+		if (searchSettings.filterFlags) {
 			int index = ui->flagsOpComboBox->currentIndex();
 			SearchSettings::ComparisonOperation comparison = (SearchSettings::ComparisonOperation) index;
 
@@ -117,40 +116,39 @@ void MainWindow::displayMaterials()
 			}
 		}
 
-		if (searchSettings.searchSrc) {
+		if (searchSettings.filterSrc) {
 			validSrc = hasValidSrc(material);
 		}
 
-		if (searchSettings.searchDst) {
+		if (searchSettings.filterDst) {
 			int index = ui->dstOpComboBox->currentIndex();
 			SearchSettings::ComparisonOperation comparison = (SearchSettings::ComparisonOperation) index;
 			validDst = SearchSettings::matchesSearch(comparison, material.dstFactor, searchSettings.dstFactor);
 		}
 
-		if (searchSettings.searchMatProp) {
+		if (searchSettings.filterPropertyName) {
 			validMatProp = material.properties.contains("NU_" + searchSettings.materialProperty);
 		}
 
-		validMaterial = validFlags && validSrc && validDst && validMatProp;
-		if (validMaterial) {
+		if (validFlags && validSrc && validDst && validMatProp) {
 			ui->plainTextEdit->appendPlainText(material.fileName);
 
-			if (validFlags) {
+			if (searchSettings.filterFlags) {
 				QString flags;
 				ui->plainTextEdit->appendPlainText(flags.setNum(material.flags, 16));
 			}
 
-			if (validSrc) {
+			if (searchSettings.filterSrc) {
 				QString src;
 				ui->plainTextEdit->appendPlainText("src: " + src.setNum(material.srcFactor, 16));
 			}
 
-			if (validDst) {
+			if (searchSettings.filterDst) {
 				QString dst;
 				ui->plainTextEdit->appendPlainText("dst: " + dst.setNum(material.dstFactor, 16));
 			}
 
-			if (validMatProp) {
+			if (searchSettings.filterPropertyName) {
 				QString propertyText = "NU_" + searchSettings.materialProperty + "\n";
 
 				// Add the space separated values to a new line.
@@ -226,5 +224,5 @@ void MainWindow::on_matPropCheckBox_clicked()
 {
 	bool isChecked = ui->matPropCheckBox->isChecked();
 	ui->matPropContainer->setEnabled(isChecked);
-	searchSettings.searchMatProp = isChecked;
+	searchSettings.filterPropertyName = isChecked;
 }

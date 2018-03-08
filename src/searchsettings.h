@@ -9,8 +9,6 @@
 class SearchSettings
 {
 public:
-    SearchSettings();
-
     QList<Material> materialList;
 
     enum class ComparisonOperation {
@@ -24,10 +22,10 @@ public:
 	uint flags1 = 0xFFFFFFFF;
 	uint flags2 = 0xFFFFFFFF;
 	ComparisonOperation flagsOperation;
-    bool searchFlags = false;
-    bool searchSrc = false;
-    bool searchDst = false;
-    bool searchMatProp = false;
+    bool filterFlags = false;
+    bool filterSrc = false;
+    bool filterDst = false;
+    bool filterPropertyName = false;
 
     int dstFactor = 0;
     int srcFactor = 0;
