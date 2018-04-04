@@ -226,3 +226,11 @@ void MainWindow::on_matPropCheckBox_clicked()
 	ui->matPropContainer->setEnabled(isChecked);
 	searchSettings.filterPropertyName = isChecked;
 }
+
+void MainWindow::on_actionClear_Materials_triggered() 
+{
+	searchSettings.materialList.clear();
+	ui->plainTextEdit->clear();
+	ui->plainTextEdit->appendPlainText("Materials cleared.");
+}
+

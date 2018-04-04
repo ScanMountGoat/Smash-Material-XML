@@ -52,6 +52,9 @@
     <ClCompile Include="gui\mainwindow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="gui\mainwindow.h">
@@ -66,6 +69,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="src\searchsettings.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

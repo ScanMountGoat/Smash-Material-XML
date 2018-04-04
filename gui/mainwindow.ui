@@ -349,6 +349,7 @@
     </property>
     <addaction name="actionOpen"/>
     <addaction name="actionOpen_Folder"/>
+    <addaction name="actionClear_Materials"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
@@ -362,12 +363,12 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen">
    <property name="text">
-    <string>Open File</string>
+    <string>Add materials from file</string>
    </property>
   </action>
   <action name="actionOpen_Folder">
    <property name="text">
-    <string>Open Folder</string>
+    <string>Add materials from folder</string>
    </property>
   </action>
   <action name="actionAbout">
@@ -380,8 +381,30 @@
     <string>Display Settings</string>
    </property>
   </action>
+  <action name="actionClear_Materials">
+   <property name="text">
+    <string>Clear materials</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionClear_Materials</sender>
+   <signal>triggered()</signal>
+   <receiver>actionClear_Materials</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>317</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

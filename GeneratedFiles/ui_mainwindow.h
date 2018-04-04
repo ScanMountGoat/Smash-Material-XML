@@ -37,6 +37,7 @@ public:
     QAction *actionOpen_Folder;
     QAction *actionAbout;
     QAction *actionDisplay_Settings;
+    QAction *actionClear_Materials;
     QWidget *centralWidget;
     QGroupBox *groupBox;
     QCheckBox *flagsCheckBox;
@@ -88,6 +89,8 @@ public:
         actionAbout->setObjectName(QStringLiteral("actionAbout"));
         actionDisplay_Settings = new QAction(MainWindow);
         actionDisplay_Settings->setObjectName(QStringLiteral("actionDisplay_Settings"));
+        actionClear_Materials = new QAction(MainWindow);
+        actionClear_Materials->setObjectName(QStringLiteral("actionClear_Materials"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupBox = new QGroupBox(centralWidget);
@@ -235,6 +238,7 @@ public:
         menuBar->addAction(menuAbout->menuAction());
         menuMaterial_XML->addAction(actionOpen);
         menuMaterial_XML->addAction(actionOpen_Folder);
+        menuMaterial_XML->addAction(actionClear_Materials);
         menuAbout->addAction(actionAbout);
 
         retranslateUi(MainWindow);
@@ -245,10 +249,11 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Material XML", Q_NULLPTR));
-        actionOpen->setText(QApplication::translate("MainWindow", "Open File", Q_NULLPTR));
-        actionOpen_Folder->setText(QApplication::translate("MainWindow", "Open Folder", Q_NULLPTR));
+        actionOpen->setText(QApplication::translate("MainWindow", "Add materials from file", Q_NULLPTR));
+        actionOpen_Folder->setText(QApplication::translate("MainWindow", "Add materials from folder", Q_NULLPTR));
         actionAbout->setText(QApplication::translate("MainWindow", "About", Q_NULLPTR));
         actionDisplay_Settings->setText(QApplication::translate("MainWindow", "Display Settings", Q_NULLPTR));
+        actionClear_Materials->setText(QApplication::translate("MainWindow", "Clear materials", Q_NULLPTR));
         groupBox->setTitle(QApplication::translate("MainWindow", "Search Properties", Q_NULLPTR));
         flagsCheckBox->setText(QApplication::translate("MainWindow", "Flags", Q_NULLPTR));
         srcCheckBox->setText(QApplication::translate("MainWindow", "src Factor", Q_NULLPTR));

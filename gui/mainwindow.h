@@ -52,6 +52,8 @@ private slots:
 
     void on_matPropCheckBox_clicked();
 
+	void on_actionClear_Materials_triggered();
+
 private:
     Ui::MainWindow *ui;
     SearchSettings searchSettings;
