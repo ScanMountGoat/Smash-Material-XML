@@ -9,7 +9,7 @@ void MaterialXml::addMaterialsFromXML(QString fileName, SearchSettings &settings
 
     QFile file(fileName);
     if(!file.open(QFile::ReadOnly | QFile::Text)) {
-        qDebug() << "Cannot read file" << file.errorString();
+		return;
     }
     reader.setDevice(&file);
 

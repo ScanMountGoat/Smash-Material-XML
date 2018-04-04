@@ -21,6 +21,11 @@ public:
     ~MainWindow();
 
     void displayMaterials();
+	
+	void addMaterialsFromFolderDialog();
+
+	void addMaterialsFromFileDialog();
+
 
 private slots:
 

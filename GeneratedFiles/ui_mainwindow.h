@@ -242,7 +242,6 @@ public:
         menuAbout->addAction(actionAbout);
 
         retranslateUi(MainWindow);
-
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 

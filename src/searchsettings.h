@@ -32,6 +32,8 @@ public:
     QString materialProperty = "";
 
     static bool matchesSearch(ComparisonOperation operation, int value, int comparisonValue);
+
+	static bool matchesSearch(ComparisonOperation operaration, uint value, uint comparisonValue);
 };
 
 #endif // SEARCHSETTINGS_H

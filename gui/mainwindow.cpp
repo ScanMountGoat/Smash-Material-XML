@@ -27,19 +27,28 @@ MainWindow::~MainWindow()
 	delete ui;
 }
 
-void MainWindow::on_actionOpen_triggered()
+void MainWindow::addMaterialsFromFileDialog() 
 {
 	QString fileName = QFileDialog::getOpenFileName(this, "Open Xml", ".", "Xml files (*.xml)");
 	MaterialXml::addMaterialsFromXML(fileName, searchSettings);
+}
 
+void MainWindow::on_actionOpen_triggered()
+{
+	addMaterialsFromFileDialog();
 	displayMaterials();
 }
 
 void MainWindow::on_actionOpen_Folder_triggered()
 {
+	addMaterialsFromFolderDialog();
+	displayMaterials();
+}
+
+void MainWindow::addMaterialsFromFolderDialog() 
+{
 	QString directory = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home",
-		QFileDialog::ShowDirsOnly
-		| QFileDialog::DontResolveSymlinks);
+		QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 	QDirIterator it(directory, QDirIterator::Subdirectories);
 	while (it.hasNext()) {
 		if (it.next().endsWith(".xml")) {
@@ -47,8 +56,6 @@ void MainWindow::on_actionOpen_Folder_triggered()
 			MaterialXml::addMaterialsFromXML(fileName, searchSettings);
 		}
 	}
-
-	displayMaterials();
 }
 
 void MainWindow::on_flagsCheckBox_clicked()
@@ -81,12 +88,10 @@ bool MainWindow::hasValidSrc(Material material)
 
 void MainWindow::displayMaterials()
 {
-	// clear the text display for each new search
+	// Clear the text display before each new search.
 	ui->plainTextEdit->clear();
 
-	for (int i = 0; i < searchSettings.materialList.length(); i++) {
-		Material material = searchSettings.materialList.at(i);
-
+	for (auto const &material : searchSettings.materialList) {
 		bool validFlags = true;
 		bool validSrc = true;
 		bool validDst = true;
@@ -96,24 +101,8 @@ void MainWindow::displayMaterials()
 		if (searchSettings.filterFlags) {
 			int index = ui->flagsOpComboBox->currentIndex();
 			SearchSettings::ComparisonOperation comparison = (SearchSettings::ComparisonOperation) index;
-
-			switch (comparison) {
-			case SearchSettings::ComparisonOperation::equals:
-				validFlags = (material.flags & searchSettings.flags1) == searchSettings.flags2;
-				break;
-			case SearchSettings::ComparisonOperation::greater:
-				validFlags = (material.flags & searchSettings.flags1) > searchSettings.flags2;
-				break;
-			case SearchSettings::ComparisonOperation::gEqual:
-				validFlags = (material.flags & searchSettings.flags1) >= searchSettings.flags2;
-				break;
-			case SearchSettings::ComparisonOperation::less:
-				validFlags = (material.flags & searchSettings.flags1) < searchSettings.flags2;
-				break;
-			case SearchSettings::ComparisonOperation::lEqual:
-				validFlags = (material.flags & searchSettings.flags1) <= searchSettings.flags2;
-				break;
-			}
+			uint value = material.flags & searchSettings.flags1;
+			validFlags = SearchSettings::matchesSearch(comparison, value, searchSettings.flags2);
 		}
 
 		if (searchSettings.filterSrc) {
