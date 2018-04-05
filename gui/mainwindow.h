@@ -24,6 +24,8 @@ public:
 	
 	void addMaterialsFromFolderDialog();
 
+	void displayMaterialCount();
+
 	void addMaterialsFromFileDialog();
 
 

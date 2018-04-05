@@ -31,18 +31,17 @@ void MainWindow::addMaterialsFromFileDialog()
 {
 	QString fileName = QFileDialog::getOpenFileName(this, "Open Xml", ".", "Xml files (*.xml)");
 	MaterialXml::addMaterialsFromXML(fileName, searchSettings);
+	displayMaterialCount();
 }
 
 void MainWindow::on_actionOpen_triggered()
 {
 	addMaterialsFromFileDialog();
-	displayMaterials();
 }
 
 void MainWindow::on_actionOpen_Folder_triggered()
 {
 	addMaterialsFromFolderDialog();
-	displayMaterials();
 }
 
 void MainWindow::addMaterialsFromFolderDialog() 
@@ -54,8 +53,16 @@ void MainWindow::addMaterialsFromFolderDialog()
 		if (it.next().endsWith(".xml")) {
 			QString fileName = it.next();
 			MaterialXml::addMaterialsFromXML(fileName, searchSettings);
+			displayMaterialCount();
 		}
 	}
+}
+
+void MainWindow::displayMaterialCount() 
+{
+	ui->plainTextEdit->clear();
+	ui->plainTextEdit->appendPlainText(QString::number(searchSettings.materialList.count())
+		+ " material(s) added.");
 }
 
 void MainWindow::on_flagsCheckBox_clicked()
