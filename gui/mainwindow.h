@@ -20,7 +20,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void displayMaterials();
+    void displayFilteredMaterials();
+
+	QList<Material> filterMaterials();
+
+	void printMaterialData(const Material & material);
 	
 	void addMaterialsFromFolderDialog();
 
@@ -74,9 +78,6 @@ private slots:
 	void on_displayDstCheckBox_clicked();
 
 	void on_displayFlagsCheckBox_clicked();
-
-
-
 
 private:
     Ui::MainWindow *ui;

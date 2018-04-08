@@ -98,77 +98,103 @@ bool MainWindow::hasValidSrc(Material material)
 	return SearchSettings::matchesSearch(comparison, material.srcFactor, searchSettings.srcFactor);
 }
 
-void MainWindow::displayMaterials()
+void MainWindow::displayFilteredMaterials()
 {
 	// Clear the text display before each new search.
 	ui->plainTextEdit->clear();
 
+	QList<Material> filteredMaterials = filterMaterials();
+	for (auto const &material : filteredMaterials) {
+		printMaterialData(material);
+	}
+}
+
+QList<Material> MainWindow::filterMaterials() 
+{
+	QList<Material> filteredMaterialList;
 	for (auto const &material : searchSettings.materialList) {
-		bool validFlags = true;
-		bool validSrc = true;
-		bool validDst = true;
-		bool validMatProp = true;
+		bool validMaterial = true;
 
 		// Check flags using the selected flags values and comparison operator.
 		if (searchSettings.filterFlags) {
 			int index = ui->flagsOpComboBox->currentIndex();
 			SearchSettings::ComparisonOperation comparison = (SearchSettings::ComparisonOperation) index;
 			uint value = material.flags & searchSettings.flags1;
-			validFlags = SearchSettings::matchesSearch(comparison, value, searchSettings.flags2);
+
+			bool validFlags = SearchSettings::matchesSearch(comparison, value, searchSettings.flags2);
+			validMaterial = validMaterial && validFlags;
 		}
 
 		if (searchSettings.filterSrc) {
-			validSrc = hasValidSrc(material);
+			bool validSrc = hasValidSrc(material);
+			validMaterial = validMaterial && validSrc;
 		}
 
 		if (searchSettings.filterDst) {
 			int index = ui->dstOpComboBox->currentIndex();
 			SearchSettings::ComparisonOperation comparison = (SearchSettings::ComparisonOperation) index;
-			validDst = SearchSettings::matchesSearch(comparison, material.dstFactor, searchSettings.dstFactor);
+
+			bool validDst = SearchSettings::matchesSearch(comparison, material.dstFactor, searchSettings.dstFactor);
+			validMaterial = validMaterial && validDst;
 		}
 
 		if (searchSettings.filterPropertyName) {
-			validMatProp = material.properties.contains("NU_" + searchSettings.materialProperty);
+			bool validMaterialProperty = material.properties.contains("NU_" + searchSettings.materialProperty);
+			validMaterial = validMaterial && validMaterialProperty;
 		}
 
-		if (validFlags && validSrc && validDst && validMatProp) {
-			ui->plainTextEdit->appendPlainText(material.fileName);
-
-			if (searchSettings.filterFlags) {
-				QString flags;
-				ui->plainTextEdit->appendPlainText(flags.setNum(material.flags, 16));
-			}
-
-			if (searchSettings.filterSrc) {
-				QString src;
-				ui->plainTextEdit->appendPlainText("src: " + src.setNum(material.srcFactor, 16));
-			}
-
-			if (searchSettings.filterDst) {
-				QString dst;
-				ui->plainTextEdit->appendPlainText("dst: " + dst.setNum(material.dstFactor, 16));
-			}
-
-			if (searchSettings.filterPropertyName) {
-				QString propertyText = "NU_" + searchSettings.materialProperty + "\n";
-
-				// Add the space separated values to a new line.
-				QList<float> values = material.properties["NU_" + searchSettings.materialProperty];
-				for (int i = 0; i < values.size(); i++) {
-					propertyText += QString::number(values.at(i)) + " ";
-				}
-				ui->plainTextEdit->appendPlainText(propertyText);
-			}
-
-			// Put a line between each material.
-			ui->plainTextEdit->appendPlainText("\n");
+		if (validMaterial) {
+			filteredMaterialList.append(material);
 		}
 	}
+
+	return filteredMaterialList;
+}
+
+void MainWindow::printMaterialData(const Material & material) 
+{
+	if (searchSettings.displayFileName) {
+		ui->plainTextEdit->appendPlainText(material.fileName);
+	}
+
+	if (searchSettings.displayFlags) {
+		QString flags;
+		ui->plainTextEdit->appendPlainText(flags.setNum(material.flags, 16));
+	}
+
+	if (searchSettings.displaySrc) {
+		QString src;
+		ui->plainTextEdit->appendPlainText("src: " + src.setNum(material.srcFactor, 16));
+	}
+
+	if (searchSettings.displayDst) {
+		QString dst;
+		ui->plainTextEdit->appendPlainText("dst: " + dst.setNum(material.dstFactor, 16));
+	}
+
+	switch (searchSettings.propertyDisplayMode) {
+	case SearchSettings::PropertDisplay::None:
+		break;
+	case SearchSettings::PropertDisplay::Selected:
+		QString propertyText = "NU_" + searchSettings.materialProperty + "\n";
+
+		// Add the space separated values to a new line.
+		QList<float> values = material.properties["NU_" + searchSettings.materialProperty];
+		for (int i = 0; i < values.size(); i++) {
+			propertyText += QString::number(values.at(i)) + " ";
+		}
+		ui->plainTextEdit->appendPlainText(propertyText);
+		break;
+	}
+
+
+	// Put a line between each material.
+	ui->plainTextEdit->appendPlainText("\n");
 }
 
 void MainWindow::on_searchPushButton_clicked()
 {
-	displayMaterials();
+	displayFilteredMaterials();
 }
 
 void MainWindow::on_clearPushButton_clicked()
@@ -248,7 +274,22 @@ void MainWindow::on_matPropLineEdit_editingFinished()
 
 void MainWindow::on_displayFileNameCheckBox_clicked() 
 {
-	ui->plainTextEdit->setEnabled(ui->displayFileNameCheckBox->isChecked());
+	searchSettings.displayFileName = ui->displayFileNameCheckBox->isChecked();
+}
+
+void MainWindow::on_displaySrcCheckBox_clicked()
+{
+	searchSettings.displaySrc = ui->displaySrcCheckBox->isChecked();
+}
+
+void MainWindow::on_displayDstCheckBox_clicked() 
+{
+	searchSettings.displayDst = ui->displayDstCheckBox->isChecked();
+}
+
+void MainWindow::on_displayFlagsCheckBox_clicked() 
+{
+	searchSettings.displayFlags = ui->displayFlagsCheckBox->isChecked();
 }
 
 void MainWindow::on_matPropCheckBox_clicked()

@@ -3,15 +3,15 @@
 
 bool SearchSettings::matchesSearch(ComparisonOperation operation, int value, int comparisonValue)
 {
-    if (operation == SearchSettings::ComparisonOperation::equals)
+    if (operation == SearchSettings::ComparisonOperation::Equals)
         return value == comparisonValue;
-    else if (operation == SearchSettings::ComparisonOperation::greater)
+    else if (operation == SearchSettings::ComparisonOperation::Greater)
         return value > comparisonValue;
-    else if (operation == SearchSettings::ComparisonOperation::gEqual)
+    else if (operation == SearchSettings::ComparisonOperation::GreaterOrEqual)
         return value >= comparisonValue;
-    else if (operation == SearchSettings::ComparisonOperation::less)
+    else if (operation == SearchSettings::ComparisonOperation::Less)
         return value < comparisonValue;
-    else if (operation == SearchSettings::ComparisonOperation::lEqual)
+    else if (operation == SearchSettings::ComparisonOperation::LessOrEqual)
         return value <= comparisonValue;
 
     return false;
@@ -19,15 +19,15 @@ bool SearchSettings::matchesSearch(ComparisonOperation operation, int value, int
 
 bool SearchSettings::matchesSearch(ComparisonOperation operation, uint value, uint comparisonValue) 
 {
-	if (operation == SearchSettings::ComparisonOperation::equals)
+	if (operation == SearchSettings::ComparisonOperation::Equals)
 		return value == comparisonValue;
-	else if (operation == SearchSettings::ComparisonOperation::greater)
+	else if (operation == SearchSettings::ComparisonOperation::Greater)
 		return value > comparisonValue;
-	else if (operation == SearchSettings::ComparisonOperation::gEqual)
+	else if (operation == SearchSettings::ComparisonOperation::GreaterOrEqual)
 		return value >= comparisonValue;
-	else if (operation == SearchSettings::ComparisonOperation::less)
+	else if (operation == SearchSettings::ComparisonOperation::Less)
 		return value < comparisonValue;
-	else if (operation == SearchSettings::ComparisonOperation::lEqual)
+	else if (operation == SearchSettings::ComparisonOperation::LessOrEqual)
 		return value <= comparisonValue;
 
 	return false;
