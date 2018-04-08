@@ -9,15 +9,13 @@
 #include <QXmlStreamReader>
 
 
-class MaterialXml
+namespace MaterialXml
 {
-public:
-    MaterialXml();
-    static void addMaterialsFromXML(QString fileName, SearchSettings &settings);
-    static void readMesh(QXmlStreamReader &reader, QString fileName, SearchSettings &settings);
-    static void readPolygon(QXmlStreamReader &reader, QString fileName, SearchSettings &settings);
-    static void readMaterial(QXmlStreamReader &reader, QString fileName, SearchSettings &settings);
-    static void readParam(QXmlStreamReader &reader, Material &material);
-};
+    void addMaterialsFromXML(QString fileName, SearchSettings &settings);
+    void readMesh(QXmlStreamReader &reader, QString fileName, SearchSettings &settings);
+    void readPolygon(QXmlStreamReader &reader, QString fileName, SearchSettings &settings);
+    void readMaterial(QXmlStreamReader &reader, QString fileName, SearchSettings &settings);
+    void readParam(QXmlStreamReader &reader, Material &material);
+}
 
 #endif // MATERIALXML_H

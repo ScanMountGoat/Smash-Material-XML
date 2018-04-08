@@ -16,7 +16,8 @@ public:
         Greater = 1,
         GreaterOrEqual = 2,
         Less = 3,
-        LessOrEqual = 4
+        LessOrEqual = 4,
+		NotEqual = 5
     };
 
 	// Settings for filtering materials.
@@ -36,7 +37,8 @@ public:
 	bool displaySrc = false;
 	bool displayDst = false;
 	bool displayFlags = false;
-	bool displayFileName = true;
+	bool displayFileName = false
+		;
 	enum class PropertDisplay {
 		None = 0,
 		Selected = 1,
