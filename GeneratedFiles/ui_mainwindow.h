@@ -15,6 +15,8 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -40,46 +42,47 @@ public:
     QAction *actionDisplay_Settings;
     QAction *actionClear_Materials;
     QWidget *centralWidget;
+    QGridLayout *gridLayout;
+    QPlainTextEdit *plainTextEdit;
+    QGroupBox *searchPropertiesGroupBox;
     QVBoxLayout *verticalLayout;
-    QGroupBox *groupBox;
-    QCheckBox *flagsCheckBox;
-    QCheckBox *srcCheckBox;
-    QCheckBox *dstCheckBox;
-    QWidget *dstContainer;
-    QWidget *layoutWidget;
-    QHBoxLayout *horizontalLayout_3;
-    QLabel *dstLabel;
-    QComboBox *dstOpComboBox;
-    QLineEdit *dstLineEdit;
-    QWidget *srcContainer;
-    QWidget *layoutWidget1;
-    QHBoxLayout *horizontalLayout_2;
-    QLabel *srcLabel;
-    QComboBox *srcOpComboBox;
-    QLineEdit *srcLineEdit;
+    QHBoxLayout *flagsMatPropHorizontalLayout;
+    QFrame *flagsFrame;
     QWidget *flagsContainer;
-    QWidget *layoutWidget2;
+    QWidget *layoutWidget;
     QHBoxLayout *flagsHorizontalLayout;
     QLabel *flagsLabel;
     QLineEdit *flags1LineEdit;
     QComboBox *flagsOpComboBox;
     QLineEdit *flags2LineEdit;
-    QPushButton *searchPushButton;
-    QPushButton *clearPushButton;
+    QCheckBox *flagsCheckBox;
+    QFrame *matPropertyFrame;
     QCheckBox *matPropCheckBox;
     QWidget *matPropContainer;
-    QWidget *layoutWidget3;
+    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout;
     QLabel *nuLabel;
     QLineEdit *matPropLineEdit;
-    QCheckBox *textureCountCheckBox;
-    QWidget *layoutWidget_2;
-    QHBoxLayout *texCountHorizontalLayout;
-    QLabel *flagsLabel_2;
-    QLineEdit *texCount1LineEdit;
-    QComboBox *texCountOpComboBox;
-    QLineEdit *textCount2LineEdit;
-    QPlainTextEdit *plainTextEdit;
+    QHBoxLayout *dstSrcHorizontalLayout;
+    QFrame *dstFrame;
+    QCheckBox *dstCheckBox;
+    QWidget *dstContainer;
+    QWidget *layoutWidget2;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *dstLabel;
+    QComboBox *dstOpComboBox;
+    QLineEdit *dstLineEdit;
+    QFrame *srcFrame;
+    QWidget *srcContainer;
+    QWidget *layoutWidget3;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *srcLabel;
+    QComboBox *srcOpComboBox;
+    QLineEdit *srcLineEdit;
+    QCheckBox *srcCheckBox;
+    QHBoxLayout *searchClearHorizontalLayout;
+    QPushButton *searchPushButton;
+    QPushButton *clearPushButton;
     QMenuBar *menuBar;
     QMenu *menuMaterial_XML;
     QMenu *menuAbout;
@@ -89,7 +92,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(565, 856);
+        MainWindow->resize(858, 942);
         MainWindow->setLayoutDirection(Qt::LeftToRight);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
@@ -103,185 +106,213 @@ public:
         actionClear_Materials->setObjectName(QStringLiteral("actionClear_Materials"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        groupBox = new QGroupBox(centralWidget);
-        groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setEnabled(true);
+        gridLayout = new QGridLayout(centralWidget);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        plainTextEdit = new QPlainTextEdit(centralWidget);
+        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
-        groupBox->setSizePolicy(sizePolicy);
-        flagsCheckBox = new QCheckBox(groupBox);
-        flagsCheckBox->setObjectName(QStringLiteral("flagsCheckBox"));
-        flagsCheckBox->setGeometry(QRect(10, 20, 70, 17));
-        srcCheckBox = new QCheckBox(groupBox);
-        srcCheckBox->setObjectName(QStringLiteral("srcCheckBox"));
-        srcCheckBox->setGeometry(QRect(10, 70, 70, 17));
-        dstCheckBox = new QCheckBox(groupBox);
-        dstCheckBox->setObjectName(QStringLiteral("dstCheckBox"));
-        dstCheckBox->setGeometry(QRect(10, 120, 70, 17));
-        dstContainer = new QWidget(groupBox);
-        dstContainer->setObjectName(QStringLiteral("dstContainer"));
-        dstContainer->setGeometry(QRect(30, 140, 241, 31));
-        layoutWidget = new QWidget(dstContainer);
-        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(0, 0, 279, 33));
-        horizontalLayout_3 = new QHBoxLayout(layoutWidget);
-        horizontalLayout_3->setSpacing(6);
-        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        dstLabel = new QLabel(layoutWidget);
-        dstLabel->setObjectName(QStringLiteral("dstLabel"));
+        sizePolicy.setVerticalStretch(6);
+        sizePolicy.setHeightForWidth(plainTextEdit->sizePolicy().hasHeightForWidth());
+        plainTextEdit->setSizePolicy(sizePolicy);
 
-        horizontalLayout_3->addWidget(dstLabel);
+        gridLayout->addWidget(plainTextEdit, 4, 0, 1, 1);
 
-        dstOpComboBox = new QComboBox(layoutWidget);
-        dstOpComboBox->setObjectName(QStringLiteral("dstOpComboBox"));
-
-        horizontalLayout_3->addWidget(dstOpComboBox);
-
-        dstLineEdit = new QLineEdit(layoutWidget);
-        dstLineEdit->setObjectName(QStringLiteral("dstLineEdit"));
-
-        horizontalLayout_3->addWidget(dstLineEdit);
-
-        srcContainer = new QWidget(groupBox);
-        srcContainer->setObjectName(QStringLiteral("srcContainer"));
-        srcContainer->setGeometry(QRect(30, 90, 241, 31));
-        layoutWidget1 = new QWidget(srcContainer);
-        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(0, 0, 278, 33));
-        horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        srcLabel = new QLabel(layoutWidget1);
-        srcLabel->setObjectName(QStringLiteral("srcLabel"));
-
-        horizontalLayout_2->addWidget(srcLabel);
-
-        srcOpComboBox = new QComboBox(layoutWidget1);
-        srcOpComboBox->setObjectName(QStringLiteral("srcOpComboBox"));
-
-        horizontalLayout_2->addWidget(srcOpComboBox);
-
-        srcLineEdit = new QLineEdit(layoutWidget1);
-        srcLineEdit->setObjectName(QStringLiteral("srcLineEdit"));
-
-        horizontalLayout_2->addWidget(srcLineEdit);
-
-        flagsContainer = new QWidget(groupBox);
+        searchPropertiesGroupBox = new QGroupBox(centralWidget);
+        searchPropertiesGroupBox->setObjectName(QStringLiteral("searchPropertiesGroupBox"));
+        searchPropertiesGroupBox->setEnabled(true);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(2);
+        sizePolicy1.setHeightForWidth(searchPropertiesGroupBox->sizePolicy().hasHeightForWidth());
+        searchPropertiesGroupBox->setSizePolicy(sizePolicy1);
+        searchPropertiesGroupBox->setMinimumSize(QSize(840, 230));
+        verticalLayout = new QVBoxLayout(searchPropertiesGroupBox);
+        verticalLayout->setSpacing(0);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        flagsMatPropHorizontalLayout = new QHBoxLayout();
+        flagsMatPropHorizontalLayout->setSpacing(6);
+        flagsMatPropHorizontalLayout->setObjectName(QStringLiteral("flagsMatPropHorizontalLayout"));
+        flagsFrame = new QFrame(searchPropertiesGroupBox);
+        flagsFrame->setObjectName(QStringLiteral("flagsFrame"));
+        flagsFrame->setFrameShape(QFrame::StyledPanel);
+        flagsFrame->setFrameShadow(QFrame::Raised);
+        flagsContainer = new QWidget(flagsFrame);
         flagsContainer->setObjectName(QStringLiteral("flagsContainer"));
-        flagsContainer->setGeometry(QRect(30, 40, 371, 31));
-        layoutWidget2 = new QWidget(flagsContainer);
-        layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(0, 0, 376, 33));
-        flagsHorizontalLayout = new QHBoxLayout(layoutWidget2);
+        flagsContainer->setGeometry(QRect(30, 30, 371, 31));
+        layoutWidget = new QWidget(flagsContainer);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(0, 0, 371, 33));
+        flagsHorizontalLayout = new QHBoxLayout(layoutWidget);
         flagsHorizontalLayout->setSpacing(6);
         flagsHorizontalLayout->setContentsMargins(11, 11, 11, 11);
         flagsHorizontalLayout->setObjectName(QStringLiteral("flagsHorizontalLayout"));
         flagsHorizontalLayout->setContentsMargins(0, 0, 0, 0);
-        flagsLabel = new QLabel(layoutWidget2);
+        flagsLabel = new QLabel(layoutWidget);
         flagsLabel->setObjectName(QStringLiteral("flagsLabel"));
 
         flagsHorizontalLayout->addWidget(flagsLabel);
 
-        flags1LineEdit = new QLineEdit(layoutWidget2);
+        flags1LineEdit = new QLineEdit(layoutWidget);
         flags1LineEdit->setObjectName(QStringLiteral("flags1LineEdit"));
 
         flagsHorizontalLayout->addWidget(flags1LineEdit);
 
-        flagsOpComboBox = new QComboBox(layoutWidget2);
+        flagsOpComboBox = new QComboBox(layoutWidget);
         flagsOpComboBox->setObjectName(QStringLiteral("flagsOpComboBox"));
 
         flagsHorizontalLayout->addWidget(flagsOpComboBox);
 
-        flags2LineEdit = new QLineEdit(layoutWidget2);
+        flags2LineEdit = new QLineEdit(layoutWidget);
         flags2LineEdit->setObjectName(QStringLiteral("flags2LineEdit"));
 
         flagsHorizontalLayout->addWidget(flags2LineEdit);
 
-        searchPushButton = new QPushButton(groupBox);
-        searchPushButton->setObjectName(QStringLiteral("searchPushButton"));
-        searchPushButton->setGeometry(QRect(220, 280, 80, 22));
-        clearPushButton = new QPushButton(groupBox);
-        clearPushButton->setObjectName(QStringLiteral("clearPushButton"));
-        clearPushButton->setGeometry(QRect(310, 280, 80, 22));
-        matPropCheckBox = new QCheckBox(groupBox);
+        flagsCheckBox = new QCheckBox(flagsFrame);
+        flagsCheckBox->setObjectName(QStringLiteral("flagsCheckBox"));
+        flagsCheckBox->setGeometry(QRect(10, 10, 70, 17));
+
+        flagsMatPropHorizontalLayout->addWidget(flagsFrame);
+
+        matPropertyFrame = new QFrame(searchPropertiesGroupBox);
+        matPropertyFrame->setObjectName(QStringLiteral("matPropertyFrame"));
+        matPropertyFrame->setFrameShape(QFrame::StyledPanel);
+        matPropertyFrame->setFrameShadow(QFrame::Raised);
+        matPropCheckBox = new QCheckBox(matPropertyFrame);
         matPropCheckBox->setObjectName(QStringLiteral("matPropCheckBox"));
-        matPropCheckBox->setGeometry(QRect(10, 170, 111, 17));
-        matPropContainer = new QWidget(groupBox);
+        matPropCheckBox->setGeometry(QRect(10, 0, 111, 17));
+        matPropContainer = new QWidget(matPropertyFrame);
         matPropContainer->setObjectName(QStringLiteral("matPropContainer"));
-        matPropContainer->setGeometry(QRect(20, 190, 251, 31));
-        layoutWidget3 = new QWidget(matPropContainer);
-        layoutWidget3->setObjectName(QStringLiteral("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(10, 0, 231, 33));
-        horizontalLayout = new QHBoxLayout(layoutWidget3);
+        matPropContainer->setGeometry(QRect(20, 20, 251, 31));
+        layoutWidget1 = new QWidget(matPropContainer);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(10, 0, 231, 33));
+        horizontalLayout = new QHBoxLayout(layoutWidget1);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        nuLabel = new QLabel(layoutWidget3);
+        nuLabel = new QLabel(layoutWidget1);
         nuLabel->setObjectName(QStringLiteral("nuLabel"));
 
         horizontalLayout->addWidget(nuLabel);
 
-        matPropLineEdit = new QLineEdit(layoutWidget3);
+        matPropLineEdit = new QLineEdit(layoutWidget1);
         matPropLineEdit->setObjectName(QStringLiteral("matPropLineEdit"));
 
         horizontalLayout->addWidget(matPropLineEdit);
 
-        textureCountCheckBox = new QCheckBox(groupBox);
-        textureCountCheckBox->setObjectName(QStringLiteral("textureCountCheckBox"));
-        textureCountCheckBox->setGeometry(QRect(10, 220, 111, 17));
-        layoutWidget_2 = new QWidget(groupBox);
-        layoutWidget_2->setObjectName(QStringLiteral("layoutWidget_2"));
-        layoutWidget_2->setGeometry(QRect(20, 240, 376, 33));
-        texCountHorizontalLayout = new QHBoxLayout(layoutWidget_2);
-        texCountHorizontalLayout->setSpacing(6);
-        texCountHorizontalLayout->setContentsMargins(11, 11, 11, 11);
-        texCountHorizontalLayout->setObjectName(QStringLiteral("texCountHorizontalLayout"));
-        texCountHorizontalLayout->setContentsMargins(0, 0, 0, 0);
-        flagsLabel_2 = new QLabel(layoutWidget_2);
-        flagsLabel_2->setObjectName(QStringLiteral("flagsLabel_2"));
 
-        texCountHorizontalLayout->addWidget(flagsLabel_2);
-
-        texCount1LineEdit = new QLineEdit(layoutWidget_2);
-        texCount1LineEdit->setObjectName(QStringLiteral("texCount1LineEdit"));
-
-        texCountHorizontalLayout->addWidget(texCount1LineEdit);
-
-        texCountOpComboBox = new QComboBox(layoutWidget_2);
-        texCountOpComboBox->setObjectName(QStringLiteral("texCountOpComboBox"));
-
-        texCountHorizontalLayout->addWidget(texCountOpComboBox);
-
-        textCount2LineEdit = new QLineEdit(layoutWidget_2);
-        textCount2LineEdit->setObjectName(QStringLiteral("textCount2LineEdit"));
-
-        texCountHorizontalLayout->addWidget(textCount2LineEdit);
+        flagsMatPropHorizontalLayout->addWidget(matPropertyFrame);
 
 
-        verticalLayout->addWidget(groupBox);
+        verticalLayout->addLayout(flagsMatPropHorizontalLayout);
 
-        plainTextEdit = new QPlainTextEdit(centralWidget);
-        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
-        sizePolicy.setHeightForWidth(plainTextEdit->sizePolicy().hasHeightForWidth());
-        plainTextEdit->setSizePolicy(sizePolicy);
+        dstSrcHorizontalLayout = new QHBoxLayout();
+        dstSrcHorizontalLayout->setSpacing(6);
+        dstSrcHorizontalLayout->setObjectName(QStringLiteral("dstSrcHorizontalLayout"));
+        dstFrame = new QFrame(searchPropertiesGroupBox);
+        dstFrame->setObjectName(QStringLiteral("dstFrame"));
+        dstFrame->setFrameShape(QFrame::StyledPanel);
+        dstFrame->setFrameShadow(QFrame::Raised);
+        dstCheckBox = new QCheckBox(dstFrame);
+        dstCheckBox->setObjectName(QStringLiteral("dstCheckBox"));
+        dstCheckBox->setGeometry(QRect(0, 0, 70, 17));
+        dstContainer = new QWidget(dstFrame);
+        dstContainer->setObjectName(QStringLiteral("dstContainer"));
+        dstContainer->setGeometry(QRect(20, 20, 241, 31));
+        layoutWidget2 = new QWidget(dstContainer);
+        layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
+        layoutWidget2->setGeometry(QRect(0, 0, 241, 33));
+        horizontalLayout_3 = new QHBoxLayout(layoutWidget2);
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
+        dstLabel = new QLabel(layoutWidget2);
+        dstLabel->setObjectName(QStringLiteral("dstLabel"));
 
-        verticalLayout->addWidget(plainTextEdit);
+        horizontalLayout_3->addWidget(dstLabel);
+
+        dstOpComboBox = new QComboBox(layoutWidget2);
+        dstOpComboBox->setObjectName(QStringLiteral("dstOpComboBox"));
+
+        horizontalLayout_3->addWidget(dstOpComboBox);
+
+        dstLineEdit = new QLineEdit(layoutWidget2);
+        dstLineEdit->setObjectName(QStringLiteral("dstLineEdit"));
+
+        horizontalLayout_3->addWidget(dstLineEdit);
+
+
+        dstSrcHorizontalLayout->addWidget(dstFrame);
+
+        srcFrame = new QFrame(searchPropertiesGroupBox);
+        srcFrame->setObjectName(QStringLiteral("srcFrame"));
+        srcFrame->setFrameShape(QFrame::StyledPanel);
+        srcFrame->setFrameShadow(QFrame::Raised);
+        srcContainer = new QWidget(srcFrame);
+        srcContainer->setObjectName(QStringLiteral("srcContainer"));
+        srcContainer->setGeometry(QRect(30, 20, 241, 31));
+        layoutWidget3 = new QWidget(srcContainer);
+        layoutWidget3->setObjectName(QStringLiteral("layoutWidget3"));
+        layoutWidget3->setGeometry(QRect(0, 0, 241, 33));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget3);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        srcLabel = new QLabel(layoutWidget3);
+        srcLabel->setObjectName(QStringLiteral("srcLabel"));
+
+        horizontalLayout_2->addWidget(srcLabel);
+
+        srcOpComboBox = new QComboBox(layoutWidget3);
+        srcOpComboBox->setObjectName(QStringLiteral("srcOpComboBox"));
+
+        horizontalLayout_2->addWidget(srcOpComboBox);
+
+        srcLineEdit = new QLineEdit(layoutWidget3);
+        srcLineEdit->setObjectName(QStringLiteral("srcLineEdit"));
+
+        horizontalLayout_2->addWidget(srcLineEdit);
+
+        srcCheckBox = new QCheckBox(srcFrame);
+        srcCheckBox->setObjectName(QStringLiteral("srcCheckBox"));
+        srcCheckBox->setGeometry(QRect(10, 0, 70, 17));
+
+        dstSrcHorizontalLayout->addWidget(srcFrame);
+
+
+        verticalLayout->addLayout(dstSrcHorizontalLayout);
+
+        searchClearHorizontalLayout = new QHBoxLayout();
+        searchClearHorizontalLayout->setSpacing(6);
+        searchClearHorizontalLayout->setObjectName(QStringLiteral("searchClearHorizontalLayout"));
+        searchPushButton = new QPushButton(searchPropertiesGroupBox);
+        searchPushButton->setObjectName(QStringLiteral("searchPushButton"));
+
+        searchClearHorizontalLayout->addWidget(searchPushButton);
+
+        clearPushButton = new QPushButton(searchPropertiesGroupBox);
+        clearPushButton->setObjectName(QStringLiteral("clearPushButton"));
+
+        searchClearHorizontalLayout->addWidget(clearPushButton);
+
+
+        verticalLayout->addLayout(searchClearHorizontalLayout);
+
+
+        gridLayout->addWidget(searchPropertiesGroupBox, 3, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 565, 38));
+        menuBar->setGeometry(QRect(0, 0, 858, 21));
         menuMaterial_XML = new QMenu(menuBar);
         menuMaterial_XML->setObjectName(QStringLiteral("menuMaterial_XML"));
         menuAbout = new QMenu(menuBar);
@@ -311,9 +342,19 @@ public:
         actionAbout->setText(QApplication::translate("MainWindow", "About", Q_NULLPTR));
         actionDisplay_Settings->setText(QApplication::translate("MainWindow", "Display Settings", Q_NULLPTR));
         actionClear_Materials->setText(QApplication::translate("MainWindow", "Clear materials", Q_NULLPTR));
-        groupBox->setTitle(QApplication::translate("MainWindow", "Search Properties", Q_NULLPTR));
+        searchPropertiesGroupBox->setTitle(QApplication::translate("MainWindow", "Search Properties", Q_NULLPTR));
+        flagsLabel->setText(QApplication::translate("MainWindow", "Flags & ", Q_NULLPTR));
+        flagsOpComboBox->clear();
+        flagsOpComboBox->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "==", Q_NULLPTR)
+         << QApplication::translate("MainWindow", ">", Q_NULLPTR)
+         << QApplication::translate("MainWindow", ">=", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "<", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "<=", Q_NULLPTR)
+        );
         flagsCheckBox->setText(QApplication::translate("MainWindow", "Flags", Q_NULLPTR));
-        srcCheckBox->setText(QApplication::translate("MainWindow", "src Factor", Q_NULLPTR));
+        matPropCheckBox->setText(QApplication::translate("MainWindow", "Material Property", Q_NULLPTR));
+        nuLabel->setText(QApplication::translate("MainWindow", "NU_", Q_NULLPTR));
         dstCheckBox->setText(QApplication::translate("MainWindow", "dst Factor", Q_NULLPTR));
         dstLabel->setText(QApplication::translate("MainWindow", "dstFactor", Q_NULLPTR));
         dstOpComboBox->clear();
@@ -333,29 +374,9 @@ public:
          << QApplication::translate("MainWindow", "<", Q_NULLPTR)
          << QApplication::translate("MainWindow", "<=", Q_NULLPTR)
         );
-        flagsLabel->setText(QApplication::translate("MainWindow", "Flags & ", Q_NULLPTR));
-        flagsOpComboBox->clear();
-        flagsOpComboBox->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "==", Q_NULLPTR)
-         << QApplication::translate("MainWindow", ">", Q_NULLPTR)
-         << QApplication::translate("MainWindow", ">=", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "<", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "<=", Q_NULLPTR)
-        );
+        srcCheckBox->setText(QApplication::translate("MainWindow", "src Factor", Q_NULLPTR));
         searchPushButton->setText(QApplication::translate("MainWindow", "Search", Q_NULLPTR));
         clearPushButton->setText(QApplication::translate("MainWindow", "Clear", Q_NULLPTR));
-        matPropCheckBox->setText(QApplication::translate("MainWindow", "Material Property", Q_NULLPTR));
-        nuLabel->setText(QApplication::translate("MainWindow", "NU_", Q_NULLPTR));
-        textureCountCheckBox->setText(QApplication::translate("MainWindow", "Material Property", Q_NULLPTR));
-        flagsLabel_2->setText(QApplication::translate("MainWindow", "Flags & ", Q_NULLPTR));
-        texCountOpComboBox->clear();
-        texCountOpComboBox->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "==", Q_NULLPTR)
-         << QApplication::translate("MainWindow", ">", Q_NULLPTR)
-         << QApplication::translate("MainWindow", ">=", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "<", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "<=", Q_NULLPTR)
-        );
         menuMaterial_XML->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
         menuAbout->setTitle(QApplication::translate("MainWindow", "View", Q_NULLPTR));
     } // retranslateUi
