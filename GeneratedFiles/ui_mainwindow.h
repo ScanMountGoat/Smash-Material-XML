@@ -26,6 +26,7 @@
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -39,6 +40,7 @@ public:
     QAction *actionDisplay_Settings;
     QAction *actionClear_Materials;
     QWidget *centralWidget;
+    QVBoxLayout *verticalLayout;
     QGroupBox *groupBox;
     QCheckBox *flagsCheckBox;
     QCheckBox *srcCheckBox;
@@ -70,6 +72,13 @@ public:
     QHBoxLayout *horizontalLayout;
     QLabel *nuLabel;
     QLineEdit *matPropLineEdit;
+    QCheckBox *textureCountCheckBox;
+    QWidget *layoutWidget_2;
+    QHBoxLayout *texCountHorizontalLayout;
+    QLabel *flagsLabel_2;
+    QLineEdit *texCount1LineEdit;
+    QComboBox *texCountOpComboBox;
+    QLineEdit *textCount2LineEdit;
     QPlainTextEdit *plainTextEdit;
     QMenuBar *menuBar;
     QMenu *menuMaterial_XML;
@@ -80,7 +89,8 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(459, 635);
+        MainWindow->resize(431, 763);
+        MainWindow->setLayoutDirection(Qt::LeftToRight);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
         actionOpen_Folder = new QAction(MainWindow);
@@ -93,9 +103,17 @@ public:
         actionClear_Materials->setObjectName(QStringLiteral("actionClear_Materials"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        verticalLayout = new QVBoxLayout(centralWidget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(10, 10, 411, 261));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy);
         flagsCheckBox = new QCheckBox(groupBox);
         flagsCheckBox->setObjectName(QStringLiteral("flagsCheckBox"));
         flagsCheckBox->setGeometry(QRect(10, 20, 70, 17));
@@ -162,7 +180,7 @@ public:
         flagsContainer->setGeometry(QRect(30, 40, 371, 31));
         layoutWidget2 = new QWidget(flagsContainer);
         layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(0, 0, 376, 33));
+        layoutWidget2->setGeometry(QRect(0, 0, 371, 33));
         flagsHorizontalLayout = new QHBoxLayout(layoutWidget2);
         flagsHorizontalLayout->setSpacing(6);
         flagsHorizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -190,10 +208,10 @@ public:
 
         searchPushButton = new QPushButton(groupBox);
         searchPushButton->setObjectName(QStringLiteral("searchPushButton"));
-        searchPushButton->setGeometry(QRect(230, 230, 80, 22));
+        searchPushButton->setGeometry(QRect(220, 280, 80, 22));
         clearPushButton = new QPushButton(groupBox);
         clearPushButton->setObjectName(QStringLiteral("clearPushButton"));
-        clearPushButton->setGeometry(QRect(320, 230, 80, 22));
+        clearPushButton->setGeometry(QRect(310, 280, 80, 22));
         matPropCheckBox = new QCheckBox(groupBox);
         matPropCheckBox->setObjectName(QStringLiteral("matPropCheckBox"));
         matPropCheckBox->setGeometry(QRect(10, 170, 111, 17));
@@ -218,13 +236,51 @@ public:
 
         horizontalLayout->addWidget(matPropLineEdit);
 
+        textureCountCheckBox = new QCheckBox(groupBox);
+        textureCountCheckBox->setObjectName(QStringLiteral("textureCountCheckBox"));
+        textureCountCheckBox->setGeometry(QRect(10, 220, 111, 17));
+        layoutWidget_2 = new QWidget(groupBox);
+        layoutWidget_2->setObjectName(QStringLiteral("layoutWidget_2"));
+        layoutWidget_2->setGeometry(QRect(20, 240, 376, 33));
+        texCountHorizontalLayout = new QHBoxLayout(layoutWidget_2);
+        texCountHorizontalLayout->setSpacing(6);
+        texCountHorizontalLayout->setContentsMargins(11, 11, 11, 11);
+        texCountHorizontalLayout->setObjectName(QStringLiteral("texCountHorizontalLayout"));
+        texCountHorizontalLayout->setContentsMargins(0, 0, 0, 0);
+        flagsLabel_2 = new QLabel(layoutWidget_2);
+        flagsLabel_2->setObjectName(QStringLiteral("flagsLabel_2"));
+
+        texCountHorizontalLayout->addWidget(flagsLabel_2);
+
+        texCount1LineEdit = new QLineEdit(layoutWidget_2);
+        texCount1LineEdit->setObjectName(QStringLiteral("texCount1LineEdit"));
+
+        texCountHorizontalLayout->addWidget(texCount1LineEdit);
+
+        texCountOpComboBox = new QComboBox(layoutWidget_2);
+        texCountOpComboBox->setObjectName(QStringLiteral("texCountOpComboBox"));
+
+        texCountHorizontalLayout->addWidget(texCountOpComboBox);
+
+        textCount2LineEdit = new QLineEdit(layoutWidget_2);
+        textCount2LineEdit->setObjectName(QStringLiteral("textCount2LineEdit"));
+
+        texCountHorizontalLayout->addWidget(textCount2LineEdit);
+
+
+        verticalLayout->addWidget(groupBox);
+
         plainTextEdit = new QPlainTextEdit(centralWidget);
         plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
-        plainTextEdit->setGeometry(QRect(20, 280, 391, 271));
+        sizePolicy.setHeightForWidth(plainTextEdit->sizePolicy().hasHeightForWidth());
+        plainTextEdit->setSizePolicy(sizePolicy);
+
+        verticalLayout->addWidget(plainTextEdit);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 459, 38));
+        menuBar->setGeometry(QRect(0, 0, 431, 21));
         menuMaterial_XML = new QMenu(menuBar);
         menuMaterial_XML->setObjectName(QStringLiteral("menuMaterial_XML"));
         menuAbout = new QMenu(menuBar);
@@ -242,6 +298,7 @@ public:
         menuAbout->addAction(actionAbout);
 
         retranslateUi(MainWindow);
+
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
@@ -288,6 +345,16 @@ public:
         clearPushButton->setText(QApplication::translate("MainWindow", "Clear", Q_NULLPTR));
         matPropCheckBox->setText(QApplication::translate("MainWindow", "Material Property", Q_NULLPTR));
         nuLabel->setText(QApplication::translate("MainWindow", "NU_", Q_NULLPTR));
+        textureCountCheckBox->setText(QApplication::translate("MainWindow", "Material Property", Q_NULLPTR));
+        flagsLabel_2->setText(QApplication::translate("MainWindow", "Flags & ", Q_NULLPTR));
+        texCountOpComboBox->clear();
+        texCountOpComboBox->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "==", Q_NULLPTR)
+         << QApplication::translate("MainWindow", ">", Q_NULLPTR)
+         << QApplication::translate("MainWindow", ">=", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "<", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "<=", Q_NULLPTR)
+        );
         menuMaterial_XML->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
         menuAbout->setTitle(QApplication::translate("MainWindow", "View", Q_NULLPTR));
     } // retranslateUi
