@@ -184,6 +184,7 @@ void MainWindow::on_flags1LineEdit_editingFinished()
 	bool validInput = true;
 	if (validInput && text.length() == 8) {
 		searchSettings.flags1 = (text.toUInt(&validInput, 16));
+
 		QPalette palette;
 		palette.setColor(QPalette::Base, Qt::white);
 		palette.setColor(QPalette::Text, Qt::black);
@@ -200,9 +201,19 @@ void MainWindow::on_flags2LineEdit_editingFinished()
 {
 	// Use hex format. Ex: 9A011063. 8 digits for 4 bytes of hex.
 	QString text = ui->flags2LineEdit->text();
-	if (text.length() == 8) {
-		bool ok;
-		searchSettings.flags2 = (text.toUInt(&ok, 16));
+	bool validInput = true;
+	if (validInput && text.length() == 8) {
+		searchSettings.flags2 = (text.toUInt(&validInput, 16));
+
+		QPalette palette;
+		palette.setColor(QPalette::Base, Qt::white);
+		palette.setColor(QPalette::Text, Qt::black);
+		ui->flags2LineEdit->setPalette(palette);
+	} else {
+		QPalette palette;
+		palette.setColor(QPalette::Base, Qt::red);
+		palette.setColor(QPalette::Text, Qt::black);
+		ui->flags2LineEdit->setPalette(palette);
 	}
 }
 
