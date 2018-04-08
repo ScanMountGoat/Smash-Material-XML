@@ -89,7 +89,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(431, 763);
+        MainWindow->resize(565, 856);
         MainWindow->setLayoutDirection(Qt::LeftToRight);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
@@ -109,6 +109,7 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
+        groupBox->setEnabled(true);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -180,7 +181,7 @@ public:
         flagsContainer->setGeometry(QRect(30, 40, 371, 31));
         layoutWidget2 = new QWidget(flagsContainer);
         layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(0, 0, 371, 33));
+        layoutWidget2->setGeometry(QRect(0, 0, 376, 33));
         flagsHorizontalLayout = new QHBoxLayout(layoutWidget2);
         flagsHorizontalLayout->setSpacing(6);
         flagsHorizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -280,7 +281,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 431, 21));
+        menuBar->setGeometry(QRect(0, 0, 565, 38));
         menuMaterial_XML = new QMenu(menuBar);
         menuMaterial_XML->setObjectName(QStringLiteral("menuMaterial_XML"));
         menuAbout = new QMenu(menuBar);
