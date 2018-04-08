@@ -246,6 +246,11 @@ void MainWindow::on_matPropLineEdit_editingFinished()
 	searchSettings.materialProperty = text;
 }
 
+void MainWindow::on_displayFileNameCheckBox_clicked() 
+{
+	ui->plainTextEdit->setEnabled(ui->displayFileNameCheckBox->isChecked());
+}
+
 void MainWindow::on_matPropCheckBox_clicked()
 {
 	bool isChecked = ui->matPropCheckBox->isChecked();

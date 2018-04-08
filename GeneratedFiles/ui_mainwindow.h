@@ -16,7 +16,6 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -27,6 +26,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -42,8 +42,8 @@ public:
     QAction *actionDisplay_Settings;
     QAction *actionClear_Materials;
     QWidget *centralWidget;
-    QGridLayout *gridLayout;
-    QPlainTextEdit *plainTextEdit;
+    QVBoxLayout *verticalLayout_4;
+    QHBoxLayout *settingsHorizontalLayout;
     QGroupBox *searchPropertiesGroupBox;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *flagsMatPropHorizontalLayout;
@@ -83,6 +83,17 @@ public:
     QHBoxLayout *searchClearHorizontalLayout;
     QPushButton *searchPushButton;
     QPushButton *clearPushButton;
+    QGroupBox *displayOptionsGroupBox;
+    QVBoxLayout *verticalLayout_2;
+    QCheckBox *displayFileNameCheckBox;
+    QCheckBox *displaySrcCheckBox;
+    QCheckBox *displayDstCheckBox;
+    QCheckBox *displayFlagsCheckBox;
+    QVBoxLayout *verticalLayout_3;
+    QRadioButton *allPropertiesRadioButton;
+    QRadioButton *selectedPropertyRadioButton;
+    QRadioButton *noPropertyRadioButton;
+    QPlainTextEdit *plainTextEdit;
     QMenuBar *menuBar;
     QMenu *menuMaterial_XML;
     QMenu *menuAbout;
@@ -92,7 +103,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(858, 942);
+        MainWindow->resize(997, 942);
         MainWindow->setLayoutDirection(Qt::LeftToRight);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
@@ -106,28 +117,21 @@ public:
         actionClear_Materials->setObjectName(QStringLiteral("actionClear_Materials"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        gridLayout = new QGridLayout(centralWidget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        plainTextEdit = new QPlainTextEdit(centralWidget);
-        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(6);
-        sizePolicy.setHeightForWidth(plainTextEdit->sizePolicy().hasHeightForWidth());
-        plainTextEdit->setSizePolicy(sizePolicy);
-
-        gridLayout->addWidget(plainTextEdit, 4, 0, 1, 1);
-
+        verticalLayout_4 = new QVBoxLayout(centralWidget);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        settingsHorizontalLayout = new QHBoxLayout();
+        settingsHorizontalLayout->setSpacing(6);
+        settingsHorizontalLayout->setObjectName(QStringLiteral("settingsHorizontalLayout"));
         searchPropertiesGroupBox = new QGroupBox(centralWidget);
         searchPropertiesGroupBox->setObjectName(QStringLiteral("searchPropertiesGroupBox"));
         searchPropertiesGroupBox->setEnabled(true);
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(2);
-        sizePolicy1.setHeightForWidth(searchPropertiesGroupBox->sizePolicy().hasHeightForWidth());
-        searchPropertiesGroupBox->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(2);
+        sizePolicy.setHeightForWidth(searchPropertiesGroupBox->sizePolicy().hasHeightForWidth());
+        searchPropertiesGroupBox->setSizePolicy(sizePolicy);
         searchPropertiesGroupBox->setMinimumSize(QSize(840, 230));
         verticalLayout = new QVBoxLayout(searchPropertiesGroupBox);
         verticalLayout->setSpacing(0);
@@ -307,12 +311,75 @@ public:
         verticalLayout->addLayout(searchClearHorizontalLayout);
 
 
-        gridLayout->addWidget(searchPropertiesGroupBox, 3, 0, 1, 1);
+        settingsHorizontalLayout->addWidget(searchPropertiesGroupBox);
+
+        displayOptionsGroupBox = new QGroupBox(centralWidget);
+        displayOptionsGroupBox->setObjectName(QStringLiteral("displayOptionsGroupBox"));
+        verticalLayout_2 = new QVBoxLayout(displayOptionsGroupBox);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        displayFileNameCheckBox = new QCheckBox(displayOptionsGroupBox);
+        displayFileNameCheckBox->setObjectName(QStringLiteral("displayFileNameCheckBox"));
+
+        verticalLayout_2->addWidget(displayFileNameCheckBox);
+
+        displaySrcCheckBox = new QCheckBox(displayOptionsGroupBox);
+        displaySrcCheckBox->setObjectName(QStringLiteral("displaySrcCheckBox"));
+
+        verticalLayout_2->addWidget(displaySrcCheckBox);
+
+        displayDstCheckBox = new QCheckBox(displayOptionsGroupBox);
+        displayDstCheckBox->setObjectName(QStringLiteral("displayDstCheckBox"));
+
+        verticalLayout_2->addWidget(displayDstCheckBox);
+
+        displayFlagsCheckBox = new QCheckBox(displayOptionsGroupBox);
+        displayFlagsCheckBox->setObjectName(QStringLiteral("displayFlagsCheckBox"));
+
+        verticalLayout_2->addWidget(displayFlagsCheckBox);
+
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        allPropertiesRadioButton = new QRadioButton(displayOptionsGroupBox);
+        allPropertiesRadioButton->setObjectName(QStringLiteral("allPropertiesRadioButton"));
+
+        verticalLayout_3->addWidget(allPropertiesRadioButton);
+
+        selectedPropertyRadioButton = new QRadioButton(displayOptionsGroupBox);
+        selectedPropertyRadioButton->setObjectName(QStringLiteral("selectedPropertyRadioButton"));
+
+        verticalLayout_3->addWidget(selectedPropertyRadioButton);
+
+        noPropertyRadioButton = new QRadioButton(displayOptionsGroupBox);
+        noPropertyRadioButton->setObjectName(QStringLiteral("noPropertyRadioButton"));
+
+        verticalLayout_3->addWidget(noPropertyRadioButton);
+
+
+        verticalLayout_2->addLayout(verticalLayout_3);
+
+
+        settingsHorizontalLayout->addWidget(displayOptionsGroupBox);
+
+
+        verticalLayout_4->addLayout(settingsHorizontalLayout);
+
+        plainTextEdit = new QPlainTextEdit(centralWidget);
+        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(6);
+        sizePolicy1.setHeightForWidth(plainTextEdit->sizePolicy().hasHeightForWidth());
+        plainTextEdit->setSizePolicy(sizePolicy1);
+
+        verticalLayout_4->addWidget(plainTextEdit);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 858, 21));
+        menuBar->setGeometry(QRect(0, 0, 997, 21));
         menuMaterial_XML = new QMenu(menuBar);
         menuMaterial_XML->setObjectName(QStringLiteral("menuMaterial_XML"));
         menuAbout = new QMenu(menuBar);
@@ -377,6 +444,14 @@ public:
         srcCheckBox->setText(QApplication::translate("MainWindow", "src Factor", Q_NULLPTR));
         searchPushButton->setText(QApplication::translate("MainWindow", "Search", Q_NULLPTR));
         clearPushButton->setText(QApplication::translate("MainWindow", "Clear", Q_NULLPTR));
+        displayOptionsGroupBox->setTitle(QApplication::translate("MainWindow", "Display Settings", Q_NULLPTR));
+        displayFileNameCheckBox->setText(QApplication::translate("MainWindow", "File Name", Q_NULLPTR));
+        displaySrcCheckBox->setText(QApplication::translate("MainWindow", "Src Factor", Q_NULLPTR));
+        displayDstCheckBox->setText(QApplication::translate("MainWindow", "Dst Factor", Q_NULLPTR));
+        displayFlagsCheckBox->setText(QApplication::translate("MainWindow", "Flags", Q_NULLPTR));
+        allPropertiesRadioButton->setText(QApplication::translate("MainWindow", "All Properties", Q_NULLPTR));
+        selectedPropertyRadioButton->setText(QApplication::translate("MainWindow", "Selected Property", Q_NULLPTR));
+        noPropertyRadioButton->setText(QApplication::translate("MainWindow", "No Properties", Q_NULLPTR));
         menuMaterial_XML->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
         menuAbout->setTitle(QApplication::translate("MainWindow", "View", Q_NULLPTR));
     } // retranslateUi
