@@ -30,6 +30,9 @@ MainWindow::~MainWindow()
 void MainWindow::addMaterialsFromFileDialog() 
 {
 	QString fileName = QFileDialog::getOpenFileName(this, "Open Xml", ".", "Xml files (*.xml)");
+	if (fileName.isEmpty())
+		return;
+
 	MaterialXml::addMaterialsFromXML(fileName, searchSettings);
 	displayMaterialCount();
 }
@@ -46,8 +49,10 @@ void MainWindow::on_actionOpen_Folder_triggered()
 
 void MainWindow::addMaterialsFromFolderDialog() 
 {
-	QString directory = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home",
-		QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+	QString directory = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+	if (directory.isEmpty())
+		return;
+
 	QDirIterator it(directory, QDirIterator::Subdirectories);
 	while (it.hasNext()) {
 		if (it.next().endsWith(".xml")) {
