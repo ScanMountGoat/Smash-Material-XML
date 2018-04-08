@@ -25,6 +25,12 @@ public:
 	QList<Material> filterMaterials();
 
 	void printMaterialData(const Material & material);
+
+	void printAllPropertyValues(const Material & material);
+
+	void printMaterialProperty(const QString name, const QList<float> values);
+
+	void printSelectedPropertyValues(const Material & material);
 	
 	void addMaterialsFromFolderDialog();
 
@@ -78,6 +84,12 @@ private slots:
 	void on_displayDstCheckBox_clicked();
 
 	void on_displayFlagsCheckBox_clicked();
+
+	void on_allPropertiesRadioButton_clicked();
+
+	void on_noPropertyRadioButton_clicked();
+
+	void on_selectedPropertyRadioButton_clicked();
 
 private:
     Ui::MainWindow *ui;
