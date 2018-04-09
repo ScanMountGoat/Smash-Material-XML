@@ -224,7 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="gui\mainwindow.ui" />
-    <QtUic Include="gui\settings.ui" />
+    <QtUic Include="gui\settingswindow.ui" />
     <CustomBuild Include="Settings.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

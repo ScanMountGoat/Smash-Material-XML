@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'settings.ui'
+** Form generated from reading UI file 'settingswindow.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.9.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_SETTINGS_H
-#define UI_SETTINGS_H
+#ifndef UI_SETTINGSWINDOW_H
+#define UI_SETTINGSWINDOW_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -489,4 +489,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_SETTINGS_H
+#endif // UI_SETTINGSWINDOW_H

@@ -88,7 +88,7 @@
     <QtUic Include="gui\mainwindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="gui\settings.ui">
+    <QtUic Include="gui\settingswindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

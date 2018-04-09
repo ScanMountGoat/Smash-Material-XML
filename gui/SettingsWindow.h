@@ -2,7 +2,7 @@
 #define SETTINGS_WINDOW_H
 
 #include <QMainWindow>
-#include "ui_Settings.h"
+#include "ui_settingswindow.h"
 
 #include "src/searchsettings.h"
 
