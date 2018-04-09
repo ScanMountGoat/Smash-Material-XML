@@ -80,6 +80,23 @@ public:
     QComboBox *srcOpComboBox;
     QLineEdit *srcLineEdit;
     QCheckBox *srcCheckBox;
+    QHBoxLayout *texCountCullModeHorizontalLayout;
+    QFrame *cullModeFrame;
+    QCheckBox *cullModeCheckBox;
+    QWidget *dstContainer_3;
+    QWidget *layoutWidget_3;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *cullModeLabel;
+    QComboBox *cullModeOpComboBox;
+    QLineEdit *cullModeLineEdit;
+    QFrame *textureCountFrame;
+    QCheckBox *texCountCheckBox;
+    QWidget *dstContainer_2;
+    QWidget *layoutWidget_2;
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *texCountLabel;
+    QComboBox *texCountOpComboBox;
+    QLineEdit *textureCountLineEdit;
     QHBoxLayout *searchClearHorizontalLayout;
     QPushButton *searchPushButton;
     QPushButton *clearPushButton;
@@ -89,6 +106,8 @@ public:
     QCheckBox *displaySrcCheckBox;
     QCheckBox *displayDstCheckBox;
     QCheckBox *displayFlagsCheckBox;
+    QCheckBox *displayCullCheckBox;
+    QCheckBox *displayTexturesCheckBox;
     QVBoxLayout *verticalLayout_3;
     QRadioButton *allPropertiesRadioButton;
     QRadioButton *selectedPropertyRadioButton;
@@ -103,7 +122,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(997, 942);
+        MainWindow->resize(997, 961);
         MainWindow->setLayoutDirection(Qt::LeftToRight);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
@@ -127,9 +146,9 @@ public:
         searchPropertiesGroupBox = new QGroupBox(centralWidget);
         searchPropertiesGroupBox->setObjectName(QStringLiteral("searchPropertiesGroupBox"));
         searchPropertiesGroupBox->setEnabled(true);
-        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(2);
+        sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(searchPropertiesGroupBox->sizePolicy().hasHeightForWidth());
         searchPropertiesGroupBox->setSizePolicy(sizePolicy);
         searchPropertiesGroupBox->setMinimumSize(QSize(840, 230));
@@ -178,7 +197,7 @@ public:
 
         flagsCheckBox = new QCheckBox(flagsFrame);
         flagsCheckBox->setObjectName(QStringLiteral("flagsCheckBox"));
-        flagsCheckBox->setGeometry(QRect(10, 10, 70, 17));
+        flagsCheckBox->setGeometry(QRect(0, 10, 70, 17));
 
         flagsMatPropHorizontalLayout->addWidget(flagsFrame);
 
@@ -188,13 +207,13 @@ public:
         matPropertyFrame->setFrameShadow(QFrame::Raised);
         matPropCheckBox = new QCheckBox(matPropertyFrame);
         matPropCheckBox->setObjectName(QStringLiteral("matPropCheckBox"));
-        matPropCheckBox->setGeometry(QRect(10, 0, 111, 17));
+        matPropCheckBox->setGeometry(QRect(0, 10, 141, 17));
         matPropContainer = new QWidget(matPropertyFrame);
         matPropContainer->setObjectName(QStringLiteral("matPropContainer"));
-        matPropContainer->setGeometry(QRect(20, 20, 251, 31));
+        matPropContainer->setGeometry(QRect(20, 30, 251, 41));
         layoutWidget1 = new QWidget(matPropContainer);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(10, 0, 231, 33));
+        layoutWidget1->setGeometry(QRect(10, 0, 241, 33));
         horizontalLayout = new QHBoxLayout(layoutWidget1);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -287,12 +306,90 @@ public:
 
         srcCheckBox = new QCheckBox(srcFrame);
         srcCheckBox->setObjectName(QStringLiteral("srcCheckBox"));
-        srcCheckBox->setGeometry(QRect(10, 0, 70, 17));
+        srcCheckBox->setGeometry(QRect(0, 0, 91, 17));
 
         dstSrcHorizontalLayout->addWidget(srcFrame);
 
 
         verticalLayout->addLayout(dstSrcHorizontalLayout);
+
+        texCountCullModeHorizontalLayout = new QHBoxLayout();
+        texCountCullModeHorizontalLayout->setSpacing(6);
+        texCountCullModeHorizontalLayout->setObjectName(QStringLiteral("texCountCullModeHorizontalLayout"));
+        cullModeFrame = new QFrame(searchPropertiesGroupBox);
+        cullModeFrame->setObjectName(QStringLiteral("cullModeFrame"));
+        cullModeFrame->setFrameShape(QFrame::StyledPanel);
+        cullModeFrame->setFrameShadow(QFrame::Raised);
+        cullModeCheckBox = new QCheckBox(cullModeFrame);
+        cullModeCheckBox->setObjectName(QStringLiteral("cullModeCheckBox"));
+        cullModeCheckBox->setGeometry(QRect(0, 0, 101, 17));
+        dstContainer_3 = new QWidget(cullModeFrame);
+        dstContainer_3->setObjectName(QStringLiteral("dstContainer_3"));
+        dstContainer_3->setGeometry(QRect(20, 20, 241, 31));
+        layoutWidget_3 = new QWidget(dstContainer_3);
+        layoutWidget_3->setObjectName(QStringLiteral("layoutWidget_3"));
+        layoutWidget_3->setGeometry(QRect(0, 0, 241, 33));
+        horizontalLayout_5 = new QHBoxLayout(layoutWidget_3);
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
+        cullModeLabel = new QLabel(layoutWidget_3);
+        cullModeLabel->setObjectName(QStringLiteral("cullModeLabel"));
+
+        horizontalLayout_5->addWidget(cullModeLabel);
+
+        cullModeOpComboBox = new QComboBox(layoutWidget_3);
+        cullModeOpComboBox->setObjectName(QStringLiteral("cullModeOpComboBox"));
+
+        horizontalLayout_5->addWidget(cullModeOpComboBox);
+
+        cullModeLineEdit = new QLineEdit(layoutWidget_3);
+        cullModeLineEdit->setObjectName(QStringLiteral("cullModeLineEdit"));
+
+        horizontalLayout_5->addWidget(cullModeLineEdit);
+
+
+        texCountCullModeHorizontalLayout->addWidget(cullModeFrame);
+
+        textureCountFrame = new QFrame(searchPropertiesGroupBox);
+        textureCountFrame->setObjectName(QStringLiteral("textureCountFrame"));
+        textureCountFrame->setFrameShape(QFrame::StyledPanel);
+        textureCountFrame->setFrameShadow(QFrame::Raised);
+        texCountCheckBox = new QCheckBox(textureCountFrame);
+        texCountCheckBox->setObjectName(QStringLiteral("texCountCheckBox"));
+        texCountCheckBox->setGeometry(QRect(0, 0, 101, 17));
+        dstContainer_2 = new QWidget(textureCountFrame);
+        dstContainer_2->setObjectName(QStringLiteral("dstContainer_2"));
+        dstContainer_2->setGeometry(QRect(20, 20, 241, 31));
+        layoutWidget_2 = new QWidget(textureCountFrame);
+        layoutWidget_2->setObjectName(QStringLiteral("layoutWidget_2"));
+        layoutWidget_2->setGeometry(QRect(30, 20, 241, 33));
+        horizontalLayout_4 = new QHBoxLayout(layoutWidget_2);
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
+        texCountLabel = new QLabel(layoutWidget_2);
+        texCountLabel->setObjectName(QStringLiteral("texCountLabel"));
+
+        horizontalLayout_4->addWidget(texCountLabel);
+
+        texCountOpComboBox = new QComboBox(layoutWidget_2);
+        texCountOpComboBox->setObjectName(QStringLiteral("texCountOpComboBox"));
+
+        horizontalLayout_4->addWidget(texCountOpComboBox);
+
+        textureCountLineEdit = new QLineEdit(layoutWidget_2);
+        textureCountLineEdit->setObjectName(QStringLiteral("textureCountLineEdit"));
+
+        horizontalLayout_4->addWidget(textureCountLineEdit);
+
+
+        texCountCullModeHorizontalLayout->addWidget(textureCountFrame);
+
+
+        verticalLayout->addLayout(texCountCullModeHorizontalLayout);
 
         searchClearHorizontalLayout = new QHBoxLayout();
         searchClearHorizontalLayout->setSpacing(6);
@@ -315,6 +412,8 @@ public:
 
         displayOptionsGroupBox = new QGroupBox(centralWidget);
         displayOptionsGroupBox->setObjectName(QStringLiteral("displayOptionsGroupBox"));
+        sizePolicy.setHeightForWidth(displayOptionsGroupBox->sizePolicy().hasHeightForWidth());
+        displayOptionsGroupBox->setSizePolicy(sizePolicy);
         verticalLayout_2 = new QVBoxLayout(displayOptionsGroupBox);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -338,6 +437,16 @@ public:
         displayFlagsCheckBox->setObjectName(QStringLiteral("displayFlagsCheckBox"));
 
         verticalLayout_2->addWidget(displayFlagsCheckBox);
+
+        displayCullCheckBox = new QCheckBox(displayOptionsGroupBox);
+        displayCullCheckBox->setObjectName(QStringLiteral("displayCullCheckBox"));
+
+        verticalLayout_2->addWidget(displayCullCheckBox);
+
+        displayTexturesCheckBox = new QCheckBox(displayOptionsGroupBox);
+        displayTexturesCheckBox->setObjectName(QStringLiteral("displayTexturesCheckBox"));
+
+        verticalLayout_2->addWidget(displayTexturesCheckBox);
 
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(6);
@@ -370,7 +479,7 @@ public:
         plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(6);
+        sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(plainTextEdit->sizePolicy().hasHeightForWidth());
         plainTextEdit->setSizePolicy(sizePolicy1);
 
@@ -442,13 +551,35 @@ public:
          << QApplication::translate("MainWindow", "<=", Q_NULLPTR)
         );
         srcCheckBox->setText(QApplication::translate("MainWindow", "src Factor", Q_NULLPTR));
+        cullModeCheckBox->setText(QApplication::translate("MainWindow", "Cull Mode", Q_NULLPTR));
+        cullModeLabel->setText(QApplication::translate("MainWindow", "Cull Mode", Q_NULLPTR));
+        cullModeOpComboBox->clear();
+        cullModeOpComboBox->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "==", Q_NULLPTR)
+         << QApplication::translate("MainWindow", ">", Q_NULLPTR)
+         << QApplication::translate("MainWindow", ">=", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "<", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "<=", Q_NULLPTR)
+        );
+        texCountCheckBox->setText(QApplication::translate("MainWindow", "Texture Count", Q_NULLPTR));
+        texCountLabel->setText(QApplication::translate("MainWindow", "Count", Q_NULLPTR));
+        texCountOpComboBox->clear();
+        texCountOpComboBox->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "==", Q_NULLPTR)
+         << QApplication::translate("MainWindow", ">", Q_NULLPTR)
+         << QApplication::translate("MainWindow", ">=", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "<", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "<=", Q_NULLPTR)
+        );
         searchPushButton->setText(QApplication::translate("MainWindow", "Search", Q_NULLPTR));
-        clearPushButton->setText(QApplication::translate("MainWindow", "Clear", Q_NULLPTR));
+        clearPushButton->setText(QApplication::translate("MainWindow", "Clear Output", Q_NULLPTR));
         displayOptionsGroupBox->setTitle(QApplication::translate("MainWindow", "Display Settings", Q_NULLPTR));
         displayFileNameCheckBox->setText(QApplication::translate("MainWindow", "File Name", Q_NULLPTR));
         displaySrcCheckBox->setText(QApplication::translate("MainWindow", "Src Factor", Q_NULLPTR));
         displayDstCheckBox->setText(QApplication::translate("MainWindow", "Dst Factor", Q_NULLPTR));
         displayFlagsCheckBox->setText(QApplication::translate("MainWindow", "Flags", Q_NULLPTR));
+        displayCullCheckBox->setText(QApplication::translate("MainWindow", "Cull Mode", Q_NULLPTR));
+        displayTexturesCheckBox->setText(QApplication::translate("MainWindow", "Textures", Q_NULLPTR));
         allPropertiesRadioButton->setText(QApplication::translate("MainWindow", "All Properties", Q_NULLPTR));
         selectedPropertyRadioButton->setText(QApplication::translate("MainWindow", "Selected Property", Q_NULLPTR));
         noPropertyRadioButton->setText(QApplication::translate("MainWindow", "No Properties", Q_NULLPTR));
