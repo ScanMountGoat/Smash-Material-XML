@@ -205,6 +205,7 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="gui\SettingsWindow.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="gui\mainwindow.cpp" />
     <ClCompile Include="src\material.cpp" />
@@ -216,12 +217,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
+    <QtMoc Include="gui\SettingsWindow.h" />
     <ClInclude Include="src\material.h" />
     <ClInclude Include="src\materialxml.h" />
     <ClInclude Include="src\searchsettings.h" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="gui\mainwindow.ui" />
+    <QtUic Include="gui\settings.ui" />
+    <CustomBuild Include="Settings.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
