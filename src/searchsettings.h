@@ -21,24 +21,28 @@ public:
     };
 
 	// Settings for filtering materials.
+	bool filterFlags = false;
 	uint flags1 = 0xFFFFFFFF;
 	uint flags2 = 0xFFFFFFFF;
-	ComparisonOperation flagsOperation;
-    bool filterFlags = false;
-    bool filterSrc = false;
-    bool filterDst = false;
-    bool filterPropertyName = false;
+	ComparisonOperation flagsOperation = ComparisonOperation::Equals;;
 
+	bool filterDst = false;
     int dstFactor = 0;
+	ComparisonOperation dstOperation = ComparisonOperation::Equals;
+
+	bool filterSrc = false;
     int srcFactor = 0;
+	ComparisonOperation srcOperation = ComparisonOperation::Equals;
+
+	bool filterPropertyName = false;
     QString materialProperty = "";
 
 	// Settings for what properties to display.
 	bool displaySrc = false;
 	bool displayDst = false;
 	bool displayFlags = false;
-	bool displayFileName = false
-		;
+	bool displayFileName = false;
+
 	enum class PropertDisplay {
 		None = 0,
 		Selected = 1,

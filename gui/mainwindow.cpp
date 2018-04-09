@@ -82,33 +82,26 @@ void MainWindow::displayFilteredMaterials()
 }
 
 QList<Material> MainWindow::filterMaterials() 
-{
-	
+{	
 	QList<Material> filteredMaterialList;
-	/*
+	
 	for (auto const &material : searchSettings.materialList) {
 		bool validMaterial = true;
-
+		
 		// Check flags using the selected flags values and comparison operator.
 		if (searchSettings.filterFlags) {
-			int index = ui->flagsOpComboBox->currentIndex();
-			SearchSettings::ComparisonOperation comparison = (SearchSettings::ComparisonOperation) index;
 			uint value = material.flags & searchSettings.flags1;
-
-			bool validFlags = SearchSettings::matchesSearch(comparison, value, searchSettings.flags2);
+			bool validFlags = SearchSettings::matchesSearch(searchSettings.flagsOperation, value, searchSettings.flags2);
 			validMaterial = validMaterial && validFlags;
 		}
 
 		if (searchSettings.filterSrc) {
-			bool validSrc = hasValidSrc(material);
+			bool validSrc = SearchSettings::matchesSearch(searchSettings.srcOperation, material.dstFactor, searchSettings.dstFactor);
 			validMaterial = validMaterial && validSrc;
 		}
 
 		if (searchSettings.filterDst) {
-			int index = ui->dstOpComboBox->currentIndex();
-			SearchSettings::ComparisonOperation comparison = (SearchSettings::ComparisonOperation) index;
-
-			bool validDst = SearchSettings::matchesSearch(comparison, material.dstFactor, searchSettings.dstFactor);
+			bool validDst = SearchSettings::matchesSearch(searchSettings.dstOperation, material.dstFactor, searchSettings.dstFactor);
 			validMaterial = validMaterial && validDst;
 		}
 
@@ -121,7 +114,7 @@ QList<Material> MainWindow::filterMaterials()
 			filteredMaterialList.append(material);
 		}
 	}
-	*/
+	
 	return filteredMaterialList;
 }
 

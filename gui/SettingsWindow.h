@@ -39,6 +39,12 @@ private slots:
 
 	void on_matPropLineEdit_editingFinished();
 
+	void on_flagsOpComboBox_currentIndexChanged();
+
+	void on_srcOpComboBox_currentIndexChanged();
+
+	void on_dstOpComboBox_currentIndexChanged();
+
 	// Display Settings
 	void on_displayFileNameCheckBox_clicked();
 
@@ -61,7 +67,6 @@ private:
 	// The object is stored in MainWindow for the duration of the application and modified here.
 	SearchSettings *searchSettings;
 
-	bool hasValidSrc(Material material);
 };
 
 #endif

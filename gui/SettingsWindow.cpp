@@ -1,16 +1,31 @@
 #include "SettingsWindow.h"
 
+#include <qdebug.h>
+
 
 SettingsWindow::SettingsWindow(SearchSettings *searchSettings, QWidget *parent) : QMainWindow(parent), ui(new Ui::SettingsWindow)
 {
 	ui->setupUi(this);
+
+	// Set the GUI elements based on the previous search settings.
+	this->searchSettings = searchSettings;
+	// Set display settings.
+	ui->displayDstCheckBox->setChecked(searchSettings->displayDst);
+	ui->displaySrcCheckBox->setChecked(searchSettings->displaySrc);
+	ui->displayFileNameCheckBox->setChecked(searchSettings->displayFileName);
+	ui->displayFlagsCheckBox->setChecked(searchSettings->displayFlags);
+	// Set search settings.
+	ui->dstCheckBox->setChecked(searchSettings->filterDst);
+	ui->srcCheckBox->setChecked(searchSettings->filterSrc);
+	ui->matPropCheckBox->setChecked(searchSettings->filterPropertyName);
+	ui->flagsCheckBox->setChecked(searchSettings->filterFlags);
+
 	// Enable/disable the different search options.
 	// Containers (QWidget) are used to hide/unhide all child widgets.
 	ui->srcContainer->setEnabled(ui->srcCheckBox->isChecked());
 	ui->dstContainer->setEnabled(ui->dstCheckBox->isChecked());
 	ui->flagsContainer->setEnabled(ui->flagsCheckBox->isChecked());
 	ui->matPropContainer->setEnabled(ui->matPropCheckBox->isChecked());
-	this->searchSettings = searchSettings;
 }
 
 SettingsWindow::~SettingsWindow()
@@ -34,12 +49,6 @@ void SettingsWindow::on_srcCheckBox_clicked() {
 	bool isChecked = ui->srcCheckBox->isChecked();
 	ui->srcContainer->setEnabled(isChecked);
 	searchSettings->filterSrc = isChecked;
-}
-
-bool SettingsWindow::hasValidSrc(Material material) {
-	int index = ui->srcOpComboBox->currentIndex();
-	SearchSettings::ComparisonOperation comparison = (SearchSettings::ComparisonOperation) index;
-	return SearchSettings::matchesSearch(comparison, material.srcFactor, searchSettings->srcFactor);
 }
 
 void SettingsWindow::on_flags1LineEdit_editingFinished() {
@@ -99,6 +108,19 @@ void SettingsWindow::on_dstLineEdit_editingFinished() {
 void SettingsWindow::on_matPropLineEdit_editingFinished() {
 	QString text = ui->matPropLineEdit->text();
 	searchSettings->materialProperty = text;
+}
+
+void SettingsWindow::on_flagsOpComboBox_currentIndexChanged() 
+{
+	searchSettings->flagsOperation = (SearchSettings::ComparisonOperation)ui->flagsOpComboBox->currentIndex();
+}
+
+void SettingsWindow::on_srcOpComboBox_currentIndexChanged() {
+	searchSettings->srcOperation = (SearchSettings::ComparisonOperation)ui->srcOpComboBox->currentIndex();
+}
+
+void SettingsWindow::on_dstOpComboBox_currentIndexChanged() {
+	searchSettings->dstOperation = (SearchSettings::ComparisonOperation)ui->dstOpComboBox->currentIndex();
 }
 
 void SettingsWindow::on_displayFileNameCheckBox_clicked() {
