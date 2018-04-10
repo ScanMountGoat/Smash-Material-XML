@@ -24,6 +24,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionSearch_Settings_triggered() 
 {
 	SettingsWindow *settingsWindow = new SettingsWindow(&searchSettings);
+	settingsWindow->setAttribute(Qt::WA_DeleteOnClose);
 	settingsWindow->show();
 }
 
