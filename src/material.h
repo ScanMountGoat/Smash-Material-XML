@@ -25,6 +25,8 @@ public:
     int srcFactor;
     int dstFactor;
 
+	int cullMode;
+
     QString fileName;
     QHash<QString, QList<float>> properties;
 	uint flags;

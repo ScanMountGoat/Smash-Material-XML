@@ -104,6 +104,10 @@ void MainWindow::printMaterialData(const Material & material)
 		ui->plainTextEdit->appendPlainText("dst: " + dst.setNum(material.dstFactor, 16));
 	}
 
+	if (searchSettings.displayCullMode) {
+		QString cullMode;
+		ui->plainTextEdit->appendPlainText("cull mode: " + cullMode.setNum(material.cullMode, 16));
+	}
 	switch (searchSettings.propertyDisplayMode) {
 		case SearchSettings::PropertDisplay::None:
 			break;

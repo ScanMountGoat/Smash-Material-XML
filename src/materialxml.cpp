@@ -78,6 +78,14 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName, Searc
             }
             material.dstFactor = dst;
 
+			// read and set cull mode
+			int cullMode = 0;
+			if (reader.attributes().hasAttribute(("cullmode"))) {
+				bool ok;
+				cullMode = reader.attributes().value("cullmode").toInt(&ok, 16);
+			}
+			material.cullMode = cullMode;
+
             readParam(reader, material);
 
             // add the material to the global material list

@@ -34,6 +34,10 @@ public:
     int srcFactor = 0;
 	ComparisonOperation srcOperation = ComparisonOperation::Equals;
 
+	bool filterCullMode = false;
+	int cullMode = 0;
+	ComparisonOperation cullOperation = ComparisonOperation::Equals;
+
 	bool filterPropertyName = false;
     QString materialProperty = "";
 
@@ -42,6 +46,8 @@ public:
 	bool displayDst = false;
 	bool displayFlags = false;
 	bool displayFileName = false;
+	bool displayTextureHashes = false;
+	bool displayCullMode = false;
 
 	enum class PropertDisplay {
 		None = 0,

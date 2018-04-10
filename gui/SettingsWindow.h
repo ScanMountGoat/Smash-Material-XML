@@ -22,28 +22,52 @@ private slots:
 	// Search Settings
 	void on_flagsCheckBox_clicked();
 
+	void on_flagsOpComboBox_currentIndexChanged();
+
+	// Material Flags
 	void on_flags1LineEdit_editingFinished();
 
 	void on_flags2LineEdit_editingFinished();
 
-
+	// Dst Factor
 	void on_dstCheckBox_clicked();
 
 	void on_dstLineEdit_editingFinished();
 
+	void on_dstOpComboBox_currentIndexChanged();
+
+	// Src Factor
 	void on_srcCheckBox_clicked();
 
 	void on_srcLineEdit_editingFinished();
 
+	void on_srcOpComboBox_currentIndexChanged();
+
+	// Material Property
 	void on_matPropCheckBox_clicked();
 
 	void on_matPropLineEdit_editingFinished();
 
-	void on_flagsOpComboBox_currentIndexChanged();
+	// Cull Mode
+	void on_cullModeCheckBox_clicked();
 
-	void on_srcOpComboBox_currentIndexChanged();
+	void on_cullModeLineEdit_editingFinished();
 
-	void on_dstOpComboBox_currentIndexChanged();
+	void on_cullModeOpComboBox_currentIndexChanged();
+
+	// Alpha Function
+	void on_alphaFuncCheckBox_clicked();
+
+	void on_alphaFuncLineEdit_editingFinished();
+
+	void on_alphaFuncOpComboBox_currentIndexChanged();
+
+	// Alpha Test
+	void on_alphaTestCheckBox_clicked();
+
+	void on_alphaTestLineEdit_editingFinished();
+
+	void on_alphaTestOpComboBox_currentIndexChanged();
 
 	// Display Settings
 	void on_displayFileNameCheckBox_clicked();
@@ -54,6 +78,11 @@ private slots:
 
 	void on_displayFlagsCheckBox_clicked();
 
+	void on_displayTexturesCheckBox_clicked();
+
+	void on_displayCullCheckBox_clicked();
+
+	// Material Properties
 	void on_allPropertiesRadioButton_clicked();
 
 	void on_noPropertyRadioButton_clicked();

@@ -53,7 +53,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1008, 961);
+        MainWindow->resize(958, 644);
         MainWindow->setLayoutDirection(Qt::LeftToRight);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
@@ -106,7 +106,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1008, 21));
+        menuBar->setGeometry(QRect(0, 0, 958, 21));
         menuMaterial_XML = new QMenu(menuBar);
         menuMaterial_XML->setObjectName(QStringLiteral("menuMaterial_XML"));
         menuAbout = new QMenu(menuBar);
@@ -144,7 +144,7 @@ public:
         searchPushButton->setText(QApplication::translate("MainWindow", "Search", Q_NULLPTR));
         clearPushButton->setText(QApplication::translate("MainWindow", "Clear Output", Q_NULLPTR));
         menuMaterial_XML->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
-        menuAbout->setTitle(QApplication::translate("MainWindow", "View", Q_NULLPTR));
+        menuAbout->setTitle(QApplication::translate("MainWindow", "Help", Q_NULLPTR));
         menuSearch_Settings->setTitle(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
     } // retranslateUi
 

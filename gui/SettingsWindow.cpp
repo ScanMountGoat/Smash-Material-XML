@@ -9,16 +9,20 @@ SettingsWindow::SettingsWindow(SearchSettings *searchSettings, QWidget *parent) 
 
 	// Set the GUI elements based on the previous search settings.
 	this->searchSettings = searchSettings;
+
 	// Set display settings.
 	ui->displayDstCheckBox->setChecked(searchSettings->displayDst);
 	ui->displaySrcCheckBox->setChecked(searchSettings->displaySrc);
 	ui->displayFileNameCheckBox->setChecked(searchSettings->displayFileName);
 	ui->displayFlagsCheckBox->setChecked(searchSettings->displayFlags);
+	ui->displayCullCheckBox->setChecked(searchSettings->displayCullMode);
+
 	// Set search settings.
 	ui->dstCheckBox->setChecked(searchSettings->filterDst);
 	ui->srcCheckBox->setChecked(searchSettings->filterSrc);
 	ui->matPropCheckBox->setChecked(searchSettings->filterPropertyName);
 	ui->flagsCheckBox->setChecked(searchSettings->filterFlags);
+	ui->cullModeCheckBox->setChecked(searchSettings->filterCullMode);
 
 	// Enable/disable the different search options.
 	// Containers (QWidget) are used to hide/unhide all child widgets.
@@ -26,6 +30,7 @@ SettingsWindow::SettingsWindow(SearchSettings *searchSettings, QWidget *parent) 
 	ui->dstContainer->setEnabled(ui->dstCheckBox->isChecked());
 	ui->flagsContainer->setEnabled(ui->flagsCheckBox->isChecked());
 	ui->matPropContainer->setEnabled(ui->matPropCheckBox->isChecked());
+	ui->cullModeContainer->setEnabled(ui->cullModeCheckBox->isChecked());
 }
 
 SettingsWindow::~SettingsWindow()
@@ -104,10 +109,53 @@ void SettingsWindow::on_dstLineEdit_editingFinished() {
 	searchSettings->dstFactor = (text.toInt(&ok, 16));
 }
 
-
 void SettingsWindow::on_matPropLineEdit_editingFinished() {
 	QString text = ui->matPropLineEdit->text();
 	searchSettings->materialProperty = text;
+}
+
+void SettingsWindow::on_cullModeCheckBox_clicked() 
+{
+	bool isChecked = ui->cullModeCheckBox->isChecked();
+	searchSettings->filterCullMode = isChecked;
+	ui->cullModeContainer->setEnabled(isChecked);
+}
+
+void SettingsWindow::on_cullModeLineEdit_editingFinished() 
+{
+	// Use hex format
+	QString text = ui->dstLineEdit->text();
+	bool ok;
+	searchSettings->cullMode = (text.toInt(&ok, 16));
+}
+
+void SettingsWindow::on_cullModeOpComboBox_currentIndexChanged() 
+{
+	searchSettings->cullOperation = (SearchSettings::ComparisonOperation)ui->cullModeOpComboBox->currentIndex();
+}
+
+void SettingsWindow::on_alphaFuncCheckBox_clicked() 
+{
+}
+
+void SettingsWindow::on_alphaFuncLineEdit_editingFinished() 
+{
+}
+
+void SettingsWindow::on_alphaFuncOpComboBox_currentIndexChanged() 
+{
+}
+
+void SettingsWindow::on_alphaTestCheckBox_clicked() 
+{
+}
+
+void SettingsWindow::on_alphaTestLineEdit_editingFinished() 
+{
+}
+
+void SettingsWindow::on_alphaTestOpComboBox_currentIndexChanged() 
+{
 }
 
 void SettingsWindow::on_flagsOpComboBox_currentIndexChanged() 
@@ -137,6 +185,16 @@ void SettingsWindow::on_displayDstCheckBox_clicked() {
 
 void SettingsWindow::on_displayFlagsCheckBox_clicked() {
 	searchSettings->displayFlags = ui->displayFlagsCheckBox->isChecked();
+}
+
+void SettingsWindow::on_displayTexturesCheckBox_clicked() 
+{
+	searchSettings->displayTextureHashes = ui->displayTexturesCheckBox->isChecked();
+}
+
+void SettingsWindow::on_displayCullCheckBox_clicked() 
+{
+	searchSettings->displayCullMode = ui->displayCullCheckBox->isChecked();
 }
 
 void SettingsWindow::on_allPropertiesRadioButton_clicked() {
