@@ -22,8 +22,6 @@ public:
 
 	void displayFilteredMaterials();
 
-	QList<Material> filterMaterials();
-
 	void printMaterialData(const Material & material);
 
 	void printAllPropertyValues(const Material & material);

@@ -2,6 +2,7 @@
 
 #include "ui_mainwindow.h"
 #include "src/materialxml.h"
+#include "src/materialfiltering.h"
 
 #include <QMessageBox>
 #include <QFileDialog>
@@ -76,47 +77,10 @@ void MainWindow::displayFilteredMaterials()
 	// Clear the text display before each new search.
 	ui->plainTextEdit->clear();
 
-	QList<Material> filteredMaterials = filterMaterials();
+	QList<Material> filteredMaterials = materialfiltering::filterMaterials(searchSettings);
 	for (auto const &material : filteredMaterials) {
 		printMaterialData(material);
 	}
-}
-
-QList<Material> MainWindow::filterMaterials() 
-{	
-	QList<Material> filteredMaterialList;
-	
-	for (auto const &material : searchSettings.materialList) {
-		bool validMaterial = true;
-		
-		// Check flags using the selected flags values and comparison operator.
-		if (searchSettings.filterFlags) {
-			uint value = material.flags & searchSettings.flags1;
-			bool validFlags = SearchSettings::matchesSearch(searchSettings.flagsOperation, value, searchSettings.flags2);
-			validMaterial = validMaterial && validFlags;
-		}
-
-		if (searchSettings.filterSrc) {
-			bool validSrc = SearchSettings::matchesSearch(searchSettings.srcOperation, material.dstFactor, searchSettings.dstFactor);
-			validMaterial = validMaterial && validSrc;
-		}
-
-		if (searchSettings.filterDst) {
-			bool validDst = SearchSettings::matchesSearch(searchSettings.dstOperation, material.dstFactor, searchSettings.dstFactor);
-			validMaterial = validMaterial && validDst;
-		}
-
-		if (searchSettings.filterPropertyName) {
-			bool validMaterialProperty = material.properties.contains("NU_" + searchSettings.materialProperty);
-			validMaterial = validMaterial && validMaterialProperty;
-		}
-
-		if (validMaterial) {
-			filteredMaterialList.append(material);
-		}
-	}
-	
-	return filteredMaterialList;
 }
 
 void MainWindow::printMaterialData(const Material & material) 
