@@ -69,6 +69,13 @@ private slots:
 
 	void on_alphaTestOpComboBox_currentIndexChanged();
 
+	// Texture Count
+	void on_texCountCheckBox_clicked();
+
+	void on_texCountLineEdit_editingFinished();
+
+	void on_texCountOpComboBox_currentIndexChanged();
+
 	// Display Settings
 	void on_displayFileNameCheckBox_clicked();
 

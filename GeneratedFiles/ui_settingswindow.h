@@ -50,7 +50,7 @@ public:
     QCheckBox *matPropCheckBox;
     QWidget *matPropContainer;
     QWidget *layoutWidget_3;
-    QHBoxLayout *horizontalLayout;
+    QHBoxLayout *matPropHorizontalLayout;
     QLabel *nuLabel;
     QLineEdit *matPropLineEdit;
     QHBoxLayout *dstSrcHorizontalLayout;
@@ -75,13 +75,13 @@ public:
     QCheckBox *cullModeCheckBox;
     QWidget *cullModeContainer;
     QWidget *layoutWidget_6;
-    QHBoxLayout *horizontalLayout_5;
+    QHBoxLayout *cullHorizontalLayout;
     QLabel *cullModeLabel;
     QComboBox *cullModeOpComboBox;
     QLineEdit *cullModeLineEdit;
     QFrame *textureCountFrame;
     QCheckBox *texCountCheckBox;
-    QWidget *dstContainer_2;
+    QWidget *texCountContainer;
     QWidget *layoutWidget_7;
     QHBoxLayout *horizontalLayout_4;
     QLabel *texCountLabel;
@@ -94,7 +94,7 @@ public:
     QWidget *layoutWidget_8;
     QHBoxLayout *horizontalLayout_7;
     QLabel *alphaFunctionLabel;
-    QComboBox *alphaFuncOpComboBox_2;
+    QComboBox *alphaFuncOpComboBox;
     QLineEdit *alphaFuncLineEdit;
     QFrame *alphaTestFrame;
     QCheckBox *alphaTestCheckBox;
@@ -123,7 +123,7 @@ public:
     {
         if (SettingsWindow->objectName().isEmpty())
             SettingsWindow->setObjectName(QStringLiteral("SettingsWindow"));
-        SettingsWindow->resize(873, 641);
+        SettingsWindow->resize(1034, 641);
         centralwidget = new QWidget(SettingsWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         searchPropertiesGroupBox = new QGroupBox(centralwidget);
@@ -194,18 +194,18 @@ public:
         layoutWidget_3 = new QWidget(matPropContainer);
         layoutWidget_3->setObjectName(QStringLiteral("layoutWidget_3"));
         layoutWidget_3->setGeometry(QRect(10, 0, 241, 33));
-        horizontalLayout = new QHBoxLayout(layoutWidget_3);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        matPropHorizontalLayout = new QHBoxLayout(layoutWidget_3);
+        matPropHorizontalLayout->setObjectName(QStringLiteral("matPropHorizontalLayout"));
+        matPropHorizontalLayout->setContentsMargins(0, 0, 0, 0);
         nuLabel = new QLabel(layoutWidget_3);
         nuLabel->setObjectName(QStringLiteral("nuLabel"));
 
-        horizontalLayout->addWidget(nuLabel);
+        matPropHorizontalLayout->addWidget(nuLabel);
 
         matPropLineEdit = new QLineEdit(layoutWidget_3);
         matPropLineEdit->setObjectName(QStringLiteral("matPropLineEdit"));
 
-        horizontalLayout->addWidget(matPropLineEdit);
+        matPropHorizontalLayout->addWidget(matPropLineEdit);
 
 
         flagsMatPropHorizontalLayout->addWidget(matPropertyFrame);
@@ -301,40 +301,38 @@ public:
         layoutWidget_6 = new QWidget(cullModeContainer);
         layoutWidget_6->setObjectName(QStringLiteral("layoutWidget_6"));
         layoutWidget_6->setGeometry(QRect(0, 0, 241, 33));
-        horizontalLayout_5 = new QHBoxLayout(layoutWidget_6);
-        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
-        horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
+        cullHorizontalLayout = new QHBoxLayout(layoutWidget_6);
+        cullHorizontalLayout->setObjectName(QStringLiteral("cullHorizontalLayout"));
+        cullHorizontalLayout->setContentsMargins(0, 0, 0, 0);
         cullModeLabel = new QLabel(layoutWidget_6);
         cullModeLabel->setObjectName(QStringLiteral("cullModeLabel"));
 
-        horizontalLayout_5->addWidget(cullModeLabel);
+        cullHorizontalLayout->addWidget(cullModeLabel);
 
         cullModeOpComboBox = new QComboBox(layoutWidget_6);
         cullModeOpComboBox->setObjectName(QStringLiteral("cullModeOpComboBox"));
 
-        horizontalLayout_5->addWidget(cullModeOpComboBox);
+        cullHorizontalLayout->addWidget(cullModeOpComboBox);
 
         cullModeLineEdit = new QLineEdit(layoutWidget_6);
         cullModeLineEdit->setObjectName(QStringLiteral("cullModeLineEdit"));
 
-        horizontalLayout_5->addWidget(cullModeLineEdit);
+        cullHorizontalLayout->addWidget(cullModeLineEdit);
 
-
-        texCountCullModeHorizontalLayout->addWidget(cullModeFrame);
-
-        textureCountFrame = new QFrame(searchPropertiesGroupBox);
+        textureCountFrame = new QFrame(cullModeFrame);
         textureCountFrame->setObjectName(QStringLiteral("textureCountFrame"));
+        textureCountFrame->setGeometry(QRect(410, 0, 271, 61));
         textureCountFrame->setFrameShape(QFrame::StyledPanel);
         textureCountFrame->setFrameShadow(QFrame::Raised);
         texCountCheckBox = new QCheckBox(textureCountFrame);
         texCountCheckBox->setObjectName(QStringLiteral("texCountCheckBox"));
         texCountCheckBox->setGeometry(QRect(0, 0, 101, 17));
-        dstContainer_2 = new QWidget(textureCountFrame);
-        dstContainer_2->setObjectName(QStringLiteral("dstContainer_2"));
-        dstContainer_2->setGeometry(QRect(20, 20, 241, 31));
-        layoutWidget_7 = new QWidget(textureCountFrame);
+        texCountContainer = new QWidget(textureCountFrame);
+        texCountContainer->setObjectName(QStringLiteral("texCountContainer"));
+        texCountContainer->setGeometry(QRect(20, 20, 251, 41));
+        layoutWidget_7 = new QWidget(texCountContainer);
         layoutWidget_7->setObjectName(QStringLiteral("layoutWidget_7"));
-        layoutWidget_7->setGeometry(QRect(30, 20, 241, 33));
+        layoutWidget_7->setGeometry(QRect(10, 0, 241, 33));
         horizontalLayout_4 = new QHBoxLayout(layoutWidget_7);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
@@ -354,7 +352,7 @@ public:
         horizontalLayout_4->addWidget(texCountLineEdit);
 
 
-        texCountCullModeHorizontalLayout->addWidget(textureCountFrame);
+        texCountCullModeHorizontalLayout->addWidget(cullModeFrame);
 
 
         verticalLayout->addLayout(texCountCullModeHorizontalLayout);
@@ -382,10 +380,10 @@ public:
 
         horizontalLayout_7->addWidget(alphaFunctionLabel);
 
-        alphaFuncOpComboBox_2 = new QComboBox(layoutWidget_8);
-        alphaFuncOpComboBox_2->setObjectName(QStringLiteral("alphaFuncOpComboBox_2"));
+        alphaFuncOpComboBox = new QComboBox(layoutWidget_8);
+        alphaFuncOpComboBox->setObjectName(QStringLiteral("alphaFuncOpComboBox"));
 
-        horizontalLayout_7->addWidget(alphaFuncOpComboBox_2);
+        horizontalLayout_7->addWidget(alphaFuncOpComboBox);
 
         alphaFuncLineEdit = new QLineEdit(layoutWidget_8);
         alphaFuncLineEdit->setObjectName(QStringLiteral("alphaFuncLineEdit"));
@@ -404,10 +402,10 @@ public:
         alphaTestCheckBox->setGeometry(QRect(0, 0, 101, 17));
         alphaTestContainer = new QWidget(alphaTestFrame);
         alphaTestContainer->setObjectName(QStringLiteral("alphaTestContainer"));
-        alphaTestContainer->setGeometry(QRect(20, 20, 241, 31));
+        alphaTestContainer->setGeometry(QRect(20, 20, 251, 31));
         layoutWidget_9 = new QWidget(alphaTestContainer);
         layoutWidget_9->setObjectName(QStringLiteral("layoutWidget_9"));
-        layoutWidget_9->setGeometry(QRect(0, 0, 241, 33));
+        layoutWidget_9->setGeometry(QRect(10, 0, 241, 33));
         horizontalLayout_8 = new QHBoxLayout(layoutWidget_9);
         horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
         horizontalLayout_8->setContentsMargins(0, 0, 0, 0);
@@ -492,7 +490,7 @@ public:
         SettingsWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(SettingsWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 873, 21));
+        menubar->setGeometry(QRect(0, 0, 1034, 21));
         SettingsWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(SettingsWindow);
         statusbar->setObjectName(QStringLiteral("statusbar"));
@@ -561,8 +559,8 @@ public:
         );
         alphaFuncCheckBox->setText(QApplication::translate("SettingsWindow", "Alpha Function", Q_NULLPTR));
         alphaFunctionLabel->setText(QApplication::translate("SettingsWindow", "Function", Q_NULLPTR));
-        alphaFuncOpComboBox_2->clear();
-        alphaFuncOpComboBox_2->insertItems(0, QStringList()
+        alphaFuncOpComboBox->clear();
+        alphaFuncOpComboBox->insertItems(0, QStringList()
          << QApplication::translate("SettingsWindow", "==", Q_NULLPTR)
          << QApplication::translate("SettingsWindow", ">", Q_NULLPTR)
          << QApplication::translate("SettingsWindow", ">=", Q_NULLPTR)

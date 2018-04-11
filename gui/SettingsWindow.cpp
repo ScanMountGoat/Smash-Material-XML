@@ -11,26 +11,43 @@ SettingsWindow::SettingsWindow(SearchSettings *searchSettings, QWidget *parent) 
 	this->searchSettings = searchSettings;
 
 	// Set display settings.
-	ui->displayDstCheckBox->setChecked(searchSettings->displayDst);
 	ui->displaySrcCheckBox->setChecked(searchSettings->displaySrc);
+	ui->displayDstCheckBox->setChecked(searchSettings->displayDst);
 	ui->displayFileNameCheckBox->setChecked(searchSettings->displayFileName);
 	ui->displayFlagsCheckBox->setChecked(searchSettings->displayFlags);
 	ui->displayCullCheckBox->setChecked(searchSettings->displayCullMode);
+	ui->displayTexturesCheckBox->setChecked(searchSettings->displayCullMode);
 
 	// Set search settings.
-	ui->dstCheckBox->setChecked(searchSettings->filterDst);
 	ui->srcCheckBox->setChecked(searchSettings->filterSrc);
+	ui->dstCheckBox->setChecked(searchSettings->filterDst);
 	ui->matPropCheckBox->setChecked(searchSettings->filterPropertyName);
 	ui->flagsCheckBox->setChecked(searchSettings->filterFlags);
 	ui->cullModeCheckBox->setChecked(searchSettings->filterCullMode);
+	ui->alphaFuncCheckBox->setChecked(searchSettings->filterAlphaFunc);
+	ui->alphaTestCheckBox->setChecked(searchSettings->filterAlphaTest);
+	ui->texCountCheckBox->setChecked(searchSettings->filterTextureCount);
 
-	// Enable/disable the different search options.
-	// Containers (QWidget) are used to hide/unhide all child widgets.
+	// Set Line Edit Values
+	ui->matPropLineEdit->setText(searchSettings->materialProperty);
+	ui->srcLineEdit->setText(QString::number(searchSettings->srcFactor, 16));
+	ui->dstLineEdit->setText(QString::number(searchSettings->dstFactor, 16));
+	ui->cullModeLineEdit->setText(QString::number(searchSettings->cullMode, 16));
+	ui->alphaTestLineEdit->setText(QString::number(searchSettings->alphaTest, 16));
+	ui->alphaFuncLineEdit->setText(QString::number(searchSettings->alphaFunc, 16));
+	ui->texCountLineEdit->setText(QString::number(searchSettings->textureCount, 10));
+	ui->flags1LineEdit->setText(QString::number(searchSettings->flags1, 16));
+	ui->flags2LineEdit->setText(QString::number(searchSettings->flags2, 16));
+
+	// QWidgets for each search option are used to hide/unhide all child widgets.
 	ui->srcContainer->setEnabled(ui->srcCheckBox->isChecked());
 	ui->dstContainer->setEnabled(ui->dstCheckBox->isChecked());
 	ui->flagsContainer->setEnabled(ui->flagsCheckBox->isChecked());
 	ui->matPropContainer->setEnabled(ui->matPropCheckBox->isChecked());
 	ui->cullModeContainer->setEnabled(ui->cullModeCheckBox->isChecked());
+	ui->texCountContainer->setEnabled(ui->texCountCheckBox->isChecked());
+	ui->alphaFuncContainer->setEnabled(ui->alphaFuncCheckBox->isChecked());
+	ui->alphaTestContainer->setEnabled(ui->alphaTestCheckBox->isChecked());
 }
 
 SettingsWindow::~SettingsWindow()
@@ -151,18 +168,46 @@ void SettingsWindow::on_alphaFuncLineEdit_editingFinished()
 
 void SettingsWindow::on_alphaFuncOpComboBox_currentIndexChanged() 
 {
+	searchSettings->alphaFuncOperation = (SearchSettings::ComparisonOperation)ui->alphaFuncOpComboBox->currentIndex();
 }
 
 void SettingsWindow::on_alphaTestCheckBox_clicked() 
 {
+	bool isChecked = ui->alphaTestCheckBox->isChecked();
+	searchSettings->filterAlphaTest = isChecked;
+	ui->alphaTestContainer->setEnabled(isChecked);
 }
 
 void SettingsWindow::on_alphaTestLineEdit_editingFinished() 
 {
+	// Use hex format
+	QString text = ui->alphaTestLineEdit->text();
+	bool ok;
+	searchSettings->alphaTest = (text.toInt(&ok, 16));
 }
 
 void SettingsWindow::on_alphaTestOpComboBox_currentIndexChanged() 
 {
+	searchSettings->alphaTestOperation = (SearchSettings::ComparisonOperation)ui->alphaTestOpComboBox->currentIndex();
+}
+
+void SettingsWindow::on_texCountCheckBox_clicked() 
+{
+	bool isChecked = ui->texCountCheckBox->isChecked();
+	searchSettings->filterTextureCount = isChecked;
+	ui->texCountContainer->setEnabled(isChecked);
+}
+
+void SettingsWindow::on_texCountLineEdit_editingFinished() 
+{
+	QString text = ui->texCountLineEdit->text();
+	bool ok;
+	searchSettings->textureCount = (text.toInt(&ok, 10));
+}
+
+void SettingsWindow::on_texCountOpComboBox_currentIndexChanged() 
+{
+	searchSettings->textureCountOperation = (SearchSettings::ComparisonOperation)ui->texCountOpComboBox->currentIndex();
 }
 
 void SettingsWindow::on_flagsOpComboBox_currentIndexChanged() 
