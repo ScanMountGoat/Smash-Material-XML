@@ -90,7 +90,7 @@ public:
     QHBoxLayout *alphaFuncTestHorizontalLayout;
     QFrame *alphaFuncFrame;
     QCheckBox *alphaFuncCheckBox;
-    QWidget *dstContainer_4;
+    QWidget *alphaFuncContainer;
     QWidget *layoutWidget_8;
     QHBoxLayout *horizontalLayout_7;
     QLabel *alphaFunctionLabel;
@@ -98,7 +98,7 @@ public:
     QLineEdit *alphaFuncLineEdit;
     QFrame *alphaTestFrame;
     QCheckBox *alphaTestCheckBox;
-    QWidget *dstContainer_5;
+    QWidget *alphaTestContainer;
     QWidget *layoutWidget_9;
     QHBoxLayout *horizontalLayout_8;
     QLabel *alphaFunctionLabel_2;
@@ -368,10 +368,10 @@ public:
         alphaFuncCheckBox = new QCheckBox(alphaFuncFrame);
         alphaFuncCheckBox->setObjectName(QStringLiteral("alphaFuncCheckBox"));
         alphaFuncCheckBox->setGeometry(QRect(0, 0, 101, 17));
-        dstContainer_4 = new QWidget(alphaFuncFrame);
-        dstContainer_4->setObjectName(QStringLiteral("dstContainer_4"));
-        dstContainer_4->setGeometry(QRect(20, 20, 241, 31));
-        layoutWidget_8 = new QWidget(dstContainer_4);
+        alphaFuncContainer = new QWidget(alphaFuncFrame);
+        alphaFuncContainer->setObjectName(QStringLiteral("alphaFuncContainer"));
+        alphaFuncContainer->setGeometry(QRect(20, 20, 241, 31));
+        layoutWidget_8 = new QWidget(alphaFuncContainer);
         layoutWidget_8->setObjectName(QStringLiteral("layoutWidget_8"));
         layoutWidget_8->setGeometry(QRect(0, 0, 241, 33));
         horizontalLayout_7 = new QHBoxLayout(layoutWidget_8);
@@ -402,10 +402,10 @@ public:
         alphaTestCheckBox = new QCheckBox(alphaTestFrame);
         alphaTestCheckBox->setObjectName(QStringLiteral("alphaTestCheckBox"));
         alphaTestCheckBox->setGeometry(QRect(0, 0, 101, 17));
-        dstContainer_5 = new QWidget(alphaTestFrame);
-        dstContainer_5->setObjectName(QStringLiteral("dstContainer_5"));
-        dstContainer_5->setGeometry(QRect(20, 20, 241, 31));
-        layoutWidget_9 = new QWidget(dstContainer_5);
+        alphaTestContainer = new QWidget(alphaTestFrame);
+        alphaTestContainer->setObjectName(QStringLiteral("alphaTestContainer"));
+        alphaTestContainer->setGeometry(QRect(20, 20, 241, 31));
+        layoutWidget_9 = new QWidget(alphaTestContainer);
         layoutWidget_9->setObjectName(QStringLiteral("layoutWidget_9"));
         layoutWidget_9->setGeometry(QRect(0, 0, 241, 33));
         horizontalLayout_8 = new QHBoxLayout(layoutWidget_9);

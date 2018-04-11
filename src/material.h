@@ -27,6 +27,9 @@ public:
 
 	int cullMode;
 
+	int alphaFunc;
+	int alphaTest;
+
     QString fileName;
     QHash<QString, QList<float>> properties;
 	uint flags;

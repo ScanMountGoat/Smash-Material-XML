@@ -561,7 +561,7 @@
            <string>Alpha Function</string>
           </property>
          </widget>
-         <widget class="QWidget" name="dstContainer_4" native="true">
+         <widget class="QWidget" name="alphaFuncContainer" native="true">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -645,7 +645,7 @@
            <string>Alpha Test</string>
           </property>
          </widget>
-         <widget class="QWidget" name="dstContainer_5" native="true">
+         <widget class="QWidget" name="alphaTestContainer" native="true">
           <property name="geometry">
            <rect>
             <x>20</x>

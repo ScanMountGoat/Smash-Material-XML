@@ -41,6 +41,10 @@ public:
 	bool filterPropertyName = false;
     QString materialProperty = "";
 
+	bool filterAlphaFunc = false;
+	int alphaFunc = 0;
+	ComparisonOperation alphaFuncOperation = ComparisonOperation::Equals;
+
 	// Settings for what properties to display.
 	bool displaySrc = false;
 	bool displayDst = false;

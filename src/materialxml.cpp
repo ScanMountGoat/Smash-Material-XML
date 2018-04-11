@@ -54,37 +54,11 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName, Searc
             // In case we need to display the file path later.
             material.fileName = fileName;
 
-            // read and set flags
-            uint flags = 0;
-            if (reader.attributes().hasAttribute(("flags"))) {
-                bool ok;
-                flags = reader.attributes().value("flags").toUInt(&ok, 16);
-            }
-            material.flags = flags;
-
-            // read and set srcFactor
-            int src = 0;
-            if (reader.attributes().hasAttribute(("srcFactor"))) {
-                bool ok;
-                src = reader.attributes().value("srcFactor").toInt(&ok, 16);
-            }
-            material.srcFactor = src;
-
-            // read and set dstFactor
-            int dst = 0;
-            if (reader.attributes().hasAttribute(("dstFactor"))) {
-                bool ok;
-                dst = reader.attributes().value("dstFactor").toInt(&ok, 16);
-            }
-            material.dstFactor = dst;
-
-			// read and set cull mode
-			int cullMode = 0;
-			if (reader.attributes().hasAttribute(("cullmode"))) {
-				bool ok;
-				cullMode = reader.attributes().value("cullmode").toInt(&ok, 16);
-			}
-			material.cullMode = cullMode;
+            // Set the attribute values.
+            material.flags = readUintAttribute(reader, "flags", true);
+            material.srcFactor = readIntAttribute(reader, "srcFactor", true);
+            material.dstFactor = readIntAttribute(reader, "dstFactor", true);
+			material.cullMode = readIntAttribute(reader, "cullmode", true);
 
             readParam(reader, material);
 
@@ -93,6 +67,33 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName, Searc
         } else
             reader.skipCurrentElement();
     }
+}
+
+int MaterialXml::readIntAttribute(QXmlStreamReader &reader, QString attributeName, bool useHex) 
+{
+	int value = 0;
+	if (reader.attributes().hasAttribute((attributeName))) {
+		bool ok;
+		if (useHex) {
+			value = reader.attributes().value(attributeName).toInt(&ok, 16);
+		} else {
+			value = reader.attributes().value(attributeName).toInt(&ok, 10);
+		}
+	}
+	return value;
+}
+
+uint MaterialXml::readUintAttribute(QXmlStreamReader &reader, QString attributeName, bool useHex) {
+	uint value = 0;
+	if (reader.attributes().hasAttribute((attributeName))) {
+		bool ok;
+		if (useHex) {
+			value = reader.attributes().value(attributeName).toUInt(&ok, 16);
+		} else {
+			value = reader.attributes().value(attributeName).toUInt(&ok, 10);
+		}
+	}
+	return value;
 }
 
 void MaterialXml::readParam(QXmlStreamReader &reader, Material &material)

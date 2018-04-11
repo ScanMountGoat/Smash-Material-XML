@@ -136,10 +136,17 @@ void SettingsWindow::on_cullModeOpComboBox_currentIndexChanged()
 
 void SettingsWindow::on_alphaFuncCheckBox_clicked() 
 {
+	bool isChecked = ui->alphaFuncCheckBox->isChecked();
+	searchSettings->filterAlphaFunc = isChecked;
+	ui->alphaFuncContainer->setEnabled(isChecked);
 }
 
 void SettingsWindow::on_alphaFuncLineEdit_editingFinished() 
 {
+	// Use hex format
+	QString text = ui->alphaFuncLineEdit->text();
+	bool ok;
+	searchSettings->alphaFunc = (text.toInt(&ok, 16));
 }
 
 void SettingsWindow::on_alphaFuncOpComboBox_currentIndexChanged() 
