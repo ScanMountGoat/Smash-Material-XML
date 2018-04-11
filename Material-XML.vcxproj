@@ -209,7 +209,6 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="gui\mainwindow.cpp" />
     <ClCompile Include="src\material.cpp" />
-    <ClCompile Include="src\materialfiltering.cpp" />
     <ClCompile Include="src\materialxml.cpp" />
     <ClCompile Include="src\searchsettings.cpp" />
   </ItemGroup>
@@ -220,7 +219,6 @@
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <QtMoc Include="gui\SettingsWindow.h" />
     <ClInclude Include="src\material.h" />
-    <ClInclude Include="src\materialfiltering.h" />
     <ClInclude Include="src\materialxml.h" />
     <ClInclude Include="src\searchsettings.h" />
   </ItemGroup>

@@ -2,7 +2,6 @@
 
 #include "ui_mainwindow.h"
 #include "src/materialxml.h"
-#include "src/materialfiltering.h"
 
 #include <QMessageBox>
 #include <QFileDialog>
@@ -77,7 +76,7 @@ void MainWindow::displayFilteredMaterials()
 	// Clear the text display before each new search.
 	ui->plainTextEdit->clear();
 
-	QList<Material> filteredMaterials = materialfiltering::filterMaterials(searchSettings);
+	QList<Material> filteredMaterials = searchSettings.filterMaterials();
 	for (auto const &material : filteredMaterials) {
 		printMaterialData(material);
 	}

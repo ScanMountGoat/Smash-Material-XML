@@ -61,9 +61,6 @@
     <ClCompile Include="gui\SettingsWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\materialfiltering.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="gui\mainwindow.h">
@@ -84,9 +81,6 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\materialfiltering.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

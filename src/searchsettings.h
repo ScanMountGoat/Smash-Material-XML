@@ -59,6 +59,8 @@ public:
     static bool matchesSearch(ComparisonOperation operation, int value, int comparisonValue);
 
 	static bool matchesSearch(ComparisonOperation operaration, uint value, uint comparisonValue);
+
+	QList<Material> filterMaterials();
 };
 
 #endif // SEARCHSETTINGS_H
