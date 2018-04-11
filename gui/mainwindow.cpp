@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
 	ui->setupUi(this);
 
-	// Use a monospaced font. 
+	// Use a monospaced font so all the material property values are aligned.
 	ui->plainTextEdit->setFont(QFont("Courier", 10));
 }
 
@@ -50,7 +50,7 @@ void MainWindow::on_actionOpen_Folder_triggered()
 
 void MainWindow::addMaterialsFromFolderDialog() 
 {
-	QString directory = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+	QString directory = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly);
 	if (directory.isEmpty())
 		return;
 
@@ -107,6 +107,13 @@ void MainWindow::printMaterialData(const Material & material)
 		QString cullMode;
 		ui->plainTextEdit->appendPlainText("cull mode: " + cullMode.setNum(material.cullMode, 16));
 	}
+
+	if (searchSettings.displayTextureHashes) {
+		for (auto const hash : material.textureHashes) {
+			ui->plainTextEdit->appendPlainText("texture: " + hash);
+		}
+	}
+
 	switch (searchSettings.propertyDisplayMode) {
 		case SearchSettings::PropertDisplay::None:
 			break;
@@ -145,7 +152,7 @@ void MainWindow::printMaterialProperty(const QString name, const QList<float> va
 		QString valueString = QString::number(values.at(i), 'f', 4).leftJustified(20, ' ');
 		propertyText += valueString + " ";
 	}
-	ui->plainTextEdit->appendPlainText(propertyText + "\n");
+	ui->plainTextEdit->appendPlainText(propertyText);
 }
 
 void MainWindow::on_searchPushButton_clicked()

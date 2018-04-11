@@ -2,43 +2,43 @@
 
 void Material::testFlags()
 {
-    shadow = (flags & (int)TextureFlags::Shadow) > 0;
-    dummyramp = (flags & (int)TextureFlags::DummyRamp) > 0;
-    spheremap = (flags & (int)TextureFlags::SphereMap) > 0;
-    aomap = (flags & (int)TextureFlags::StageAOMap) > 0 && !dummyramp;
-    stagemap = (flags & (int)TextureFlags::StageAOMap) > 0 && dummyramp;
+    hasShadow = (flags & (int)TextureFlags::Shadow) > 0;
+    hasDummyRamp = (flags & (int)TextureFlags::DummyRamp) > 0;
+    hasSphereMap = (flags & (int)TextureFlags::SphereMap) > 0;
+    hasAoMap = (flags & (int)TextureFlags::StageAOMap) > 0 && !hasDummyRamp;
+    hasStageMap = (flags & (int)TextureFlags::StageAOMap) > 0 && hasDummyRamp;
 
-    cubemap = (flags & (int)TextureFlags::RampCubeMap) > 0 && (!dummyramp) && (!spheremap);
-    ramp = (flags & (int)TextureFlags::RampCubeMap) > 0 && dummyramp;
+    hasCubeMap = (flags & (int)TextureFlags::RampCubeMap) > 0 && (!hasDummyRamp) && (!hasSphereMap);
+    hasRamp = (flags & (int)TextureFlags::RampCubeMap) > 0 && hasDummyRamp;
 
-    diffuse = (flags & (int)TextureFlags::DiffuseMap) > 0;
-    diffuse3 = (flags & 0x00009100) == 0x00009100 || (flags & 0x00009600) == 0x00009600 || ((flags & 0x00009900) == 0x00009900);
-    diffuse2 = ((flags & (int)TextureFlags::RampCubeMap) > 0 && ((flags & (int)TextureFlags::NormalMap) == 0)
-        && dummyramp) || diffuse3;
+    hasDiffuse = (flags & (int)TextureFlags::DiffuseMap) > 0;
+    hasDiffuse3 = (flags & 0x00009100) == 0x00009100 || (flags & 0x00009600) == 0x00009600 || ((flags & 0x00009900) == 0x00009900);
+    hasDiffuse2 = ((flags & (int)TextureFlags::RampCubeMap) > 0 && ((flags & (int)TextureFlags::NormalMap) == 0)
+        && hasDummyRamp) || hasDiffuse3;
 
-    normalmap = (flags & (int)TextureFlags::NormalMap) > 0;
+    hasNormalMap = (flags & (int)TextureFlags::NormalMap) > 0;
 }
 
 void Material::calculateTextureCount()
 {
-    if (diffuse)
+    if (hasDiffuse)
         expectedTextureCount += 1;
-    if (spheremap)
+    if (hasSphereMap)
         expectedTextureCount += 1;
-    if (diffuse2)
+    if (hasDiffuse2)
         expectedTextureCount += 1;
-    if (diffuse3)
+    if (hasDiffuse3)
         expectedTextureCount += 1;
-    if (stagemap)
+    if (hasStageMap)
         expectedTextureCount += 1;
-    if (cubemap)
+    if (hasCubeMap)
         expectedTextureCount += 1;
-    if (aomap)
+    if (hasAoMap)
         expectedTextureCount += 1;
-    if (normalmap)
+    if (hasNormalMap)
         expectedTextureCount += 1;
-    if (ramp)
+    if (hasRamp)
         expectedTextureCount += 1;
-    if (dummyramp)
+    if (hasDummyRamp)
         expectedTextureCount += 1;
 }

@@ -23,7 +23,9 @@ namespace MaterialXml
 
 	uint readUintAttribute(QXmlStreamReader & reader, QString name, bool useHex);
 
-    void readParam(QXmlStreamReader &reader, Material &material);
+    void readTexturesAndProperties(QXmlStreamReader &reader, Material &material);
+	void readTexture(QXmlStreamReader & reader, Material & material);
+	void readParam(QXmlStreamReader & reader, Material & material);
 }
 
 #endif // MATERIALXML_H

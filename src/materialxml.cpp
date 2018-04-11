@@ -60,7 +60,7 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName, Searc
             material.dstFactor = readIntAttribute(reader, "dstFactor", true);
 			material.cullMode = readIntAttribute(reader, "cullmode", true);
 
-            readParam(reader, material);
+            readTexturesAndProperties(reader, material);
 
             // add the material to the global material list
             settings.materialList.append(material);
@@ -96,24 +96,39 @@ uint MaterialXml::readUintAttribute(QXmlStreamReader &reader, QString attributeN
 	return value;
 }
 
-void MaterialXml::readParam(QXmlStreamReader &reader, Material &material)
+void MaterialXml::readTexturesAndProperties(QXmlStreamReader &reader, Material &material)
 {
     while(reader.readNextStartElement()) {
-        if(reader.name() == "param") {
-            QString name = "";
-            if (reader.attributes().hasAttribute(("name")))
-                name = reader.attributes().value("name").toString();
-
-            QString valuesString = reader.readElementText();
-            QStringList values = valuesString.split(" ");
-            QList<float> paramValues;
-
-            for (int i = 0; i < 4; i++) {
-                paramValues.append(values.at(i).toFloat());
-            }
-
-            material.properties.insert(name, paramValues);
-        } else
-            reader.skipCurrentElement();
+		if (reader.name() == "texture") {
+			readTexture(reader, material);
+			reader.skipCurrentElement();
+		} else if (reader.name() == "param") {
+			readParam(reader, material);
+		}
     }
+}
+
+void MaterialXml::readTexture(QXmlStreamReader & reader, Material & material) 
+{
+	if (reader.attributes().hasAttribute(("hash"))) {
+		QString hash = reader.attributes().value("hash").toString();
+		material.textureHashes.append(hash);
+	}
+}
+
+void MaterialXml::readParam(QXmlStreamReader &reader, Material &material) 
+{
+	QString name = "";
+	if (reader.attributes().hasAttribute(("name")))
+		name = reader.attributes().value("name").toString();
+
+	QString valuesString = reader.readElementText();
+	QStringList values = valuesString.split(" ");
+	QList<float> paramValues;
+
+	for (int i = 0; i < 4; i++) {
+		paramValues.append(values.at(i).toFloat());
+	}
+
+	material.properties.insert(name, paramValues);
 }

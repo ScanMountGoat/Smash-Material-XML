@@ -7,17 +7,17 @@
 class Material
 {
 public:
-    bool spheremap;
-    bool aomap;
-    bool stagemap;
-    bool cubemap;
-    bool diffuse;
-    bool diffuse2;
-    bool diffuse3;
-    bool ramp;
-    bool shadow;
-    bool dummyramp;
-    bool normalmap;
+    bool hasSphereMap;
+    bool hasAoMap;
+    bool hasStageMap;
+    bool hasCubeMap;
+    bool hasDiffuse;
+    bool hasDiffuse2;
+    bool hasDiffuse3;
+    bool hasRamp;
+    bool hasShadow;
+    bool hasDummyRamp;
+    bool hasNormalMap;
 
     int textureCount = 0;
     int expectedTextureCount = 0;
@@ -31,7 +31,12 @@ public:
 	int alphaTest;
 
     QString fileName;
+
     QHash<QString, QList<float>> properties;
+
+	// This could be stored as Uint, but we won't be processing the numbers.
+	QList<QString> textureHashes;
+
 	uint flags;
 
     enum TextureFlags {
