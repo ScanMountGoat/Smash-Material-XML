@@ -1,0 +1,13 @@
+gui/SettingsWindow.cpp
+gui/SettingsWindow.h
+gui/mainwindow.cpp
+gui/mainwindow.h
+gui/mainwindow.ui
+gui/settingswindow.ui
+src/main.cpp
+src/material.cpp
+src/material.h
+src/materialxml.cpp
+src/materialxml.h
+src/searchsettings.cpp
+src/searchsettings.h
