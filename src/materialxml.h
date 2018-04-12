@@ -9,8 +9,7 @@
 #include <QXmlStreamReader>
 
 
-namespace MaterialXml
-{
+namespace MaterialXml {
     void addMaterialsFromXML(QString fileName, SearchSettings &settings);
 
     void readMesh(QXmlStreamReader &reader, QString fileName, SearchSettings &settings);
@@ -19,13 +18,13 @@ namespace MaterialXml
 
     void readMaterial(QXmlStreamReader &reader, QString fileName, SearchSettings &settings);
 
-	int readIntAttribute(QXmlStreamReader & reader, QString name, bool useHex);
+    int readIntAttribute(QXmlStreamReader & reader, QString name, bool useHex);
 
-	uint readUintAttribute(QXmlStreamReader & reader, QString name, bool useHex);
+    uint readUintAttribute(QXmlStreamReader & reader, QString name, bool useHex);
 
     void readTexturesAndProperties(QXmlStreamReader &reader, Material &material);
-	void readTexture(QXmlStreamReader & reader, Material & material);
-	void readParam(QXmlStreamReader & reader, Material & material);
+    void readTexture(QXmlStreamReader & reader, Material & material);
+    void readParam(QXmlStreamReader & reader, Material & material);
 }
 
 #endif // MATERIALXML_H

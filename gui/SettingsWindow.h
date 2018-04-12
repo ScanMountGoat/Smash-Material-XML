@@ -17,7 +17,7 @@ class SettingsWindow : public QMainWindow
 public:
 	explicit SettingsWindow(SearchSettings *searchSettings, QWidget *parent = Q_NULLPTR);
 	~SettingsWindow();
-
+    
 private slots:
 	// Search Settings
 	void on_flagsCheckBox_clicked();
@@ -103,6 +103,13 @@ private:
 	// The object is stored in MainWindow for the duration of the application and modified here.
 	SearchSettings *searchSettings;
 
+    void setLineEditValues(SearchSettings *searchSettings);
+
+    void setSearchSettings(SearchSettings *searchSettings);
+
+    void setDisplaySettings(SearchSettings *searchSettings);
+
+    void showHideContainers();
 };
 
 #endif

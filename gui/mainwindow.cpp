@@ -8,28 +8,24 @@
 #include <QDebug>
 #include <QDirIterator>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
-{
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
 	ui->setupUi(this);
 
 	// Use a monospaced font so all the material property values are aligned.
 	ui->plainTextEdit->setFont(QFont("Courier", 10));
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
 	delete ui;
 }
 
-void MainWindow::on_actionSearch_Settings_triggered() 
-{
+void MainWindow::on_actionSearch_Settings_triggered() {
 	SettingsWindow *settingsWindow = new SettingsWindow(&searchSettings);
 	settingsWindow->setAttribute(Qt::WA_DeleteOnClose);
 	settingsWindow->show();
 }
 
-void MainWindow::addMaterialsFromFileDialog() 
-{
+void MainWindow::addMaterialsFromFileDialog() {
 	QString fileName = QFileDialog::getOpenFileName(this, "Open Xml", ".", "Xml files (*.xml)");
 	if (fileName.isEmpty())
 		return;
@@ -38,8 +34,7 @@ void MainWindow::addMaterialsFromFileDialog()
 	displayMaterialCount();
 }
 
-void MainWindow::on_actionOpen_triggered()
-{
+void MainWindow::on_actionOpen_triggered() {
 	addMaterialsFromFileDialog();
 }
 
@@ -48,9 +43,9 @@ void MainWindow::on_actionOpen_Folder_triggered()
 	addMaterialsFromFolderDialog();
 }
 
-void MainWindow::addMaterialsFromFolderDialog() 
-{
-	QString directory = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly);
+void MainWindow::addMaterialsFromFolderDialog() {
+    QString directory = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home",
+                                                          QFileDialog::ShowDirsOnly);
 	if (directory.isEmpty())
 		return;
 
@@ -64,15 +59,13 @@ void MainWindow::addMaterialsFromFolderDialog()
 	}
 }
 
-void MainWindow::displayMaterialCount() 
-{
+void MainWindow::displayMaterialCount() {
 	ui->plainTextEdit->clear();
 	ui->plainTextEdit->appendPlainText(QString::number(searchSettings.materialList.count())
 		+ " material(s) added.");
 }
 
-void MainWindow::displayFilteredMaterials()
-{
+void MainWindow::displayFilteredMaterials(){
 	// Clear the text display before each new search.
 	ui->plainTextEdit->clear();
 
@@ -82,8 +75,7 @@ void MainWindow::displayFilteredMaterials()
 	}
 }
 
-void MainWindow::printMaterialData(const Material & material) 
-{
+void MainWindow::printMaterialData(const Material & material) {
 	if (searchSettings.displayFileName) {
 		ui->plainTextEdit->appendPlainText(material.fileName);
 	}
@@ -129,19 +121,18 @@ void MainWindow::printMaterialData(const Material & material)
 	ui->plainTextEdit->appendPlainText("\n");
 }
 
-void MainWindow::printAllPropertyValues(const Material & material) 
-{
+void MainWindow::printAllPropertyValues(const Material & material) {
 	for (auto it = material.properties.begin(); it != material.properties.end(); ++it) {
 		printMaterialProperty(it.key(), it.value());
 	}
 }
 
 void MainWindow::printSelectedPropertyValues(const Material & material) {
-	printMaterialProperty("NU_" + searchSettings.materialProperty, material.properties["NU_" + searchSettings.materialProperty]);
+    QString key = "NU_" + searchSettings.materialProperty;
+    printMaterialProperty("NU_" + searchSettings.materialProperty, material.properties[key]);
 }
 
-void MainWindow::printMaterialProperty(const QString name, const QList<float> values) 
-{
+void MainWindow::printMaterialProperty(const QString name, const QList<float> values) {
 	// Add padding so that all the values are in the same column. 
 	// The longest property name is NU_dualNormalScrollParams.
 	QString maxName = "NU_dualNormalScrollParams";

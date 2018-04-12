@@ -12,15 +12,16 @@ void Material::testFlags()
     hasRamp = (flags & (int)TextureFlags::RampCubeMap) > 0 && hasDummyRamp;
 
     hasDiffuse = (flags & (int)TextureFlags::DiffuseMap) > 0;
-    hasDiffuse3 = (flags & 0x00009100) == 0x00009100 || (flags & 0x00009600) == 0x00009600 || ((flags & 0x00009900) == 0x00009900);
-    hasDiffuse2 = ((flags & (int)TextureFlags::RampCubeMap) > 0 && ((flags & (int)TextureFlags::NormalMap) == 0)
+    hasDiffuse3 = (flags & 0x00009100) == 0x00009100 || (flags & 0x00009600) == 0x00009600
+            || ((flags & 0x00009900) == 0x00009900);
+    hasDiffuse2 = ((flags & (int)TextureFlags::RampCubeMap) > 0
+                   && ((flags & (int)TextureFlags::NormalMap) == 0)
         && hasDummyRamp) || hasDiffuse3;
 
     hasNormalMap = (flags & (int)TextureFlags::NormalMap) > 0;
 }
 
-void Material::calculateTextureCount()
-{
+void Material::calculateTextureCount() {
     if (hasDiffuse)
         expectedTextureCount += 1;
     if (hasSphereMap)

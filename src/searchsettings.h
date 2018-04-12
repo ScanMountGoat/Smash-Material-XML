@@ -6,8 +6,7 @@
 #include <QString>
 #include <QList>
 
-class SearchSettings
-{
+class SearchSettings {
 public:
     QList<Material> materialList;
 
@@ -24,7 +23,7 @@ public:
 	bool filterFlags = false;
 	uint flags1 = 0xFFFFFFFF;
 	uint flags2 = 0xFFFFFFFF;
-	ComparisonOperation flagsOperation = ComparisonOperation::Equals;;
+    ComparisonOperation flagsOperation = ComparisonOperation::Equals;
 
 	// Dst Factor
 	bool filterDst = false;

@@ -4,8 +4,7 @@
 #include<QString>
 #include<QHash>
 
-class Material
-{
+class Material {
 public:
     bool hasSphereMap;
     bool hasAoMap;

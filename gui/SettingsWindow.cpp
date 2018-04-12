@@ -3,51 +3,65 @@
 #include <qdebug.h>
 
 
+void SettingsWindow::setLineEditValues(SearchSettings *searchSettings)
+{
+    ui->matPropLineEdit->setText(searchSettings->materialProperty);
+    ui->srcLineEdit->setText(QString::number(searchSettings->srcFactor, 16));
+    ui->dstLineEdit->setText(QString::number(searchSettings->dstFactor, 16));
+    ui->cullModeLineEdit->setText(QString::number(searchSettings->cullMode, 16));
+    ui->alphaTestLineEdit->setText(QString::number(searchSettings->alphaTest, 16));
+    ui->alphaFuncLineEdit->setText(QString::number(searchSettings->alphaFunc, 16));
+    ui->texCountLineEdit->setText(QString::number(searchSettings->textureCount, 10));
+    ui->flags1LineEdit->setText(QString::number(searchSettings->flags1, 16));
+    ui->flags2LineEdit->setText(QString::number(searchSettings->flags2, 16));
+}
+
+void SettingsWindow::setSearchSettings(SearchSettings *searchSettings)
+{
+    ui->srcCheckBox->setChecked(searchSettings->filterSrc);
+    ui->dstCheckBox->setChecked(searchSettings->filterDst);
+    ui->matPropCheckBox->setChecked(searchSettings->filterPropertyName);
+    ui->flagsCheckBox->setChecked(searchSettings->filterFlags);
+    ui->cullModeCheckBox->setChecked(searchSettings->filterCullMode);
+    ui->alphaFuncCheckBox->setChecked(searchSettings->filterAlphaFunc);
+    ui->alphaTestCheckBox->setChecked(searchSettings->filterAlphaTest);
+    ui->texCountCheckBox->setChecked(searchSettings->filterTextureCount);
+}
+
+void SettingsWindow::setDisplaySettings(SearchSettings *searchSettings)
+{
+    ui->displaySrcCheckBox->setChecked(searchSettings->displaySrc);
+    ui->displayDstCheckBox->setChecked(searchSettings->displayDst);
+    ui->displayFileNameCheckBox->setChecked(searchSettings->displayFileName);
+    ui->displayFlagsCheckBox->setChecked(searchSettings->displayFlags);
+    ui->displayCullCheckBox->setChecked(searchSettings->displayCullMode);
+    ui->displayTexturesCheckBox->setChecked(searchSettings->displayTextureHashes);
+}
+
+void SettingsWindow::showHideContainers()
+{
+    // QWidgets for each search option are used to hide/unhide all child widgets.
+    ui->srcContainer->setEnabled(ui->srcCheckBox->isChecked());
+    ui->dstContainer->setEnabled(ui->dstCheckBox->isChecked());
+    ui->flagsContainer->setEnabled(ui->flagsCheckBox->isChecked());
+    ui->matPropContainer->setEnabled(ui->matPropCheckBox->isChecked());
+    ui->cullModeContainer->setEnabled(ui->cullModeCheckBox->isChecked());
+    ui->texCountContainer->setEnabled(ui->texCountCheckBox->isChecked());
+    ui->alphaFuncContainer->setEnabled(ui->alphaFuncCheckBox->isChecked());
+    ui->alphaTestContainer->setEnabled(ui->alphaTestCheckBox->isChecked());
+}
+
 SettingsWindow::SettingsWindow(SearchSettings *searchSettings, QWidget *parent) : QMainWindow(parent), ui(new Ui::SettingsWindow)
 {
 	ui->setupUi(this);
 
-	// Set the GUI elements based on the previous search settings.
 	this->searchSettings = searchSettings;
 
-	// Set display settings.
-	ui->displaySrcCheckBox->setChecked(searchSettings->displaySrc);
-	ui->displayDstCheckBox->setChecked(searchSettings->displayDst);
-	ui->displayFileNameCheckBox->setChecked(searchSettings->displayFileName);
-	ui->displayFlagsCheckBox->setChecked(searchSettings->displayFlags);
-	ui->displayCullCheckBox->setChecked(searchSettings->displayCullMode);
-	ui->displayTexturesCheckBox->setChecked(searchSettings->displayCullMode);
-
-	// Set search settings.
-	ui->srcCheckBox->setChecked(searchSettings->filterSrc);
-	ui->dstCheckBox->setChecked(searchSettings->filterDst);
-	ui->matPropCheckBox->setChecked(searchSettings->filterPropertyName);
-	ui->flagsCheckBox->setChecked(searchSettings->filterFlags);
-	ui->cullModeCheckBox->setChecked(searchSettings->filterCullMode);
-	ui->alphaFuncCheckBox->setChecked(searchSettings->filterAlphaFunc);
-	ui->alphaTestCheckBox->setChecked(searchSettings->filterAlphaTest);
-	ui->texCountCheckBox->setChecked(searchSettings->filterTextureCount);
-
-	// Set Line Edit Values
-	ui->matPropLineEdit->setText(searchSettings->materialProperty);
-	ui->srcLineEdit->setText(QString::number(searchSettings->srcFactor, 16));
-	ui->dstLineEdit->setText(QString::number(searchSettings->dstFactor, 16));
-	ui->cullModeLineEdit->setText(QString::number(searchSettings->cullMode, 16));
-	ui->alphaTestLineEdit->setText(QString::number(searchSettings->alphaTest, 16));
-	ui->alphaFuncLineEdit->setText(QString::number(searchSettings->alphaFunc, 16));
-	ui->texCountLineEdit->setText(QString::number(searchSettings->textureCount, 10));
-	ui->flags1LineEdit->setText(QString::number(searchSettings->flags1, 16));
-	ui->flags2LineEdit->setText(QString::number(searchSettings->flags2, 16));
-
-	// QWidgets for each search option are used to hide/unhide all child widgets.
-	ui->srcContainer->setEnabled(ui->srcCheckBox->isChecked());
-	ui->dstContainer->setEnabled(ui->dstCheckBox->isChecked());
-	ui->flagsContainer->setEnabled(ui->flagsCheckBox->isChecked());
-	ui->matPropContainer->setEnabled(ui->matPropCheckBox->isChecked());
-	ui->cullModeContainer->setEnabled(ui->cullModeCheckBox->isChecked());
-	ui->texCountContainer->setEnabled(ui->texCountCheckBox->isChecked());
-	ui->alphaFuncContainer->setEnabled(ui->alphaFuncCheckBox->isChecked());
-	ui->alphaTestContainer->setEnabled(ui->alphaTestCheckBox->isChecked());
+    // Set the GUI elements based on the previous search settings.
+    setDisplaySettings(searchSettings);
+    setSearchSettings(searchSettings);
+    setLineEditValues(searchSettings);
+    showHideContainers();
 }
 
 SettingsWindow::~SettingsWindow()

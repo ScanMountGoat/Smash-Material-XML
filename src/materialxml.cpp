@@ -3,8 +3,7 @@
 #include <QFile>
 #include <QDebug>
 
-void MaterialXml::addMaterialsFromXML(QString fileName, SearchSettings &settings)
-{
+void MaterialXml::addMaterialsFromXML(QString fileName, SearchSettings &settings) {
     QXmlStreamReader reader;
 
     QFile file(fileName);
@@ -21,8 +20,7 @@ void MaterialXml::addMaterialsFromXML(QString fileName, SearchSettings &settings
     }
 }
 
-void MaterialXml::readMesh(QXmlStreamReader &reader, QString fileName, SearchSettings &settings)
-{
+void MaterialXml::readMesh(QXmlStreamReader &reader, QString fileName, SearchSettings &settings) {
     while(reader.readNextStartElement()) {
         if(reader.name() == "mesh") {
             QString name = "";
@@ -35,8 +33,8 @@ void MaterialXml::readMesh(QXmlStreamReader &reader, QString fileName, SearchSet
     }
 }
 
-void MaterialXml::readPolygon(QXmlStreamReader &reader, QString fileName, SearchSettings &settings)
-{
+void MaterialXml::readPolygon(QXmlStreamReader &reader, QString fileName,
+                              SearchSettings &settings) {
     while(reader.readNextStartElement()) {
         if(reader.name() == "polygon") {
             readMaterial(reader, fileName, settings);
@@ -45,8 +43,8 @@ void MaterialXml::readPolygon(QXmlStreamReader &reader, QString fileName, Search
     }
 }
 
-void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName, SearchSettings &settings)
-{
+void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName,
+                               SearchSettings &settings) {
     while(reader.readNextStartElement()) {
         if(reader.name() == "material") {
             Material material;
@@ -69,8 +67,7 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName, Searc
     }
 }
 
-int MaterialXml::readIntAttribute(QXmlStreamReader &reader, QString attributeName, bool useHex) 
-{
+int MaterialXml::readIntAttribute(QXmlStreamReader &reader, QString attributeName, bool useHex) {
 	int value = 0;
 	if (reader.attributes().hasAttribute((attributeName))) {
 		bool ok;
@@ -96,8 +93,7 @@ uint MaterialXml::readUintAttribute(QXmlStreamReader &reader, QString attributeN
 	return value;
 }
 
-void MaterialXml::readTexturesAndProperties(QXmlStreamReader &reader, Material &material)
-{
+void MaterialXml::readTexturesAndProperties(QXmlStreamReader &reader, Material &material) {
     while(reader.readNextStartElement()) {
 		if (reader.name() == "texture") {
 			readTexture(reader, material);
@@ -108,16 +104,14 @@ void MaterialXml::readTexturesAndProperties(QXmlStreamReader &reader, Material &
     }
 }
 
-void MaterialXml::readTexture(QXmlStreamReader & reader, Material & material) 
-{
+void MaterialXml::readTexture(QXmlStreamReader & reader, Material & material) {
 	if (reader.attributes().hasAttribute(("hash"))) {
 		QString hash = reader.attributes().value("hash").toString();
 		material.textureHashes.append(hash);
 	}
 }
 
-void MaterialXml::readParam(QXmlStreamReader &reader, Material &material) 
-{
+void MaterialXml::readParam(QXmlStreamReader &reader, Material &material) {
 	QString name = "";
 	if (reader.attributes().hasAttribute(("name")))
 		name = reader.attributes().value("name").toString();
