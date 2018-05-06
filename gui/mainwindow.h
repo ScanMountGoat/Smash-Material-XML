@@ -20,7 +20,10 @@ public:
 	explicit MainWindow(QWidget *parent = 0);
 	~MainWindow();
 
-	void displayFilteredMaterials();
+    // Print material values to text box.
+    void printFilteredMaterials();
+
+    void printMaterialCount();
 
 	void printMaterialData(const Material & material);
 
@@ -30,12 +33,20 @@ public:
 
 	void printSelectedPropertyValues(const Material & material);
 
+    void printSrc(const Material& material);
+
+    void printFlags(const Material& material);
+
+    void printDst(const Material& material);
+
+    void printCullMode(const Material& material);
+
+    void printTextures(const Material& material);
+
+    // Add materials to material list.
 	void addMaterialsFromFolderDialog();
 
-	void displayMaterialCount();
-
 	void addMaterialsFromFileDialog();
-
 
 private slots:
 

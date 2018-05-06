@@ -31,15 +31,14 @@ void MainWindow::addMaterialsFromFileDialog() {
 		return;
 
 	MaterialXml::addMaterialsFromXML(fileName, searchSettings);
-	displayMaterialCount();
+    printMaterialCount();
 }
 
 void MainWindow::on_actionOpen_triggered() {
 	addMaterialsFromFileDialog();
 }
 
-void MainWindow::on_actionOpen_Folder_triggered()
-{
+void MainWindow::on_actionOpen_Folder_triggered() {
 	addMaterialsFromFolderDialog();
 }
 
@@ -54,18 +53,18 @@ void MainWindow::addMaterialsFromFolderDialog() {
 		if (it.next().endsWith(".xml")) {
 			QString fileName = it.next();
 			MaterialXml::addMaterialsFromXML(fileName, searchSettings);
-			displayMaterialCount();
+            printMaterialCount();
 		}
 	}
 }
 
-void MainWindow::displayMaterialCount() {
+void MainWindow::printMaterialCount() {
 	ui->plainTextEdit->clear();
 	ui->plainTextEdit->appendPlainText(QString::number(searchSettings.materialList.count())
 		+ " material(s) added.");
 }
 
-void MainWindow::displayFilteredMaterials(){
+void MainWindow::printFilteredMaterials() {
 	// Clear the text display before each new search.
 	ui->plainTextEdit->clear();
 
@@ -75,35 +74,55 @@ void MainWindow::displayFilteredMaterials(){
 	}
 }
 
+void MainWindow::printSrc(const Material& material) {
+    QString src;
+    ui->plainTextEdit->appendPlainText("src: " + src.setNum(material.srcFactor, 16));
+}
+
+void MainWindow::printFlags(const Material& material) {
+    QString flags;
+    ui->plainTextEdit->appendPlainText(flags.setNum(material.flags, 16));
+}
+
+void MainWindow::printDst(const Material& material) {
+    QString dst;
+    ui->plainTextEdit->appendPlainText("dst: " + dst.setNum(material.dstFactor, 16));
+}
+
+void MainWindow::printCullMode(const Material& material) {
+    QString cullMode;
+    ui->plainTextEdit->appendPlainText("cull mode: " + cullMode.setNum(material.cullMode, 16));
+}
+
+void MainWindow::printTextures(const Material& material) {
+    for (auto const hash : material.textureHashes) {
+        ui->plainTextEdit->appendPlainText("texture: " + hash);
+    }
+}
+
 void MainWindow::printMaterialData(const Material & material) {
 	if (searchSettings.displayFileName) {
 		ui->plainTextEdit->appendPlainText(material.fileName);
 	}
 
 	if (searchSettings.displayFlags) {
-		QString flags;
-		ui->plainTextEdit->appendPlainText(flags.setNum(material.flags, 16));
+        printFlags(material);
 	}
 
 	if (searchSettings.displaySrc) {
-		QString src;
-		ui->plainTextEdit->appendPlainText("src: " + src.setNum(material.srcFactor, 16));
+        printSrc(material);
 	}
 
 	if (searchSettings.displayDst) {
-		QString dst;
-		ui->plainTextEdit->appendPlainText("dst: " + dst.setNum(material.dstFactor, 16));
+        printDst(material);
 	}
 
 	if (searchSettings.displayCullMode) {
-		QString cullMode;
-		ui->plainTextEdit->appendPlainText("cull mode: " + cullMode.setNum(material.cullMode, 16));
+        printCullMode(material);
 	}
 
 	if (searchSettings.displayTextureHashes) {
-		for (auto const hash : material.textureHashes) {
-			ui->plainTextEdit->appendPlainText("texture: " + hash);
-		}
+        printTextures(material);
 	}
 
 	switch (searchSettings.propertyDisplayMode) {
@@ -146,25 +165,21 @@ void MainWindow::printMaterialProperty(const QString name, const QList<float> va
 	ui->plainTextEdit->appendPlainText(propertyText);
 }
 
-void MainWindow::on_searchPushButton_clicked()
-{
-	displayFilteredMaterials();
+void MainWindow::on_searchPushButton_clicked() {
+    printFilteredMaterials();
 }
 
-void MainWindow::on_clearPushButton_clicked()
-{
+void MainWindow::on_clearPushButton_clicked() {
 	ui->plainTextEdit->clear();
 }
 
-void MainWindow::on_actionAbout_triggered()
-{
+void MainWindow::on_actionAbout_triggered() {
 	// Display license information.
 	QString link = "<a href='https://github.com/ScanMountGoat/Smash-Material-XML/blob/master/license.txt'>GPL License</a>";
 	QMessageBox::about(0, "About", link);
 }
 
-void MainWindow::on_actionClear_Materials_triggered() 
-{
+void MainWindow::on_actionClear_Materials_triggered() {
 	searchSettings.materialList.clear();
 	ui->plainTextEdit->clear();
 	ui->plainTextEdit->appendPlainText("Materials cleared.");

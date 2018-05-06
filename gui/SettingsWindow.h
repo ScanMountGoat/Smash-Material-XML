@@ -18,6 +18,8 @@ public:
 	explicit SettingsWindow(SearchSettings *searchSettings, QWidget *parent = Q_NULLPTR);
 	~SettingsWindow();
     
+    void setPropertyRadioButtons(SearchSettings *searchSettings);
+    
 private slots:
 	// Search Settings
 	void on_flagsCheckBox_clicked();

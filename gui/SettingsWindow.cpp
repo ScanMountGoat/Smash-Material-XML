@@ -3,8 +3,7 @@
 #include <qdebug.h>
 
 
-void SettingsWindow::setLineEditValues(SearchSettings *searchSettings)
-{
+void SettingsWindow::setLineEditValues(SearchSettings *searchSettings) {
     ui->matPropLineEdit->setText(searchSettings->materialProperty);
     ui->srcLineEdit->setText(QString::number(searchSettings->srcFactor, 16));
     ui->dstLineEdit->setText(QString::number(searchSettings->dstFactor, 16));
@@ -16,8 +15,7 @@ void SettingsWindow::setLineEditValues(SearchSettings *searchSettings)
     ui->flags2LineEdit->setText(QString::number(searchSettings->flags2, 16));
 }
 
-void SettingsWindow::setSearchSettings(SearchSettings *searchSettings)
-{
+void SettingsWindow::setSearchSettings(SearchSettings *searchSettings) {
     ui->srcCheckBox->setChecked(searchSettings->filterSrc);
     ui->dstCheckBox->setChecked(searchSettings->filterDst);
     ui->matPropCheckBox->setChecked(searchSettings->filterPropertyName);
@@ -28,8 +26,7 @@ void SettingsWindow::setSearchSettings(SearchSettings *searchSettings)
     ui->texCountCheckBox->setChecked(searchSettings->filterTextureCount);
 }
 
-void SettingsWindow::setDisplaySettings(SearchSettings *searchSettings)
-{
+void SettingsWindow::setDisplaySettings(SearchSettings *searchSettings) {
     ui->displaySrcCheckBox->setChecked(searchSettings->displaySrc);
     ui->displayDstCheckBox->setChecked(searchSettings->displayDst);
     ui->displayFileNameCheckBox->setChecked(searchSettings->displayFileName);
@@ -38,8 +35,7 @@ void SettingsWindow::setDisplaySettings(SearchSettings *searchSettings)
     ui->displayTexturesCheckBox->setChecked(searchSettings->displayTextureHashes);
 }
 
-void SettingsWindow::showHideContainers()
-{
+void SettingsWindow::showHideContainers() {
     // QWidgets for each search option are used to hide/unhide all child widgets.
     ui->srcContainer->setEnabled(ui->srcCheckBox->isChecked());
     ui->dstContainer->setEnabled(ui->dstCheckBox->isChecked());
@@ -51,8 +47,21 @@ void SettingsWindow::showHideContainers()
     ui->alphaTestContainer->setEnabled(ui->alphaTestCheckBox->isChecked());
 }
 
-SettingsWindow::SettingsWindow(SearchSettings *searchSettings, QWidget *parent) : QMainWindow(parent), ui(new Ui::SettingsWindow)
-{
+void SettingsWindow::setPropertyRadioButtons(SearchSettings *searchSettings) {
+    switch (searchSettings->propertyDisplayMode) {
+        case SearchSettings::PropertDisplay::All:
+            ui->allPropertiesRadioButton->click();
+            break;
+        case SearchSettings::PropertDisplay::None:
+            ui->noPropertyRadioButton->click();
+            break;
+        case SearchSettings::PropertDisplay::Selected:
+            ui->selectedPropertyRadioButton->click();
+            break;
+    }
+}
+
+SettingsWindow::SettingsWindow(SearchSettings *searchSettings, QWidget *parent) : QMainWindow(parent), ui(new Ui::SettingsWindow) {
 	ui->setupUi(this);
 
 	this->searchSettings = searchSettings;
@@ -61,11 +70,11 @@ SettingsWindow::SettingsWindow(SearchSettings *searchSettings, QWidget *parent) 
     setDisplaySettings(searchSettings);
     setSearchSettings(searchSettings);
     setLineEditValues(searchSettings);
+    setPropertyRadioButtons(searchSettings);
     showHideContainers();
 }
 
-SettingsWindow::~SettingsWindow()
-{
+SettingsWindow::~SettingsWindow() {
 	delete ui;
 }
 
@@ -145,87 +154,74 @@ void SettingsWindow::on_matPropLineEdit_editingFinished() {
 	searchSettings->materialProperty = text;
 }
 
-void SettingsWindow::on_cullModeCheckBox_clicked() 
-{
+void SettingsWindow::on_cullModeCheckBox_clicked() {
 	bool isChecked = ui->cullModeCheckBox->isChecked();
 	searchSettings->filterCullMode = isChecked;
 	ui->cullModeContainer->setEnabled(isChecked);
 }
 
-void SettingsWindow::on_cullModeLineEdit_editingFinished() 
-{
+void SettingsWindow::on_cullModeLineEdit_editingFinished() {
 	// Use hex format
 	QString text = ui->dstLineEdit->text();
 	bool ok;
 	searchSettings->cullMode = (text.toInt(&ok, 16));
 }
 
-void SettingsWindow::on_cullModeOpComboBox_currentIndexChanged() 
-{
+void SettingsWindow::on_cullModeOpComboBox_currentIndexChanged() {
 	searchSettings->cullOperation = (SearchSettings::ComparisonOperation)ui->cullModeOpComboBox->currentIndex();
 }
 
-void SettingsWindow::on_alphaFuncCheckBox_clicked() 
-{
+void SettingsWindow::on_alphaFuncCheckBox_clicked() {
 	bool isChecked = ui->alphaFuncCheckBox->isChecked();
 	searchSettings->filterAlphaFunc = isChecked;
 	ui->alphaFuncContainer->setEnabled(isChecked);
 }
 
-void SettingsWindow::on_alphaFuncLineEdit_editingFinished() 
-{
+void SettingsWindow::on_alphaFuncLineEdit_editingFinished() {
 	// Use hex format
 	QString text = ui->alphaFuncLineEdit->text();
 	bool ok;
 	searchSettings->alphaFunc = (text.toInt(&ok, 16));
 }
 
-void SettingsWindow::on_alphaFuncOpComboBox_currentIndexChanged() 
-{
+void SettingsWindow::on_alphaFuncOpComboBox_currentIndexChanged() {
 	searchSettings->alphaFuncOperation = (SearchSettings::ComparisonOperation)ui->alphaFuncOpComboBox->currentIndex();
 }
 
-void SettingsWindow::on_alphaTestCheckBox_clicked() 
-{
+void SettingsWindow::on_alphaTestCheckBox_clicked() {
 	bool isChecked = ui->alphaTestCheckBox->isChecked();
 	searchSettings->filterAlphaTest = isChecked;
 	ui->alphaTestContainer->setEnabled(isChecked);
 }
 
-void SettingsWindow::on_alphaTestLineEdit_editingFinished() 
-{
+void SettingsWindow::on_alphaTestLineEdit_editingFinished() {
 	// Use hex format
 	QString text = ui->alphaTestLineEdit->text();
 	bool ok;
 	searchSettings->alphaTest = (text.toInt(&ok, 16));
 }
 
-void SettingsWindow::on_alphaTestOpComboBox_currentIndexChanged() 
-{
+void SettingsWindow::on_alphaTestOpComboBox_currentIndexChanged() {
 	searchSettings->alphaTestOperation = (SearchSettings::ComparisonOperation)ui->alphaTestOpComboBox->currentIndex();
 }
 
-void SettingsWindow::on_texCountCheckBox_clicked() 
-{
+void SettingsWindow::on_texCountCheckBox_clicked() {
 	bool isChecked = ui->texCountCheckBox->isChecked();
 	searchSettings->filterTextureCount = isChecked;
 	ui->texCountContainer->setEnabled(isChecked);
 }
 
-void SettingsWindow::on_texCountLineEdit_editingFinished() 
-{
+void SettingsWindow::on_texCountLineEdit_editingFinished() {
 	QString text = ui->texCountLineEdit->text();
 	bool ok;
 	searchSettings->textureCount = (text.toInt(&ok, 10));
 }
 
-void SettingsWindow::on_texCountOpComboBox_currentIndexChanged() 
-{
+void SettingsWindow::on_texCountOpComboBox_currentIndexChanged() {
 	searchSettings->textureCountOperation = (SearchSettings::ComparisonOperation)ui->texCountOpComboBox->currentIndex();
 }
 
-void SettingsWindow::on_flagsOpComboBox_currentIndexChanged() 
-{
+void SettingsWindow::on_flagsOpComboBox_currentIndexChanged() {
 	searchSettings->flagsOperation = (SearchSettings::ComparisonOperation)ui->flagsOpComboBox->currentIndex();
 }
 
