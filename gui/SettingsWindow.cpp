@@ -98,22 +98,11 @@ void SettingsWindow::on_srcCheckBox_clicked() {
 
 void SettingsWindow::on_flags1LineEdit_editingFinished() {
 	// Use hex format. Ex: 9A011063. 8 digits for 4 bytes of hex.
-	// Use red background for invalid inputs.
 	QString text = ui->flags1LineEdit->text();
 	bool validInput = true;
 	if (validInput && text.length() == 8) {
 		searchSettings->flags1 = (text.toUInt(&validInput, 16));
-
-		QPalette palette;
-		palette.setColor(QPalette::Base, Qt::white);
-		palette.setColor(QPalette::Text, Qt::black);
-		ui->flags1LineEdit->setPalette(palette);
-	} else {
-		QPalette palette;
-		palette.setColor(QPalette::Base, Qt::red);
-		palette.setColor(QPalette::Text, Qt::black);
-		ui->flags1LineEdit->setPalette(palette);
-	}
+    }
 }
 
 void SettingsWindow::on_flags2LineEdit_editingFinished() {
@@ -122,17 +111,7 @@ void SettingsWindow::on_flags2LineEdit_editingFinished() {
 	bool validInput = true;
 	if (validInput && text.length() == 8) {
 		searchSettings->flags2 = (text.toUInt(&validInput, 16));
-
-		QPalette palette;
-		palette.setColor(QPalette::Base, Qt::white);
-		palette.setColor(QPalette::Text, Qt::black);
-		ui->flags2LineEdit->setPalette(palette);
-	} else {
-		QPalette palette;
-		palette.setColor(QPalette::Base, Qt::red);
-		palette.setColor(QPalette::Text, Qt::black);
-		ui->flags2LineEdit->setPalette(palette);
-	}
+    }
 }
 
 void SettingsWindow::on_srcLineEdit_editingFinished() {
@@ -168,7 +147,7 @@ void SettingsWindow::on_cullModeLineEdit_editingFinished() {
 }
 
 void SettingsWindow::on_cullModeOpComboBox_currentIndexChanged() {
-	searchSettings->cullOperation = (SearchSettings::ComparisonOperation)ui->cullModeOpComboBox->currentIndex();
+    searchSettings->cullComparison = (SearchSettings::ComparisonOperation)ui->cullModeOpComboBox->currentIndex();
 }
 
 void SettingsWindow::on_alphaFuncCheckBox_clicked() {
@@ -185,7 +164,7 @@ void SettingsWindow::on_alphaFuncLineEdit_editingFinished() {
 }
 
 void SettingsWindow::on_alphaFuncOpComboBox_currentIndexChanged() {
-	searchSettings->alphaFuncOperation = (SearchSettings::ComparisonOperation)ui->alphaFuncOpComboBox->currentIndex();
+    searchSettings->alphaFuncComparison = (SearchSettings::ComparisonOperation)ui->alphaFuncOpComboBox->currentIndex();
 }
 
 void SettingsWindow::on_alphaTestCheckBox_clicked() {
@@ -202,7 +181,7 @@ void SettingsWindow::on_alphaTestLineEdit_editingFinished() {
 }
 
 void SettingsWindow::on_alphaTestOpComboBox_currentIndexChanged() {
-	searchSettings->alphaTestOperation = (SearchSettings::ComparisonOperation)ui->alphaTestOpComboBox->currentIndex();
+    searchSettings->alphaTestComparison = (SearchSettings::ComparisonOperation)ui->alphaTestOpComboBox->currentIndex();
 }
 
 void SettingsWindow::on_texCountCheckBox_clicked() {
@@ -218,19 +197,19 @@ void SettingsWindow::on_texCountLineEdit_editingFinished() {
 }
 
 void SettingsWindow::on_texCountOpComboBox_currentIndexChanged() {
-	searchSettings->textureCountOperation = (SearchSettings::ComparisonOperation)ui->texCountOpComboBox->currentIndex();
+    searchSettings->textureComparison = (SearchSettings::ComparisonOperation)ui->texCountOpComboBox->currentIndex();
 }
 
 void SettingsWindow::on_flagsOpComboBox_currentIndexChanged() {
-	searchSettings->flagsOperation = (SearchSettings::ComparisonOperation)ui->flagsOpComboBox->currentIndex();
+    searchSettings->flagsComparison = (SearchSettings::ComparisonOperation)ui->flagsOpComboBox->currentIndex();
 }
 
 void SettingsWindow::on_srcOpComboBox_currentIndexChanged() {
-	searchSettings->srcOperation = (SearchSettings::ComparisonOperation)ui->srcOpComboBox->currentIndex();
+    searchSettings->srcComparison = (SearchSettings::ComparisonOperation)ui->srcOpComboBox->currentIndex();
 }
 
 void SettingsWindow::on_dstOpComboBox_currentIndexChanged() {
-	searchSettings->dstOperation = (SearchSettings::ComparisonOperation)ui->dstOpComboBox->currentIndex();
+    searchSettings->dstComparison = (SearchSettings::ComparisonOperation)ui->dstOpComboBox->currentIndex();
 }
 
 void SettingsWindow::on_displayFileNameCheckBox_clicked() {

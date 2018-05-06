@@ -40,18 +40,18 @@ QList<Material> SearchSettings::filterMaterials() {
 		// Check flags using the selected flags values and comparison operator.
 		if (filterFlags) {
 			uint value = material.flags & flags1;
-			bool validFlags = SearchSettings::matchesSearch(flagsOperation, value, flags2);
+            bool validFlags = SearchSettings::matchesSearch(flagsComparison, value, flags2);
 			validMaterial = validMaterial && validFlags;
 		}
 
 		if (filterSrc) {
-            bool validSrc = SearchSettings::matchesSearch(srcOperation, material.dstFactor,
+            bool validSrc = SearchSettings::matchesSearch(srcComparison, material.dstFactor,
                                                           dstFactor);
 			validMaterial = validMaterial && validSrc;
 		}
 
 		if (filterDst) {
-            bool validDst = SearchSettings::matchesSearch(dstOperation, material.dstFactor,
+            bool validDst = SearchSettings::matchesSearch(dstComparison, material.dstFactor,
                                                           dstFactor);
 			validMaterial = validMaterial && validDst;
 		}
@@ -62,26 +62,26 @@ QList<Material> SearchSettings::filterMaterials() {
 		}
 
         if (filterAlphaFunc) {
-            bool validAlphaFunc = SearchSettings::matchesSearch(alphaFuncOperation,
+            bool validAlphaFunc = SearchSettings::matchesSearch(alphaFuncComparison,
                                                                 material.alphaFunc, alphaFunc);
             validMaterial = validMaterial && validAlphaFunc;
         }
 
         if (filterAlphaTest) {
-            bool validAlphaTest = SearchSettings::matchesSearch(alphaTestOperation,
+            bool validAlphaTest = SearchSettings::matchesSearch(alphaTestComparison,
                                                                 material.alphaTest, alphaTest);
             validMaterial = validMaterial && validAlphaTest;
         }
 
         if (filterTextureCount) {
-            bool validTexCount = SearchSettings::matchesSearch(textureCountOperation,
+            bool validTexCount = SearchSettings::matchesSearch(textureComparison,
                                                                material.textureHashes.count(),
                                                                textureCount);
             validMaterial = validMaterial && validTexCount;
         }
 
         if (filterCullMode) {
-            bool validCull = SearchSettings::matchesSearch(cullOperation, material.cullMode,
+            bool validCull = SearchSettings::matchesSearch(cullComparison, material.cullMode,
                                                            cullMode);
             validMaterial = validMaterial && validCull;
         }

@@ -23,22 +23,22 @@ public:
 	bool filterFlags = false;
 	uint flags1 = 0xFFFFFFFF;
 	uint flags2 = 0xFFFFFFFF;
-    ComparisonOperation flagsOperation = ComparisonOperation::Equals;
+    ComparisonOperation flagsComparison = ComparisonOperation::Equals;
 
 	// Dst Factor
 	bool filterDst = false;
     int dstFactor = 0;
-	ComparisonOperation dstOperation = ComparisonOperation::Equals;
+    ComparisonOperation dstComparison = ComparisonOperation::Equals;
 
 	// Src Factor
 	bool filterSrc = false;
     int srcFactor = 0;
-	ComparisonOperation srcOperation = ComparisonOperation::Equals;
+    ComparisonOperation srcComparison = ComparisonOperation::Equals;
 
 	// Cull Mode
 	bool filterCullMode = false;
 	int cullMode = 0;
-	ComparisonOperation cullOperation = ComparisonOperation::Equals;
+    ComparisonOperation cullComparison = ComparisonOperation::Equals;
 
 	// NU_ Material Property
 	bool filterPropertyName = false;
@@ -47,17 +47,17 @@ public:
 	// Alpha Func
 	bool filterAlphaFunc = false;
 	int alphaFunc = 0;
-	ComparisonOperation alphaFuncOperation = ComparisonOperation::Equals;
+    ComparisonOperation alphaFuncComparison = ComparisonOperation::Equals;
 
 	// Alpha Test
 	bool filterAlphaTest = false;
 	int alphaTest = 0;
-	ComparisonOperation alphaTestOperation = ComparisonOperation::Equals;
+    ComparisonOperation alphaTestComparison = ComparisonOperation::Equals;
 
 	// Texture Count
 	bool filterTextureCount = false;
 	int textureCount = 0;
-	ComparisonOperation textureCountOperation = ComparisonOperation::Equals;
+    ComparisonOperation textureComparison = ComparisonOperation::Equals;
 
 	// Settings for what properties to display.
 	bool displaySrc = false;
