@@ -32,6 +32,8 @@ These settings control what material attributes are printed for each of the mate
 * [Material Editing Guide I](https://gamebanana.com/tuts/12139): Tutorial explaining common material properties and how to edit materials.
 * [Material Editing Guide II](https://gamebanana.com/tuts/12214): Tutorial explaining more advanced material properties and example materials.
 
+## Build Information
+Prebuilt binaries are only available for windows. The project can be built from source using QTCreator. The project was built with QT 5.9.3. Building should work without any changes necessary on Ubuntu 16.04 with a proper QT installation, but this hasn't yet been tested with the latest version.
 
 ## Credits
 The application is based on the XML material import/export and NUD materials used in Smash Forge.
