@@ -48,6 +48,8 @@ public:
 
 	void addMaterialsFromFileDialog();
 
+        void printZBufferOffset(const Material& material);
+        
 private slots:
 
 	// Toolbar Commands

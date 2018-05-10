@@ -57,6 +57,7 @@ void MaterialXml::readMaterial(QXmlStreamReader &reader, QString fileName,
             material.srcFactor = readIntAttribute(reader, "srcFactor", true);
             material.dstFactor = readIntAttribute(reader, "dstFactor", true);
 			material.cullMode = readIntAttribute(reader, "cullmode", true);
+            material.zBufferOffset = readIntAttribute(reader, "zbuffoff", false);
 
             readTexturesAndProperties(reader, material);
 

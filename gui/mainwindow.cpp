@@ -100,6 +100,11 @@ void MainWindow::printTextures(const Material& material) {
     }
 }
 
+void MainWindow::printZBufferOffset(const Material& material) {
+    QString zBufOffset;
+    ui->plainTextEdit->appendPlainText("zbuffoffset: " + zBufOffset.setNum(material.zBufferOffset, 10));
+}
+
 void MainWindow::printMaterialData(const Material & material) {
 	if (searchSettings.displayFileName) {
 		ui->plainTextEdit->appendPlainText(material.fileName);
@@ -120,6 +125,10 @@ void MainWindow::printMaterialData(const Material & material) {
 	if (searchSettings.displayCullMode) {
         printCullMode(material);
 	}
+
+    if (searchSettings.displayZBufferOffset) {
+        printZBufferOffset(material);
+    }
 
 	if (searchSettings.displayTextureHashes) {
         printTextures(material);

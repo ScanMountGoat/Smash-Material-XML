@@ -86,6 +86,12 @@ QList<Material> SearchSettings::filterMaterials() {
             validMaterial = validMaterial && validCull;
         }
 
+        if (filterZBufferOffset) {
+            bool validOffset = SearchSettings::matchesSearch(zBuffComparison, material.zBufferOffset,
+                                                           zBufferOffset);
+            validMaterial = validMaterial && validOffset;
+        }
+
 		if (validMaterial) {
 			filteredMaterialList.append(material);
 		}

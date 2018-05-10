@@ -29,6 +29,8 @@ public:
 	int alphaFunc;
 	int alphaTest;
 
+    int zBufferOffset;
+
     QString fileName;
 
     QHash<QString, QList<float>> properties;

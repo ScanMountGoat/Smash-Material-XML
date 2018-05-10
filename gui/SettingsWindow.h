@@ -98,6 +98,14 @@ private slots:
 
 	void on_selectedPropertyRadioButton_clicked();
 
+    void on_zBuffCheckBox_clicked();
+
+    void on_zBuffOpComboBox_currentIndexChanged();
+
+    void on_zBuffLineEdit_editingFinished();
+
+    void on_displayZBuffCheckBox_clicked();
+
 private:
 	Ui::SettingsWindow *ui;
 

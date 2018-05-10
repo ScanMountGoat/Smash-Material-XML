@@ -13,6 +13,7 @@ void SettingsWindow::setLineEditValues(SearchSettings *searchSettings) {
     ui->texCountLineEdit->setText(QString::number(searchSettings->textureCount, 10));
     ui->flags1LineEdit->setText(QString::number(searchSettings->flags1, 16));
     ui->flags2LineEdit->setText(QString::number(searchSettings->flags2, 16));
+    ui->zBuffLineEdit->setText(QString::number(searchSettings->zBufferOffset, 10));
 }
 
 void SettingsWindow::setSearchSettings(SearchSettings *searchSettings) {
@@ -33,6 +34,7 @@ void SettingsWindow::setDisplaySettings(SearchSettings *searchSettings) {
     ui->displayFlagsCheckBox->setChecked(searchSettings->displayFlags);
     ui->displayCullCheckBox->setChecked(searchSettings->displayCullMode);
     ui->displayTexturesCheckBox->setChecked(searchSettings->displayTextureHashes);
+    ui->displayZBuffCheckBox->setChecked(searchSettings->displayZBufferOffset);
 }
 
 void SettingsWindow::showHideContainers() {
@@ -45,6 +47,7 @@ void SettingsWindow::showHideContainers() {
     ui->texCountContainer->setEnabled(ui->texCountCheckBox->isChecked());
     ui->alphaFuncContainer->setEnabled(ui->alphaFuncCheckBox->isChecked());
     ui->alphaTestContainer->setEnabled(ui->alphaTestCheckBox->isChecked());
+    ui->zBuffContainer->setEnabled(ui->zBuffCheckBox->isChecked());
 }
 
 void SettingsWindow::setPropertyRadioButtons(SearchSettings *searchSettings) {
@@ -228,13 +231,11 @@ void SettingsWindow::on_displayFlagsCheckBox_clicked() {
 	searchSettings->displayFlags = ui->displayFlagsCheckBox->isChecked();
 }
 
-void SettingsWindow::on_displayTexturesCheckBox_clicked() 
-{
+void SettingsWindow::on_displayTexturesCheckBox_clicked() {
 	searchSettings->displayTextureHashes = ui->displayTexturesCheckBox->isChecked();
 }
 
-void SettingsWindow::on_displayCullCheckBox_clicked() 
-{
+void SettingsWindow::on_displayCullCheckBox_clicked() {
 	searchSettings->displayCullMode = ui->displayCullCheckBox->isChecked();
 }
 
@@ -262,3 +263,22 @@ void SettingsWindow::on_matPropCheckBox_clicked() {
 	searchSettings->filterPropertyName = isChecked;
 }
 
+void SettingsWindow::on_zBuffCheckBox_clicked() {
+    bool isChecked = ui->zBuffCheckBox->isChecked();
+    ui->zBuffContainer->setEnabled(isChecked);
+    searchSettings->filterZBufferOffset = isChecked;
+}
+
+void SettingsWindow::on_zBuffOpComboBox_currentIndexChanged() {
+    searchSettings->zBuffComparison = (SearchSettings::ComparisonOperation)ui->zBuffOpComboBox->currentIndex();
+}
+
+void SettingsWindow::on_zBuffLineEdit_editingFinished() {
+    QString text = ui->zBuffLineEdit->text();
+    bool ok;
+    searchSettings->zBufferOffset = (text.toInt(&ok, 10));
+}
+
+void SettingsWindow::on_displayZBuffCheckBox_clicked() {
+    searchSettings->displayZBufferOffset = ui->displayZBuffCheckBox->isChecked();
+}

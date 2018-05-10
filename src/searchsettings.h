@@ -20,7 +20,7 @@ public:
     };
 
 	// Material Flags
-	bool filterFlags = false;
+    bool filterFlags = false;
 	uint flags1 = 0xFFFFFFFF;
 	uint flags2 = 0xFFFFFFFF;
     ComparisonOperation flagsComparison = ComparisonOperation::Equals;
@@ -59,13 +59,19 @@ public:
 	int textureCount = 0;
     ComparisonOperation textureComparison = ComparisonOperation::Equals;
 
+    // Z-Buffer Offset
+    bool filterZBufferOffset = false;
+    int zBufferOffset = 0;
+    ComparisonOperation zBuffComparison = ComparisonOperation::Equals;
+
 	// Settings for what properties to display.
-	bool displaySrc = false;
-	bool displayDst = false;
-	bool displayFlags = false;
-	bool displayFileName = false;
-	bool displayTextureHashes = false;
-	bool displayCullMode = false;
+    bool displaySrc = true;
+    bool displayDst = true;
+    bool displayFlags = true;
+    bool displayFileName = true;
+    bool displayTextureHashes = true;
+    bool displayCullMode = true;
+    bool displayZBufferOffset = true;
 
 	enum class PropertDisplay {
 		None = 0,
