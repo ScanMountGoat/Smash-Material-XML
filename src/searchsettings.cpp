@@ -92,6 +92,15 @@ QList<Material> SearchSettings::filterMaterials() {
             validMaterial = validMaterial && validOffset;
         }
 
+        /*for (const auto texture : material.textures) {
+            if (texture.mipDetail != 6 && texture.mipDetail != 2) {
+                validMaterial = true;
+                break;
+            } else {
+                validMaterial = false;
+            }
+        }*/
+
 		if (validMaterial) {
 			filteredMaterialList.append(material);
 		}

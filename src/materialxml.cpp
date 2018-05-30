@@ -128,7 +128,7 @@ void MaterialXml::readTexture(QXmlStreamReader & reader, Material & material) {
             texture.magFilter = reader.attributes().value("magfilter").toUInt(&ok, 10);
         }
         if (reader.attributes().hasAttribute("mipdetail")) {
-            texture.magFilter = reader.attributes().value("mipdetail").toUInt(&ok, 10);
+            texture.mipDetail = reader.attributes().value("mipdetail").toUInt(&ok, 10);
         }
 
 
