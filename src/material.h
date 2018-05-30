@@ -4,6 +4,8 @@
 #include<QString>
 #include<QHash>
 
+#include "texture.h"
+
 class Material {
 public:
     bool hasSphereMap;
@@ -36,7 +38,8 @@ public:
     QHash<QString, QList<float>> properties;
 
 	// This could be stored as Uint, but we won't be processing the numbers.
-	QList<QString> textureHashes;
+    QList<Texture> textures;
+
 
 	uint flags;
 

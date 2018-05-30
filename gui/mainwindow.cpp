@@ -95,8 +95,14 @@ void MainWindow::printCullMode(const Material& material) {
 }
 
 void MainWindow::printTextures(const Material& material) {
-    for (auto const hash : material.textureHashes) {
-        ui->plainTextEdit->appendPlainText("texture: " + hash);
+    for (auto const texture : material.textures) {
+        QString hash = "hash: " + texture.hash;
+        QString wrapModeS = "wrapmodeS: " + QString::number(texture.wrapModeS, 10);
+        QString wrapModeT = "wrapmodeT: " + QString::number(texture.wrapModeT, 10);
+        QString minFilter = "minfilter: " + QString::number(texture.minFilter, 10);
+        QString magFilter = "magfilter: " + QString::number(texture.magFilter, 10);
+        QString mipDetail = "mipdetail: " + QString::number(texture.mipDetail, 10);
+        ui->plainTextEdit->appendPlainText(hash + " " + wrapModeS + " " + wrapModeT + " " + minFilter + " " + magFilter + " " + mipDetail);
     }
 }
 

@@ -38,7 +38,8 @@ HEADERS += \
     src/materialxml.h \
     src/searchsettings.h \
     gui/mainwindow.h \
-    gui/SettingsWindow.h
+    gui/SettingsWindow.h \
+    src/texture.h
 
 FORMS += \
     gui/mainwindow.ui \

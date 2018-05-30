@@ -75,7 +75,7 @@ QList<Material> SearchSettings::filterMaterials() {
 
         if (filterTextureCount) {
             bool validTexCount = SearchSettings::matchesSearch(textureComparison,
-                                                               material.textureHashes.count(),
+                                                               material.textures.count(),
                                                                textureCount);
             validMaterial = validMaterial && validTexCount;
         }

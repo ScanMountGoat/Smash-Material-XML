@@ -107,8 +107,32 @@ void MaterialXml::readTexturesAndProperties(QXmlStreamReader &reader, Material &
 
 void MaterialXml::readTexture(QXmlStreamReader & reader, Material & material) {
 	if (reader.attributes().hasAttribute(("hash"))) {
+        // Create a new texture, if the hash is present.
+        Texture texture = Texture();
 		QString hash = reader.attributes().value("hash").toString();
-		material.textureHashes.append(hash);
+        texture.hash = hash;
+
+        // Read the other texture properties.
+        // These may be hex or decimal (shouldn't matter for comparisons).
+        bool ok;
+        if (reader.attributes().hasAttribute("wrapmodeS")) {
+            texture.wrapModeS = reader.attributes().value("wrapmodeS").toUInt(&ok, 10);
+        }
+        if (reader.attributes().hasAttribute("wrapmodeT")) {
+            texture.wrapModeS = reader.attributes().value("wrapmodeS").toUInt(&ok, 10);
+        }
+        if (reader.attributes().hasAttribute("minfilter")) {
+            texture.minFilter = reader.attributes().value("minfilter").toUInt(&ok, 10);
+        }
+        if (reader.attributes().hasAttribute("magfilter")) {
+            texture.magFilter = reader.attributes().value("magfilter").toUInt(&ok, 10);
+        }
+        if (reader.attributes().hasAttribute("mipdetail")) {
+            texture.magFilter = reader.attributes().value("mipdetail").toUInt(&ok, 10);
+        }
+
+
+        material.textures.append(texture);
 	}
 }
 

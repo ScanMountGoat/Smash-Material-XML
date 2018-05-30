@@ -861,7 +861,7 @@
        <item>
         <widget class="QCheckBox" name="displayTexturesCheckBox">
          <property name="text">
-          <string>Print Texture Hashes</string>
+          <string>Print Textures</string>
          </property>
         </widget>
        </item>
