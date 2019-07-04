@@ -95,7 +95,7 @@ void MainWindow::printCullMode(const Material& material) {
 }
 
 void MainWindow::printTextures(const Material& material) {
-    for (auto const texture : material.textures) {
+    for (const auto& texture : material.textures) {
         QString hash = "hash: " + texture.hash;
         QString wrapModeS = "wrapmodeS: " + QString::number(texture.wrapModeS, 10);
         QString wrapModeT = "wrapmodeT: " + QString::number(texture.wrapModeT, 10);
@@ -174,7 +174,7 @@ void MainWindow::printMaterialProperty(const QString name, const QList<float> va
 
 	// Add the values to the same line.
 	for (int i = 0; i < values.size(); i++) {
-		QString valueString = QString::number(values.at(i), 'f', 4).leftJustified(20, ' ');
+        QString valueString = QString::number(static_cast<double>(values.at(i)), 'f', 4).leftJustified(20, ' ');
 		propertyText += valueString + " ";
 	}
 	ui->plainTextEdit->appendPlainText(propertyText);
@@ -191,7 +191,7 @@ void MainWindow::on_clearPushButton_clicked() {
 void MainWindow::on_actionAbout_triggered() {
 	// Display license information.
 	QString link = "<a href='https://github.com/ScanMountGoat/Smash-Material-XML/blob/master/license.txt'>GPL License</a>";
-	QMessageBox::about(0, "About", link);
+    QMessageBox::about(nullptr, "About", link);
 }
 
 void MainWindow::on_actionClear_Materials_triggered() {

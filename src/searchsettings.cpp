@@ -34,7 +34,7 @@ bool SearchSettings::matchesSearch(ComparisonOperation operation, uint value, ui
 QList<Material> SearchSettings::filterMaterials() {
 	QList<Material> filteredMaterialList;
 
-	for (auto const &material : materialList) {
+    for (const auto& material : materialList) {
 		bool validMaterial = true;
 
 		// Check flags using the selected flags values and comparison operator.
