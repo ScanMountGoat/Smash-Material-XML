@@ -113,11 +113,13 @@ private:
 	// The object is stored in MainWindow for the duration of the application and modified here.
 	SearchSettings *searchSettings;
 
-    void setLineEditValues(SearchSettings *searchSettings);
+    void setLineEditValues(SearchSettings* searchSettings);
 
-    void setSearchSettings(SearchSettings *searchSettings);
+    void setOpComboBoxValues(SearchSettings* searchSettings);
 
-    void setDisplaySettings(SearchSettings *searchSettings);
+    void setSearchSettings(SearchSettings* searchSettings);
+
+    void setDisplaySettings(SearchSettings* searchSettings);
 
     void showHideContainers();
 };

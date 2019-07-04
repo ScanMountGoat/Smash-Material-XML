@@ -16,6 +16,17 @@ void SettingsWindow::setLineEditValues(SearchSettings *searchSettings) {
     ui->zBuffLineEdit->setText(QString::number(searchSettings->zBufferOffset, 10));
 }
 
+void SettingsWindow::setOpComboBoxValues(SearchSettings* searchSettings) {
+    ui->srcOpComboBox->setCurrentIndex(static_cast<int>(searchSettings->srcComparison));
+    ui->dstOpComboBox->setCurrentIndex(static_cast<int>(searchSettings->dstComparison));
+    ui->zBuffOpComboBox->setCurrentIndex(static_cast<int>(searchSettings->zBuffComparison));
+    ui->flagsOpComboBox->setCurrentIndex(static_cast<int>(searchSettings->flagsComparison));
+    ui->texCountOpComboBox->setCurrentIndex(static_cast<int>(searchSettings->textureComparison));
+    ui->cullModeOpComboBox->setCurrentIndex(static_cast<int>(searchSettings->cullComparison));
+    ui->alphaTestOpComboBox->setCurrentIndex(static_cast<int>(searchSettings->alphaTestComparison));
+    ui->alphaFuncOpComboBox->setCurrentIndex(static_cast<int>(searchSettings->alphaFuncComparison));
+}
+
 void SettingsWindow::setSearchSettings(SearchSettings *searchSettings) {
     ui->srcCheckBox->setChecked(searchSettings->filterSrc);
     ui->dstCheckBox->setChecked(searchSettings->filterDst);
@@ -25,6 +36,7 @@ void SettingsWindow::setSearchSettings(SearchSettings *searchSettings) {
     ui->alphaFuncCheckBox->setChecked(searchSettings->filterAlphaFunc);
     ui->alphaTestCheckBox->setChecked(searchSettings->filterAlphaTest);
     ui->texCountCheckBox->setChecked(searchSettings->filterTextureCount);
+    ui->zBuffCheckBox->setChecked(searchSettings->filterZBufferOffset);
 }
 
 void SettingsWindow::setDisplaySettings(SearchSettings *searchSettings) {
@@ -70,6 +82,7 @@ SettingsWindow::SettingsWindow(SearchSettings *searchSettings, QWidget *parent) 
 	this->searchSettings = searchSettings;
 
     // Set the GUI elements based on the previous search settings.
+    setOpComboBoxValues(searchSettings);
     setDisplaySettings(searchSettings);
     setSearchSettings(searchSettings);
     setLineEditValues(searchSettings);
@@ -150,7 +163,7 @@ void SettingsWindow::on_cullModeLineEdit_editingFinished() {
 }
 
 void SettingsWindow::on_cullModeOpComboBox_currentIndexChanged() {
-    searchSettings->cullComparison = (SearchSettings::ComparisonOperation)ui->cullModeOpComboBox->currentIndex();
+    searchSettings->cullComparison = static_cast<SearchSettings::ComparisonOperation>(ui->cullModeOpComboBox->currentIndex());
 }
 
 void SettingsWindow::on_alphaFuncCheckBox_clicked() {
@@ -167,7 +180,7 @@ void SettingsWindow::on_alphaFuncLineEdit_editingFinished() {
 }
 
 void SettingsWindow::on_alphaFuncOpComboBox_currentIndexChanged() {
-    searchSettings->alphaFuncComparison = (SearchSettings::ComparisonOperation)ui->alphaFuncOpComboBox->currentIndex();
+    searchSettings->alphaFuncComparison = static_cast<SearchSettings::ComparisonOperation>(ui->alphaFuncOpComboBox->currentIndex());
 }
 
 void SettingsWindow::on_alphaTestCheckBox_clicked() {
@@ -184,7 +197,7 @@ void SettingsWindow::on_alphaTestLineEdit_editingFinished() {
 }
 
 void SettingsWindow::on_alphaTestOpComboBox_currentIndexChanged() {
-    searchSettings->alphaTestComparison = (SearchSettings::ComparisonOperation)ui->alphaTestOpComboBox->currentIndex();
+    searchSettings->alphaTestComparison = static_cast<SearchSettings::ComparisonOperation>(ui->alphaTestOpComboBox->currentIndex());
 }
 
 void SettingsWindow::on_texCountCheckBox_clicked() {
@@ -200,19 +213,19 @@ void SettingsWindow::on_texCountLineEdit_editingFinished() {
 }
 
 void SettingsWindow::on_texCountOpComboBox_currentIndexChanged() {
-    searchSettings->textureComparison = (SearchSettings::ComparisonOperation)ui->texCountOpComboBox->currentIndex();
+    searchSettings->textureComparison = static_cast<SearchSettings::ComparisonOperation>(ui->texCountOpComboBox->currentIndex());
 }
 
 void SettingsWindow::on_flagsOpComboBox_currentIndexChanged() {
-    searchSettings->flagsComparison = (SearchSettings::ComparisonOperation)ui->flagsOpComboBox->currentIndex();
+    searchSettings->flagsComparison = static_cast<SearchSettings::ComparisonOperation>(ui->flagsOpComboBox->currentIndex());
 }
 
 void SettingsWindow::on_srcOpComboBox_currentIndexChanged() {
-    searchSettings->srcComparison = (SearchSettings::ComparisonOperation)ui->srcOpComboBox->currentIndex();
+    searchSettings->srcComparison = static_cast<SearchSettings::ComparisonOperation>(ui->srcOpComboBox->currentIndex());
 }
 
 void SettingsWindow::on_dstOpComboBox_currentIndexChanged() {
-    searchSettings->dstComparison = (SearchSettings::ComparisonOperation)ui->dstOpComboBox->currentIndex();
+    searchSettings->dstComparison = static_cast<SearchSettings::ComparisonOperation>(ui->dstOpComboBox->currentIndex());
 }
 
 void SettingsWindow::on_displayFileNameCheckBox_clicked() {
@@ -270,7 +283,7 @@ void SettingsWindow::on_zBuffCheckBox_clicked() {
 }
 
 void SettingsWindow::on_zBuffOpComboBox_currentIndexChanged() {
-    searchSettings->zBuffComparison = (SearchSettings::ComparisonOperation)ui->zBuffOpComboBox->currentIndex();
+    searchSettings->zBuffComparison = static_cast<SearchSettings::ComparisonOperation>(ui->zBuffOpComboBox->currentIndex());
 }
 
 void SettingsWindow::on_zBuffLineEdit_editingFinished() {
