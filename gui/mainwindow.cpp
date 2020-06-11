@@ -1,7 +1,6 @@
 #include "gui/mainwindow.h"
 
 #include "ui_mainwindow.h"
-#include "src/materialxml.h"
 
 #include <QMessageBox>
 #include <QFileDialog>
@@ -25,39 +24,6 @@ void MainWindow::on_actionSearch_Settings_triggered() {
 	settingsWindow->show();
 }
 
-void MainWindow::addMaterialsFromFileDialog() {
-	QString fileName = QFileDialog::getOpenFileName(this, "Open Xml", ".", "Xml files (*.xml)");
-	if (fileName.isEmpty())
-		return;
-
-	MaterialXml::addMaterialsFromXML(fileName, searchSettings);
-    printMaterialCount();
-}
-
-void MainWindow::on_actionOpen_triggered() {
-	addMaterialsFromFileDialog();
-}
-
-void MainWindow::on_actionOpen_Folder_triggered() {
-	addMaterialsFromFolderDialog();
-}
-
-void MainWindow::addMaterialsFromFolderDialog() {
-    QString directory = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home",
-                                                          QFileDialog::ShowDirsOnly);
-	if (directory.isEmpty())
-		return;
-
-	QDirIterator it(directory, QDirIterator::Subdirectories);
-	while (it.hasNext()) {
-		if (it.next().endsWith(".xml")) {
-			QString fileName = it.next();
-			MaterialXml::addMaterialsFromXML(fileName, searchSettings);
-            printMaterialCount();
-		}
-	}
-}
-
 void MainWindow::printMaterialCount() {
 	ui->plainTextEdit->clear();
 	ui->plainTextEdit->appendPlainText(QString::number(searchSettings.materialList.count())
@@ -76,7 +42,7 @@ void MainWindow::printFilteredMaterials() {
 
 void MainWindow::printSrc(const Material& material) {
     QString src;
-    ui->plainTextEdit->appendPlainText("src: " + src.setNum(material.srcFactor, 16));
+    ui->plainTextEdit->appendPlainText("src: " + src.setNum(material.srcFactor, 10));
 }
 
 void MainWindow::printFlags(const Material& material) {
@@ -86,24 +52,16 @@ void MainWindow::printFlags(const Material& material) {
 
 void MainWindow::printDst(const Material& material) {
     QString dst;
-    ui->plainTextEdit->appendPlainText("dst: " + dst.setNum(material.dstFactor, 16));
+    ui->plainTextEdit->appendPlainText("dst: " + dst.setNum(material.dstFactor, 10));
 }
 
 void MainWindow::printCullMode(const Material& material) {
     QString cullMode;
-    ui->plainTextEdit->appendPlainText("cull mode: " + cullMode.setNum(material.cullMode, 16));
+    ui->plainTextEdit->appendPlainText("cull mode: " + cullMode.setNum(material.cullMode, 10));
 }
 
 void MainWindow::printTextures(const Material& material) {
-    for (const auto& texture : material.textures) {
-        QString hash = "hash: " + texture.hash;
-        QString wrapModeS = "wrapmodeS: " + QString::number(texture.wrapModeS, 10);
-        QString wrapModeT = "wrapmodeT: " + QString::number(texture.wrapModeT, 10);
-        QString minFilter = "minfilter: " + QString::number(texture.minFilter, 10);
-        QString magFilter = "magfilter: " + QString::number(texture.magFilter, 10);
-        QString mipDetail = "mipdetail: " + QString::number(texture.mipDetail, 10);
-        ui->plainTextEdit->appendPlainText(hash + " " + wrapModeS + " " + wrapModeT + " " + minFilter + " " + magFilter + " " + mipDetail);
-    }
+    ui->plainTextEdit->appendPlainText(material.textures);
 }
 
 void MainWindow::printZBufferOffset(const Material& material) {
@@ -156,14 +114,16 @@ void MainWindow::printMaterialData(const Material & material) {
 }
 
 void MainWindow::printAllPropertyValues(const Material & material) {
-	for (auto it = material.properties.begin(); it != material.properties.end(); ++it) {
-		printMaterialProperty(it.key(), it.value());
-	}
+    ui->plainTextEdit->appendPlainText(material.properties);
 }
 
 void MainWindow::printSelectedPropertyValues(const Material & material) {
     QString key = "NU_" + searchSettings.materialProperty;
-    printMaterialProperty("NU_" + searchSettings.materialProperty, material.properties[key]);
+    for (const auto& line : material.properties.split('\n')) {
+        if (line.startsWith(key, Qt::CaseInsensitive)) {
+            ui->plainTextEdit->appendPlainText(line);
+        }
+    }
 }
 
 void MainWindow::printMaterialProperty(const QString name, const QList<float> values) {
@@ -193,10 +153,3 @@ void MainWindow::on_actionAbout_triggered() {
 	QString link = "<a href='https://github.com/ScanMountGoat/Smash-Material-XML/blob/master/license.txt'>GPL License</a>";
     QMessageBox::about(nullptr, "About", link);
 }
-
-void MainWindow::on_actionClear_Materials_triggered() {
-	searchSettings.materialList.clear();
-	ui->plainTextEdit->clear();
-	ui->plainTextEdit->appendPlainText("Materials cleared.");
-}
-

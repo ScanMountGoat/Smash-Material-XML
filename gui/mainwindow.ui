@@ -70,14 +70,6 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuMaterial_XML">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="actionOpen"/>
-    <addaction name="actionOpen_Folder"/>
-    <addaction name="actionClear_Materials"/>
-   </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
      <string>Help</string>
@@ -90,34 +82,13 @@
     </property>
     <addaction name="actionSearch_Settings"/>
    </widget>
-   <addaction name="menuMaterial_XML"/>
    <addaction name="menuSearch_Settings"/>
    <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionOpen">
-   <property name="text">
-    <string>Add materials from file</string>
-   </property>
-  </action>
-  <action name="actionOpen_Folder">
-   <property name="text">
-    <string>Add materials from folder</string>
-   </property>
-  </action>
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
-   </property>
-  </action>
-  <action name="actionDisplay_Settings">
-   <property name="text">
-    <string>Display Settings</string>
-   </property>
-  </action>
-  <action name="actionClear_Materials">
-   <property name="text">
-    <string>Clear materials</string>
    </property>
   </action>
   <action name="actionSearch_Settings">

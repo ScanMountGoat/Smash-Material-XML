@@ -85,6 +85,8 @@ public:
 	static bool matchesSearch(ComparisonOperation operaration, uint value, uint comparisonValue);
 
 	QList<Material> filterMaterials();
+
+    QString getComparisonOperator(ComparisonOperation op);
 };
 
 #endif // SEARCHSETTINGS_H

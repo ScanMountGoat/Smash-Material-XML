@@ -51,23 +51,13 @@ public:
         void printZBufferOffset(const Material& material);
         
 private slots:
-
-	// Toolbar Commands
-	void on_actionOpen_triggered();
-
-	void on_actionOpen_Folder_triggered();
-
-	void on_actionClear_Materials_triggered();
-
 	void on_actionAbout_triggered();
 
 	void on_actionSearch_Settings_triggered();
 
-	// Search Bar Buttons
 	void on_searchPushButton_clicked();
 
 	void on_clearPushButton_clicked();
-
 
 private:
 	Ui::MainWindow *ui;

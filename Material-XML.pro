@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,23 +24,32 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 win32:RC_ICONS += icon.ico
 
-
 SOURCES += \
     src/main.cpp \
     src/material.cpp \
-    src/materialxml.cpp \
     src/searchsettings.cpp \
     gui/mainwindow.cpp \
     gui/SettingsWindow.cpp
 
 HEADERS += \
     src/material.h \
-    src/materialxml.h \
     src/searchsettings.h \
     gui/mainwindow.h \
-    gui/SettingsWindow.h \
-    src/texture.h
+    gui/SettingsWindow.h
 
 FORMS += \
     gui/mainwindow.ui \
     gui/settingswindow.ui
+
+SOURCE_PATH = $$shell_path($$clean_path("$$PWD\\Sm4shMaterials.db"))
+DEST_PATH_DEBUG = $$shell_path($$clean_path("$$OUT_PWD\\debug\\Sm4shMaterials.db"))
+DEST_PATH_RELEASE = $$shell_path($$clean_path("$$OUT_PWD\\release\\Sm4shMaterials.db"))
+
+#Create a command, using the 'cmd' command line and Window's 'xcopy', to copy our shaders folder
+#into the Game/Bin/Shaders/ directory.
+CopyFiles.commands = $$quote(cmd /c copy /Y $${SOURCE_PATH} $${DEST_PATH_DEBUG})
+CopyFiles.commands = $$quote(cmd /c copy /Y $${SOURCE_PATH} $${DEST_PATH_RELEASE})
+
+#Add the command to Qt.
+QMAKE_EXTRA_TARGETS += CopyFiles
+POST_TARGETDEPS += CopyFiles

@@ -5,11 +5,11 @@
 
 void SettingsWindow::setLineEditValues(SearchSettings *searchSettings) {
     ui->matPropLineEdit->setText(searchSettings->materialProperty);
-    ui->srcLineEdit->setText(QString::number(searchSettings->srcFactor, 16));
-    ui->dstLineEdit->setText(QString::number(searchSettings->dstFactor, 16));
-    ui->cullModeLineEdit->setText(QString::number(searchSettings->cullMode, 16));
-    ui->alphaTestLineEdit->setText(QString::number(searchSettings->alphaTest, 16));
-    ui->alphaFuncLineEdit->setText(QString::number(searchSettings->alphaFunc, 16));
+    ui->srcLineEdit->setText(QString::number(searchSettings->srcFactor, 10));
+    ui->dstLineEdit->setText(QString::number(searchSettings->dstFactor, 10));
+    ui->cullModeLineEdit->setText(QString::number(searchSettings->cullMode, 10));
+    ui->alphaTestLineEdit->setText(QString::number(searchSettings->alphaTest, 10));
+    ui->alphaFuncLineEdit->setText(QString::number(searchSettings->alphaFunc, 10));
     ui->texCountLineEdit->setText(QString::number(searchSettings->textureCount, 10));
     ui->flags1LineEdit->setText(QString::number(searchSettings->flags1, 16));
     ui->flags2LineEdit->setText(QString::number(searchSettings->flags2, 16));
@@ -116,7 +116,7 @@ void SettingsWindow::on_flags1LineEdit_editingFinished() {
 	// Use hex format. Ex: 9A011063. 8 digits for 4 bytes of hex.
 	QString text = ui->flags1LineEdit->text();
 	bool validInput = true;
-	if (validInput && text.length() == 8) {
+    if (validInput && text.length() <= 8) {
 		searchSettings->flags1 = (text.toUInt(&validInput, 16));
     }
 }
@@ -125,7 +125,7 @@ void SettingsWindow::on_flags2LineEdit_editingFinished() {
 	// Use hex format. Ex: 9A011063. 8 digits for 4 bytes of hex.
 	QString text = ui->flags2LineEdit->text();
 	bool validInput = true;
-	if (validInput && text.length() == 8) {
+    if (validInput && text.length() <= 8) {
 		searchSettings->flags2 = (text.toUInt(&validInput, 16));
     }
 }
@@ -134,14 +134,14 @@ void SettingsWindow::on_srcLineEdit_editingFinished() {
 	// Use hex format
 	QString text = ui->srcLineEdit->text();
 	bool ok;
-	searchSettings->srcFactor = (text.toInt(&ok, 16));
+    searchSettings->srcFactor = (text.toInt(&ok, 10));
 }
 
 void SettingsWindow::on_dstLineEdit_editingFinished() {
 	// Use hex format
 	QString text = ui->dstLineEdit->text();
 	bool ok;
-	searchSettings->dstFactor = (text.toInt(&ok, 16));
+    searchSettings->dstFactor = (text.toInt(&ok, 10));
 }
 
 void SettingsWindow::on_matPropLineEdit_editingFinished() {
@@ -157,9 +157,9 @@ void SettingsWindow::on_cullModeCheckBox_clicked() {
 
 void SettingsWindow::on_cullModeLineEdit_editingFinished() {
 	// Use hex format
-	QString text = ui->dstLineEdit->text();
+    QString text = ui->cullModeLineEdit->text();
 	bool ok;
-	searchSettings->cullMode = (text.toInt(&ok, 16));
+    searchSettings->cullMode = (text.toInt(&ok, 10));
 }
 
 void SettingsWindow::on_cullModeOpComboBox_currentIndexChanged() {
@@ -176,7 +176,7 @@ void SettingsWindow::on_alphaFuncLineEdit_editingFinished() {
 	// Use hex format
 	QString text = ui->alphaFuncLineEdit->text();
 	bool ok;
-	searchSettings->alphaFunc = (text.toInt(&ok, 16));
+    searchSettings->alphaFunc = (text.toInt(&ok, 10));
 }
 
 void SettingsWindow::on_alphaFuncOpComboBox_currentIndexChanged() {
@@ -193,7 +193,7 @@ void SettingsWindow::on_alphaTestLineEdit_editingFinished() {
 	// Use hex format
 	QString text = ui->alphaTestLineEdit->text();
 	bool ok;
-	searchSettings->alphaTest = (text.toInt(&ok, 16));
+    searchSettings->alphaTest = (text.toInt(&ok, 10));
 }
 
 void SettingsWindow::on_alphaTestOpComboBox_currentIndexChanged() {
