@@ -1,18 +1,14 @@
 # Material-XML
 <a href="url"><img src="application.png" align="top" height="auto" width="auto" ></a>   
-A QT GUI application for analyzing XML materials exported from [Smash Forge](https://github.com/jam1garner/Smash-Forge).
-A dump of XML material files for most of the models in Smash 4 for Wii U can be
+A QT GUI application for searching a database of Smash 4 material data.
+The of dump of XML material files used for this application can be
 found [here](https://github.com/ScanMountGoat/Sm4sh-Material-Research/blob/master/XML%20Materials/Smash%20XML%20Materials.7z). For bugs or feature suggestions, please use the [Issues page](https://github.com/ScanMountGoat/Smash-Material-XML/issues).
 
 ## Usage Guide
-The application maintains a single list of xml materials. Each search creates a filtered list of materials based on the search settings used. Not specifying any search settings will include all materials.
+Each search creates a filtered list of materials based on the search settings used. Not specifying any search settings will include all materials.
 
 ### Main Toolbar
-**File > Add material from file:** all the materials in the selected XML file will be added to the
-materials list.  
-**File > Add material from folder:** all the materials in all XML files in the selected directory,
-including all subdirectories, will be added to the materials list.  
-**Clear materials:** all materials previously added to the materials list will be removed.  
+**Settings > Search Settings:** edit the settings used to search for particular materials.
 **View > About:** displays a link to the license information.
 
 ### Search Button
@@ -33,7 +29,7 @@ These settings control what material attributes are printed for each of the mate
 * [Material Editing Guide II](https://gamebanana.com/tuts/12214): Tutorial explaining more advanced material properties and example materials.
 
 ## Build Information
-Prebuilt binaries are only available for windows. The project can be built from source using QTCreator. The project was built with QT 5.9.3. Building should work without any changes necessary on Ubuntu 16.04 with a proper QT installation, but this hasn't yet been tested with the latest version.
+Prebuilt binaries are only available for windows. The project can be built from source using QTCreator. The project was built with QT 5.15.0.
 
 ## Credits
 The application is based on the XML material import/export and NUD materials used in Smash Forge.
