@@ -7,6 +7,16 @@
 #include <QDebug>
 #include <QCoreApplication>
 
+SearchSettings::SearchSettings() {
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(QCoreApplication::applicationDirPath() + "/Sm4shMaterials.db");
+    db.open();
+}
+
+SearchSettings::~SearchSettings() {
+    db.close();
+}
+
 bool SearchSettings::matchesSearch(ComparisonOperation operation, int value, int compareValue) {
     if (operation == SearchSettings::ComparisonOperation::Equals)
         return value == compareValue;

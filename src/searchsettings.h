@@ -5,6 +5,7 @@
 
 #include <QString>
 #include <QList>
+#include <QtSql>
 
 class SearchSettings {
 public:
@@ -18,6 +19,8 @@ public:
         LessOrEqual = 4,
 		NotEqual = 5
     };
+
+    QSqlDatabase db;
 
 	// Material Flags
     bool filterFlags = false;
@@ -87,6 +90,9 @@ public:
 	QList<Material> filterMaterials();
 
     QString getComparisonOperator(ComparisonOperation op);
+
+    SearchSettings();
+    ~SearchSettings();
 };
 
 #endif // SEARCHSETTINGS_H
