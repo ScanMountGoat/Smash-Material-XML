@@ -239,7 +239,7 @@
               <item>
                <widget class="QLabel" name="dstLabel">
                 <property name="text">
-                 <string>dstFactor</string>
+                 <string>Dst Factor</string>
                 </property>
                </widget>
               </item>
@@ -310,7 +310,7 @@
               <item>
                <widget class="QLabel" name="srcLabel">
                 <property name="text">
-                 <string>srcFactor</string>
+                 <string>Src Factor</string>
                 </property>
                </widget>
               </item>
@@ -755,7 +755,7 @@
               <item>
                <widget class="QLabel" name="zBuffLabel">
                 <property name="text">
-                 <string>Function</string>
+                 <string>Offset</string>
                 </property>
                </widget>
               </item>
