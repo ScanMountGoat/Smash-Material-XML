@@ -68,7 +68,7 @@ private:
 	SearchSettings searchSettings;
     int currentPage = 1;
     int totalPages = 1;
-    const int materialsPerPage = 500;
+    const int materialsPerPage = 1000;
 };
 
 #endif // MAINWINDOW_H
