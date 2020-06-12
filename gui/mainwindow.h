@@ -59,9 +59,16 @@ private slots:
 
 	void on_clearPushButton_clicked();
 
+    void on_prevPushButton_clicked();
+
+    void on_nextPushButton_clicked();
+
 private:
 	Ui::MainWindow *ui;
 	SearchSettings searchSettings;
+    int currentPage = 1;
+    int totalPages = 1;
+    const int materialsPerPage = 500;
 };
 
 #endif // MAINWINDOW_H

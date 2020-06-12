@@ -31,6 +31,30 @@
     <item>
      <layout class="QHBoxLayout" name="searchClearHorizontalLayout">
       <item>
+       <widget class="QPushButton" name="prevPushButton">
+        <property name="text">
+         <string>&lt;</string>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="nextPushButton">
+        <property name="text">
+         <string>&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="pageLabel">
+        <property name="text">
+         <string>Page: 1 of 1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>

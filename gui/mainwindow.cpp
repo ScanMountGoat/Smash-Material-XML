@@ -36,9 +36,14 @@ void MainWindow::printFilteredMaterials() {
 	ui->plainTextEdit->clear();
 
 	QList<Material> filteredMaterials = searchSettings.filterMaterials();
-	for (auto const &material : filteredMaterials) {
-		printMaterialData(material);
-	}
+    totalPages = filteredMaterials.size() / materialsPerPage;
+    ui->pageLabel->setText(QString("Page %1 of %2").arg(QString::number(currentPage), QString::number(totalPages)));
+
+    int start = currentPage * materialsPerPage;
+    int end = start + materialsPerPage;
+    for (int i = start; i < end && i < filteredMaterials.size(); i++) {
+        printMaterialData(filteredMaterials[i]);
+    }
 }
 
 void MainWindow::printSrc(const Material& material) {
@@ -142,6 +147,8 @@ void MainWindow::printMaterialProperty(const QString name, const QList<float> va
 }
 
 void MainWindow::on_searchPushButton_clicked() {
+    // Start displaying materials from the beginning.
+    currentPage = 1;
     printFilteredMaterials();
 }
 
@@ -153,4 +160,20 @@ void MainWindow::on_actionAbout_triggered() {
 	// Display license information.
 	QString link = "<a href='https://github.com/ScanMountGoat/Smash-Material-XML/blob/master/license.txt'>GPL License</a>";
     QMessageBox::about(nullptr, "About", link);
+}
+
+void MainWindow::on_prevPushButton_clicked() {
+    currentPage--;
+    if (currentPage < 1) {
+        currentPage = 1;
+    }
+    printFilteredMaterials();
+}
+
+void MainWindow::on_nextPushButton_clicked() {
+    currentPage++;
+    if (currentPage > totalPages) {
+        currentPage = totalPages;
+    }
+    printFilteredMaterials();
 }
