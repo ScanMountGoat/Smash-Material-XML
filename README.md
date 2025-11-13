@@ -1,8 +1,8 @@
 # Material-XML
 <a href="url"><img src="application.png" align="top" height="auto" width="auto" ></a>   
 A QT GUI application for searching a database of Smash 4 material data.
-The of dump of XML material files used for this application can be
-found [here](https://github.com/ScanMountGoat/Sm4sh-Material-Research/blob/master/XML%20Materials/Smash%20XML%20Materials.7z). For bugs or feature suggestions, please use the [Issues page](https://github.com/ScanMountGoat/Smash-Material-XML/issues).
+The dump of XML material files used for this application can be
+found [here](https://github.com/ScanMountGoat/Sm4sh-Material-Research/blob/ee38265c96fc78e4776116d6c4ae0e9cf115de1f/XML%20Materials/Smash%20XML%20Materials.7z). For bugs or feature suggestions, please use the [Issues page](https://github.com/ScanMountGoat/Smash-Material-XML/issues).
 
 ## Usage Guide
 Each search creates a filtered list of materials based on the search settings used. Not specifying any search settings will include all materials.
